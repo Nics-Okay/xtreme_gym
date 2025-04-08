@@ -1,0 +1,67 @@
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8%;
+    width: 100%;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    background-color: #328acf;
+}
+
+.menu-button-container ion-icon {
+    font-size: xx-large;
+}
+
+.title-container {
+    margin: 0 auto 0 10px;
+}
+
+.title-container h1 {
+    color: #e6e6e6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/*
+.notification-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+}
+
+.notification-icon {
+    padding: 0 10px;
+    font-size: 28px;
+    color: #e6e6e6;
+}
+
+@media (max-width: 639px) {
+    .notification-icon {
+        font-size: 32px;
+    }
+}
+
+.red-dot {
+    position: absolute;
+    top: 12px;
+    right: 17px;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 50%;
+    /*
+    border: 2px solid white;
+    display: none; /* Hidden by default
+}
+
+.notification-wrapper.unread .red-dot {
+    display: block;
+}
+
+ */

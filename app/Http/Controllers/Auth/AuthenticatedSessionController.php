@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->route('otp.reset');
     }
 
     /**
@@ -36,6 +36,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // Clear OTP status
+        if ($user = $request->user()) {
+            $user->update([
+                'otp_code' => null,
+                'otp_expires_at' => null,
+                'otp_verified' => false,
+            ]);
+        }
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

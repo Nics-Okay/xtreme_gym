@@ -13,10 +13,29 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('user_type')->default('user');
+            $table->string('email')->nullable()->unique();
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('nickname')->nullable();
+            $table->string('phone')->nullable();
             $table->string('password');
+            $table->string('address')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('emergency_contact_name')->nullable();
+            $table->string('emergency_contact_number')->nullable();
+            $table->string('admin_code')->nullable();
+            $table->string('otp_code')->nullable();
+            $table->timestamp('otp_expires_at')->nullable();
+            $table->string('membership_type')->nullable();
+            $table->string('membership_status')->nullable()->default('inactive');
+            $table->date('membership_validity')->nullable();
+            $table->integer('renewal_count')->nullable()->default(0);
+            $table->integer('visits')->nullable()->default(0);
+            $table->time('active_hours')->nullable();
+            $table->time('membership_hours')->nullable();
+            $table->boolean('is_in_gym')->default(false);
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

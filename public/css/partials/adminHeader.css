@@ -1,0 +1,14 @@
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    padding: 0 3%;
+    border-bottom: 2px solid lightgrey;
+    background-color: white;
+}
+
+.header-container h2 {
+    margin-right: auto;
+    color: #4B5563;
+}

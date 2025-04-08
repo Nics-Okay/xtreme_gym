@@ -1,0 +1,114 @@
+.global-content-container.confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 35%;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    background-color: white;
+}
+
+.global-container-header {
+    margin: 15px 0;
+}
+
+.global-container-header h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.global-container-subheader {
+    display: flex;
+    flex-direction: column;
+    height: 15%;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.global-container-subheader h4 {
+    height: 30%;
+}
+
+.payment-for {
+    display: flex;
+    align-items: center;
+    height: 65%;
+    margin-top: auto;
+    padding: 0 10px;
+    border-radius: 5px;
+    background-color: #e6e6e6;
+}
+
+.payment-for-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.payment-for-icon i {
+    font-size: larger;
+    color: #328acf;
+}
+
+.payment-for p {
+    margin-right: auto;
+}
+
+.global-container-content {
+    width: 100%;
+    padding: 10px;
+}
+
+.plan-info {
+    display: flex;
+    font-size: small;
+}
+
+.plan-info span:first-child {
+    margin-right: auto;
+}
+
+.global-container-form {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.global-container-form p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: small;
+    margin-bottom: 2px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3px; /* spacing between fields */
+}
+
+.form-group input, .form-group textarea {
+    padding: 0 5px;
+    font-size: small;
+}
+
+.form-group label, .form-row label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    font-weight: bold;
+    margin-bottom: 2px; /* space between label and input */
+}
+
+.payment-options label {
+    font-weight: normal;
+}

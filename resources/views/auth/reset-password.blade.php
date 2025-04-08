@@ -1,4 +1,8 @@
-<x-guest-layout>
+@extends('layouts.auth')
+
+@section('title', 'GYMXTREME - Login')
+
+@section('main-content')
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
@@ -36,4 +40,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+@endsection

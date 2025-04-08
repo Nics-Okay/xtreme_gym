@@ -1,0 +1,257 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(218, 218, 218);
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw; 
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.main-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:70%;
+    width: 40%;
+    padding: 0 5vw;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.auth-title {
+    color: black;
+    font-size: x-large;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.main-content form {
+    width: 100%;
+}
+
+.auth-fields.name {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+
+.input-field {
+    width: 50%;
+}
+
+.auth-fields.name input {
+    height: 5vh;
+    width: 100%;
+    font-size: small;
+}
+
+.auth-fields.email input,
+.auth-fields.password input,
+.auth-fields.password-confirmation input, 
+.auth-fields.forgot input {
+    height: 5vh;
+    width: 100%;
+    font-size: small;
+}
+
+.auth-fields {
+    margin: 0 0 15px;
+}
+
+.auth-fields.remember {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+    font-size: small;
+}
+
+.auth-fields.remember input {
+    height: 80%;
+}
+
+.auth-fields.remember label {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    color: black;
+}
+
+.auth-help.forgot {
+    color: grey;
+    font-weight: bold;
+}
+
+.auth-help.x-auth {
+    margin: 0 0;
+    text-align: center;
+    color: grey;
+    font-size: small;
+    font-weight: bold;
+}
+
+.auth-help.x-auth a {
+    color: red;
+}
+
+.auth-button {
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+.auth-button button {
+    height: 5vh;
+    width: 100%;
+    color: white;
+    font-weight: 700;
+    border-radius: 20px;
+    background-color: rgb(0, 102, 255); 
+}
+
+.auth-button button:hover {
+    background-color: rgb(0, 84, 211);
+}
+
+/* Password Recovery */
+.auth-title.forgot {
+    font-size: 30px;
+}
+
+.auth-button.forgot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.auth-button.forgot button {
+    color: white;
+    background-color: rgb(0, 102, 255);
+}
+
+.verify.h3 {
+    margin: 15px 0;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.verify.p {
+    text-align: center;
+    font-size: small;
+    margin-bottom: 10px;
+    color: #4B5563;
+}
+
+.verify.p b {
+    color: black;
+}
+
+.verify.container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.verify.button-resend {
+    width: 100%;
+}
+
+.verify.button-resend button {
+    width: 100%;
+    padding: 10px 0;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(0, 102, 255);
+}
+
+.verify.button-resend button:hover {
+    background-color: rgb(0, 84, 211);
+}
+
+.verify.container .primary-button.log-out {
+    margin: 10px 0;
+    font-size: small;
+    color: #4B5563;
+    text-decoration: underline;
+}
+
+/* OTP Verify */
+.otp-container {
+    align-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+.otp-title {
+    font-size: x-large;
+    font-weight: bold;
+    margin: 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.otp-box {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #007bff;
+    outline: none;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.otp-button {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    width: 50%;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-link {
+    color: #4B5563;
+    font-size: small;
+    text-decoration: none;
+}

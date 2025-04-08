@@ -1,0 +1,138 @@
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 250px;
+    padding: 0 20px;
+    background-color: #1c2536ff;
+}
+
+.menu-container h1 {
+    margin: 20px 0;
+    color: white;
+}
+
+.menu-section.user {
+    height: fit-content;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgb(49, 63, 88);
+}
+
+.user.name {
+    color: white;
+}
+
+.user.role {
+    color: #e6e6e6;
+    font-size: small;
+}
+
+.menu-section.underline {
+    height: 1px;
+    width: calc(100% + 40px);
+    margin: 20px 0;
+    background-color: rgb(49, 63, 88);
+}
+
+.menu-content {
+    width: 100%;
+    margin-bottom: auto;
+}
+
+.menu-content ul {
+}
+
+.menu-content li {
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+.menu {
+    font-size: small;
+    width: 100%;
+}
+
+.menu-item {
+    display: flex;
+    color: #e6e6e6;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.menu-item p {
+    margin-right: auto;
+}
+
+.chevron {
+    margin-right: -10px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    margin-top: 5px;
+    background: white;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #454545 !important;
+    font-size: small;
+    border-bottom: 1px solid #e6e6e6;
+    transition: background 0.3s;
+}
+
+.dropdown-content a:hover {
+    background: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+.rotate {
+    transform: rotate(90deg);
+}
+
+.menu-content a {
+    color: #e6e6e6;
+    font-size: small;
+    text-decoration: none;
+}
+
+.menu-content i {
+    margin: 0 10px;
+}
+
+.dropdown-content i {
+    color: transparent;
+}
+
+.menu-section.logout {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.menu-section.logout a {
+    color: #e6e6e6;
+    font-size: small;
+    text-decoration: none;
+}
+
+.menu-section.logout a ion-icon {
+    margin: 0 5px;
+    font-size: large;
+}
+
+.logout-container {
+    display: flex;
+    align-items: center;
+}

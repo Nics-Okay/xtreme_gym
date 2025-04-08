@@ -1,4 +1,8 @@
-<x-guest-layout>
+@extends('layouts.auth')
+
+@section('title', 'GYMXTREME - Login')
+
+@section('main-content')
     <div class="mb-4 text-sm text-gray-600">
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
     </div>

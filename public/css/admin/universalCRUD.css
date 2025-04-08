@@ -1,0 +1,141 @@
+.table-header-info {
+    color: #4B5563;
+}
+
+.table-header-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 200px;
+    margin: 10px 0;
+    margin-left: auto;
+    border: 1px solid rgb(0, 0, 0, 0.5);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgb(0, 0, 0, 0.5);
+    background-color: rgb(223, 171, 39);
+}
+
+.table-header-button ion-icon {
+    color: black;
+    margin-bottom: -2px;
+}
+
+.table-header-button a {
+    color: black;
+    text-decoration: none;
+}
+
+.crud-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 10%);
+    width: 100%;
+    padding: 10px;
+}
+
+.crud-section.header {
+    display: flex;
+    align-items: center;
+    height: 8%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.crud-section.return {
+    display: flex;
+    align-items: center;
+    height: 8%;
+    width: 100%;
+}
+
+.crud-section.return a {
+    display: flex;
+    align-items: center;
+    color: #4B5563;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.crud-section.return ion-icon {
+    display: flex;
+    margin-right: 5px;
+    font-size: x-large;
+}
+
+.crud-section.return p {
+    font-size: x-large;
+    margin-bottom: -2px;
+}
+
+.universal-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.universal-div-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 40%;
+    border-radius: 15px;
+    border: 1px solid rgb(0, 0, 0, 0.4);
+    box-shadow: 0 4px 7px rgb(0, 0, 0, 0.4);
+    background-color: white;
+}
+
+.universal-div-header {
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.universal-div-content {
+    width: 70%;
+
+}
+
+.label {
+    margin: 0;
+    padding: 0;
+}
+
+.label label {
+    font-size: 14px;
+}
+
+.label input {
+    height: 30px;
+    width: 100%;
+    margin: 0 0 20px;
+    border: none; /* Remove all borders */
+    border-bottom: 1px solid #000000a9; /* Add a bottom border */
+    outline: none; /* Remove the focus outline */
+    padding: 5px 0; /* Optional: Add padding for spacing */
+    width: 100%; /* Optional: Set width */
+    font-size: 16px; /* Optional: Adjust text size */
+}
+
+input {
+    padding-left: 5px;
+}
+
+.submit-button {
+    margin-top: 50px;
+    justify-self: center;
+}
+
+.submit-button input {
+    font-size: 18px;
+    height: 35px;
+    width: 120px;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px 3px rgb(0, 0, 0, 0.5);
+    background-color: rgb(212, 161, 29);
+}
