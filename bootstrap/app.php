@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckAdminLock;
 use App\Http\Middleware\EnsureOtpVerified;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Application;
@@ -15,7 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'otp.verified' => EnsureOtpVerified::class,
-            'role' => RoleMiddleware::class
+            'role' => RoleMiddleware::class,
+            'admin.lock' => CheckAdminLock::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

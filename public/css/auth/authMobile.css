@@ -1,0 +1,12 @@
+@media (max-width: 639px) {
+    .main-content {
+        height:60%;
+        width: 90%;
+        padding: 0 5vw;
+    }
+    
+    .auth-button button {
+        font-size: small;
+        border-radius: 5px;
+    }
+}

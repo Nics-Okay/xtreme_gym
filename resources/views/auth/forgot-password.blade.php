@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'GYMXTREME - Login')
+@section('title', 'Xtreme Gym World - Forgot Password')
 
 @section('main-content')
     <div class="main-content">

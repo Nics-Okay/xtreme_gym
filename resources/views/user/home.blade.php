@@ -1,5 +1,5 @@
 @extends('layouts.UserLayout')
 
 @section('main-content')
-<div class=""></div>
+<div class="">Class</div>
 @endsection

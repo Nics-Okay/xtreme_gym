@@ -20,6 +20,6 @@ class RoleMiddleware
             return $next($request);
         }
 
-        return redirect()->route('index')->with('error', 'Access denied.');
+        return redirect()->route('main')->with('error', 'Access denied.');
     }
 }

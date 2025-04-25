@@ -1,0 +1,71 @@
+/* Body styling */
+.body-bg {
+    background-color: #f7fafc; /* gray-100 equivalent */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styling */
+.container {
+    max-width: 36rem; /* 576px */
+    margin: 2.5rem auto; /* mt-10 */
+    padding: 1.25rem; /* p-5 */
+    background-color: #ffffff; /* white */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow */
+}
+
+/* Title styling */
+.title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: bold; /* font-bold */
+    text-align: center;
+    margin-bottom: 1.25rem; /* mb-5 */
+}
+
+/* Flex-row styling */
+.flex-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem; /* spacing if needed */
+}
+
+/* Label styling */
+.label {
+    font-weight: 500; /* font-medium */
+}
+
+/* Status styling */
+.status {
+    padding: 0.25rem 0.75rem; /* px-3 py-1 */
+    border-radius: 0.25rem; /* rounded */
+    color: #ffffff; /* text-white */
+}
+
+.status.locked {
+    background-color: #f56565; /* bg-red-500 */
+}
+
+.status.unlocked {
+    background-color: #48bb78; /* bg-green-500 */
+}
+
+/* Button styling */
+.button {
+    width: 100%; /* w-full */
+    margin-top: 1.25rem; /* mt-5 */
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    background-color: #3182ce; /* bg-blue-600 */
+    color: #ffffff; /* text-white */
+    font-weight: 600; /* font-semibold */
+    border: none;
+    border-radius: 0.25rem; /* rounded */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2b6cb0; /* hover:bg-blue-500 */
+}

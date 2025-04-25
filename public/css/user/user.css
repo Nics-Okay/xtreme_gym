@@ -1,0 +1,323 @@
+.user-content-container {
+    height: 100%;
+    width: 100%;
+}
+
+.user-content-header {
+    display: flex;
+    align-items: center;
+    height: 8%;
+    width: 100%;
+    padding: 10px;
+}
+
+.user-content-header h3 {
+    font-size: x-large;
+    margin-right: auto;
+}
+
+.user-content-button {
+    border-radius: 8px;
+    border: 2px solid rgba(28, 37, 54);
+    box-shadow: 0 2px 4px rgb(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.user-content-button a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px 8px 9px;
+    color: rgba(28, 37, 54);
+    font-size: small;
+    text-decoration: none;
+    background-color: white;
+}
+
+.user-content-button-history a {
+    padding: 0 0 0 10px;
+    color: rgba(28, 37, 54);
+}
+
+.user-content-button a:hover, .user-content-button-history a:hover {
+    background-color: rgb(223, 223, 223);
+}
+
+.user-content-button i {
+    padding-right: 3px;
+    font-size: small;
+}
+
+.user-content-button-history i {
+    font-size: x-large;
+}
+
+.user-content-button span {
+    margin-top: -2px;
+}
+
+.user-main-content {
+    height: 92%;
+    width: 100%;
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    row-gap: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 0 10px 10px;
+}
+
+/* Testing Area */
+.ongoing {
+    display: flex;
+    flex-direction: column;
+    height: 35%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.ongoing p:nth-child(1) {
+    font-size: large;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ongoing-reservation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.scheduled {
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+    width: 100%;
+    padding: 10px 0 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.scheduled p:nth-child(1) {
+    padding: 0 10px;
+    font-size: large;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.upcoming-reservation {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    padding: 0 10px;
+    overflow-y: auto;
+}
+
+.upcoming-item {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 5px 0 10px;
+}
+
+.upcoming-item h4 {
+    margin-right: 7px;
+}
+
+.reservation-info {
+    display: flex;
+    width: 100%;
+}
+
+.reservation-info.on h4 {
+    margin-right: auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    position: relative;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-history {
+    justify-items: center;
+    background-color: #e6e6e6;
+    width: 100%;
+    height: 92%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+    z-index: 999;
+    padding: 10px 0 0;
+}
+
+.modal-history-content {
+    height: 95%;
+    width: 60%;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.modal-history-content h3 {
+    justify-self: center;
+    padding: 5px 0 10px;
+}
+
+.modal-history-header {
+    display: flex;
+    justify-content: flex-start;
+    height: 5%;
+    width: 100%;
+}
+
+.modal-history-header button {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control label {
+    font-weight: bold;
+}
+
+.form-control input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.form-buttons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-buttons .cancel {
+    background-color: #ccc;
+    color: #000;
+}
+
+.form-buttons .submit {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.past-item {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 5px 0 10px;
+}
+
+.past-item h4 {
+    margin-right: 7px;
+}
+
+@media (max-width: 639px) {
+    .modal-content {
+        width: 90%;
+    }
+
+    .modal-history-content {
+        width: 100%;
+    }
+
+    .modal-history-header button {
+        font-size: large;
+    }
+}
+
+/* Test Area 2 */
+.transactions-container {
+    height: 100%;
+    width: 100%;
+}
+
+.transactions-container h4 {
+    text-align: center;
+}
+
+.transactions-container li {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1px;
+    padding: 10px;
+    background-color: white;
+}
+
+.transactions-info-one {
+    align-content: center;
+    width: 70%;
+    margin-right: auto;
+}
+
+.transactions-title {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.transactions-id, .transactions-date {
+    font-size: small;
+}
+
+.transactions-info-two {
+    width: 30%;
+    justify-items: flex-end;
+}
+
+.transactions-amount {
+    font-weight: bold;
+}
+
+.transactions-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}

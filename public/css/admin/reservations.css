@@ -1,0 +1,94 @@
+/* Menu Adjustment */
+.menu-name.reservations {
+    background-color: rgb(49, 63, 88);
+    border-radius: 5px;
+}
+
+.reservations {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background-color: white;
+}
+
+.reservations-calendar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 60%;
+}
+
+.ongoing-list {
+    width: 100%;
+    padding: 0 10px;
+    margin-top: auto;
+    overflow-y: auto;
+}
+
+.upcoming-reservations {
+    height: 100%;
+    width: 40%;
+    overflow-y: auto;
+    border-left: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.list {
+    max-height: 50%;
+    width: 100%;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.list-title {
+}
+
+.list-item {
+    padding: 5px 0;
+    font-size: small;
+    border-bottom: 1px solid black;
+}
+
+
+#calendar {
+    height: fit-content;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+:root {
+    --fc-border-color: rgba(0, 0, 0, 0.4);
+    --fc-today-bg-color: rgba(228, 190, 0, 0.466);
+    --fc-button-text-color: #4B5563;
+    --fc-button-bg-color: none;
+    --fc-button-border-color: #D9D9D9;
+    --fc-button-hover-bg-color: none;
+    --fc-button-hover-border-color: #4B5563;
+    --fc-button-active-bg-color: none;
+    --fc-button-active-border-color: none;
+}
+
+.fc .fc-toolbar-title {
+    font-size: large !important;
+}
+
+.fc .fc-toolbar {
+    font-size: 10px !important;
+}
+
+.fc-toolbar-chunk .fc-button {
+    font-size: small;
+}
+
+.fc-toolbar-chunk .fc-button:hover {
+    color: black;
+}
+
+.fc-event {
+    text-align: center;
+}
+
+.fc-event-time {
+    display: none !important;
+}

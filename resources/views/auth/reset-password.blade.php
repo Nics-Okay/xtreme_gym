@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'GYMXTREME - Login')
+@section('title', 'Xtreme Gym World - Reset Password')
 
 @section('main-content')
     <form method="POST" action="{{ route('password.store') }}">

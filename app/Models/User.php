@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\DatabaseNotification;
 
 use function Ramsey\Uuid\v1;
 
@@ -23,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'unique_id',
         'user_type',
         'email',
+        'member_since',
         'first_name',
         'last_name',
         'nickname',
@@ -34,6 +36,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'emergency_contact_number',
         'image',
         'admin_code',
+        'locked',
+        'lock_code',
         'otp_code',
         'otp_expires_at',
         'otp_verified',
@@ -84,5 +88,20 @@ class User extends Authenticatable implements MustVerifyEmail
 
             $user->unique_id = "$prefix$date$sequenceFormatted";
         });
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'user_id', 'unique_id');
+    }
+
+    public function trainers()
+    {
+        return $this->hasMany(Trainer::class, 'user_id', 'unique_id');
     }
 }

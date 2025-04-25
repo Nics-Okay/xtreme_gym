@@ -9,47 +9,8 @@
 @section('main-content')
     <div class="user-content-container">
         <div class="user-content-header">
-            <p>AVAILABE MEMBERSHIP PLANS</p>
+            <p>MEMBERSHIP PLANS</p>
         </div>
-        @if(session('success'))
-            <script>
-                window.onload = function() {
-                    let message = "{{ session('success') }}";
-                    let alertBox = document.createElement('div');
-                    alertBox.textContent = message;
-                    
-                    // Styling
-                    alertBox.style.position = 'fixed';
-                    alertBox.style.bottom = '30px'; /* Position near bottom */
-                    alertBox.style.right = '-300px'; /* Start off-screen */
-                    alertBox.style.backgroundColor = '#4CAF50';
-                    alertBox.style.color = 'white';
-                    alertBox.style.padding = '15px 20px';
-                    alertBox.style.borderRadius = '8px';
-                    alertBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-                    alertBox.style.zIndex = '1000';
-                    alertBox.style.fontSize = '14px';
-                    alertBox.style.fontWeight = 'bold';
-                    alertBox.style.textAlign = 'center';
-                    alertBox.style.minWidth = '220px';
-                    alertBox.style.maxWidth = '300px';
-                    alertBox.style.transition = 'right 0.5s ease-out, opacity 0.5s ease-in-out';
-
-                    document.body.appendChild(alertBox);
-
-                    // Slide in animation
-                    setTimeout(() => {
-                        alertBox.style.right = '10px';
-                    }, 100);
-
-                    // Auto remove after 3 seconds
-                    setTimeout(() => {
-                        alertBox.style.opacity = '0';
-                        setTimeout(() => alertBox.remove(), 500);
-                    }, 3000);
-                };
-            </script>
-        @endif
         <div class="membership-plans">
             @foreach($rates as $rate)
                 <div class="plans-container" style="background-color: {{ $rate->color ?? '#ffffff' }};">
@@ -88,11 +49,10 @@
                         </div>
                     </div>
                 </div>
-
             @endforeach
         </div>
         <div class="note-container">
-            <p><b>Note:</b> Daily membership is also available for 299. For more information message us <a href="#">here</a>.</p>
+        <p><b>Note:</b> Daily membership is also available for ₱{{ $walkIn->price ?? '(Price N/A)'}}. For more information message us <a href="{{ route('page.contact') }}">here</a>.</p>
         </div>
     </div>
     <div id="confirmationModal" class="modal-overlay" style="display: none;">
@@ -106,9 +66,7 @@
             </div>
         </div>
     </div>
-@endsection
 
-@section('js-container')
     <script>
         function showModal(availUrl) {
             document.getElementById('confirmationModal').style.display = 'flex';

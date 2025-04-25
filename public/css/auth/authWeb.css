@@ -5,8 +5,8 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(218, 218, 218);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgba(28, 37, 54);
 }
 
 .main-container {
@@ -41,7 +41,7 @@ body {
     color: black;
     font-size: x-large;
     font-weight: 700;
-    margin: 10px 0;
+    margin: 0px 0 10px;
 }
 
 .main-content form {
@@ -58,18 +58,14 @@ body {
     width: 50%;
 }
 
-.auth-fields.name input {
-    height: 5vh;
-    width: 100%;
-    font-size: small;
-}
-
+.auth-fields.name input,
 .auth-fields.email input,
 .auth-fields.password input,
 .auth-fields.password-confirmation input, 
 .auth-fields.forgot input {
     height: 5vh;
     width: 100%;
+    padding: 0 10px;
     font-size: small;
 }
 
@@ -95,9 +91,10 @@ body {
     color: black;
 }
 
-.auth-help.forgot {
+.auth-help.forgot a {
     color: grey;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .auth-help.x-auth {
@@ -109,6 +106,7 @@ body {
 }
 
 .auth-help.x-auth a {
+    text-decoration: none;
     color: red;
 }
 
@@ -122,7 +120,9 @@ body {
     width: 100%;
     color: white;
     font-weight: 700;
-    border-radius: 20px;
+    outline: none;
+    border: none;
+    border-radius: 6px;
     background-color: rgb(0, 102, 255); 
 }
 

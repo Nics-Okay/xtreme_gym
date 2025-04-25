@@ -20,6 +20,7 @@
         @include('partials.userHeader')
 
         <div class="main-content">
+            @include('partials.session-message')
             @yield('main-content')
         </div>
     </div>

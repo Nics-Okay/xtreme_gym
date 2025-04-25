@@ -108,7 +108,9 @@ class OtpController extends Controller
         }
         
         if ($user->otp_code !== $request->otp_code) {
-            return back()->withErrors(['otp_code' => 'Invalid OTP code']);
+            return back()
+                ->withErrors(['otp_code' => 'Invalid OTP code'])
+                ->with('error', 'Invalid OTP. Please try again.');
         }
 
         $user->update([

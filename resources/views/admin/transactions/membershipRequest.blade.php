@@ -2,71 +2,79 @@
 
 @section('title', 'Rates')
 
-@section('header-title', 'Membership Payments')
-
 @section('head-access')
     <link rel="stylesheet" href="{{ asset('css/layouts/tables.css') }}">
 @endsection
 
 @section('main-content')
-    <div class="section-style">
-        <div class="table-main">
-            <div class="member-table-header">
-                <h3 class="table-header-info">Membership Payments Request</h3>
+    <div class="content">
+        <div class="page-header">
+            <h2>MEMBERSHIP PAYMENTS</h2> 
+        </div>
+        <div class="table-container">
+            <div>
+                @if(session()->has('success'))
+                    <div>
+                        {{session('success')}}
+                    </div>
+                @endif
+                @if(isset($operationError))
+                    <script>
+                        window.alert("{{ $operationError }}");
+                    </script>
+                @endif
             </div>
-            <div class="table-container">
-                <div>
-                    @if(session()->has('success'))
-                        <div>
-                            {{session('success')}}
-                        </div>
-                    @endif
-                </div>
-                <table class="table-content">
-                    <thead>
+            <table class="table-content">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Membership Plan</th>
+                        <th>Amount</th>
+                        <th>Payment Method</th>
+                        <th>Date</th>
+                        <th>Valid Until</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($transactions as $transaction)
                         <tr>
-                            <th>#</th>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Membership Plan</th>
-                            <th>Amount</th>
-                            <th>Payment Method</th>
-                            <th>Date</th>
-                            <th>Valid Until</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($transactions as $transaction)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td id="center-align">{{ $transaction->user_id }}</td>
-                                <td>{{ $transaction->name }}</td>
-                                <td id="center-align">{{ $transaction->rate->name ?? 'Rate not found' }}</td>
-                                <td id="center-align">{{ $transaction->rate->price ?? 'Rate not found' }}</td>
-                                <td id="center-align">{{ $transaction->payment_method }}</td>
-                                <td id="center-align">{{ $transaction->created_at }}</td>
-                                <td id="center-align"></td>
-                                <td class="action-button">
-                                    @if($transaction->status === 'pending')
-                                        <form method="POST" action="#">
+                            <td>{{ ($transactions->currentPage() - 1) * $transactions->perPage() + $loop->iteration }}</td>
+                            <td>{{ $transaction->user_id }}</td>
+                            <td>{{ $transaction->name }}</td>
+                            <td>{{ $transaction->rate->name ?? 'Rate not found' }}</td>
+                            <td>{{ $transaction->rate->price ?? 'Rate not found' }}</td>
+                            <td>{{ $transaction->payment_method }}</td>
+                            <td>{{ $transaction->created_at }}</td>
+                            <td></td>
+                            <td>{{ $transaction->status }}</td>
+                            <td>
+                                <div class="action-button">
+                                    @if(strtolower($transaction->status) === 'pending')
+                                        <form method="post" action="{{ route('transactions.membershipRequestApprove', $transaction) }}">
                                             @csrf
-                                            @method('PUT')
+                                            @method('put')
                                             <button class="btn-approve">Approve</button>
                                         </form>
-                                        <form method="POST" action="#">
+                                        <form method="post" action="{{ route('transactions.membershipRequestCancel', $transaction) }}">
                                             @csrf
-                                            @method('PUT')
+                                            @method('put')
                                             <button class="btn-cancel">Cancel</button>
                                         </form>
                                     @else
                                         <span>N/A</span>
                                     @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="pagination-links">
+                {{ $transactions->links() }}
             </div>
         </div>
     </div>

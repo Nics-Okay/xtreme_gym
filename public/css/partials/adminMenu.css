@@ -4,8 +4,8 @@
     align-items: center;
     height: 100%;
     width: 250px;
-    padding: 0 20px;
-    background-color: #1c2536ff;
+    padding: 0 20px 20px;
+    background-color: rgba(28, 37, 54);
 }
 
 .menu-container h1 {
@@ -13,7 +13,8 @@
     color: white;
 }
 
-.menu-section.user {
+.menu-section.time-date {
+    display: flex;
     height: fit-content;
     width: 100%;
     padding: 5px 10px;
@@ -21,13 +22,27 @@
     background-color: rgb(49, 63, 88);
 }
 
-.user.name {
+#clock {
+    font-size: large;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.user.role {
+#date {
     color: #e6e6e6;
     font-size: small;
+}
+
+#lock-toggle {
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+}
+
+#lock-toggle ion-icon {
+    padding-right: 4px;
+    color: white;
+    font-size: x-large;
 }
 
 .menu-section.underline {
@@ -40,14 +55,35 @@
 .menu-content {
     width: 100%;
     margin-bottom: auto;
+    overflow-y: auto;
 }
 
-.menu-content ul {
+.menu-content::-webkit-scrollbar {
+    display: none;
 }
 
 .menu-content li {
-    padding: 8px 0;
+    width: 100%;
     overflow: hidden;
+    border-radius: 5px;
+}
+
+.menu-content li a {
+    display: flex;
+    width: 100%;
+    padding: 8px 0;
+    padding-right: 10px;
+}
+
+.icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+}
+
+.menu-content li:hover {
+    background-color: rgb(49, 63, 88);
 }
 
 .menu {
@@ -57,18 +93,12 @@
 
 .menu-item {
     display: flex;
+    align-items: center;
+    padding: 8px 0;
+    padding-right: 10px;
     color: #e6e6e6;
     cursor: pointer;
     overflow: hidden;
-}
-
-.menu-item p {
-    margin-right: auto;
-}
-
-.chevron {
-    margin-right: -10px;
-    transition: transform 0.3s ease;
 }
 
 .dropdown-content {
@@ -76,6 +106,7 @@
     margin-top: 5px;
     background: white;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .dropdown-content a {
@@ -106,33 +137,54 @@
     text-decoration: none;
 }
 
-.menu-content i {
-    margin: 0 10px;
+.chevron {
+    margin-left: auto;
+    transition: transform 0.3s ease;
 }
 
 .dropdown-content i {
     color: transparent;
 }
 
-.menu-section.logout {
+.menu-section.user {
+    display: flex;
+    column-gap: 10px;
+    height: fit-content;
+    width: 100%;
+    padding: 10px 10px 0 0;
+    border-top: 1px solid rgb(49, 63, 88);
+}
+
+.user-profile {
     display: flex;
     justify-content: center;
-    width: 100%;
-    margin-bottom: 50px;
-}
-
-.menu-section.logout a {
-    color: #e6e6e6;
-    font-size: small;
-    text-decoration: none;
-}
-
-.menu-section.logout a ion-icon {
-    margin: 0 5px;
-    font-size: large;
-}
-
-.logout-container {
-    display: flex;
     align-items: center;
+    height: 40px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.user-profile img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.user-profile img:hover {
+    filter: brightness(80%);
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.user.name {
+    color: white;
+}
+
+.user.role {
+    font-size: small;
+    color: rgba(255, 255, 255, 0.8);
 }

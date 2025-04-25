@@ -27,7 +27,6 @@ body {
     align-items: center;
     height: calc(100% - 8%);
     width: calc(100vw - 250px);
-    padding: 10px;
     overflow-x: hidden;
     overflow-y: auto;
 }

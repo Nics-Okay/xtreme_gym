@@ -32,31 +32,57 @@
     cursor: pointer;
 }
 
-.image-container {
-    width: 50%;
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
     aspect-ratio: 1/1;
-    margin: 10px 0;
+    margin-bottom: 10px;
+}
+
+.profile-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 1/1;
     border-radius: 50%;
-    overflow: hidden;
     border: 3px solid #e6e6e6;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.profile-holder img  {
+    width: 100%;
+    aspect-ratio: 1/1;
 }
 
 .user-info {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding-bottom: 18px;
-    border-bottom: 1px solid #e6e6e6;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: rgba(28, 37, 54);
+}
+
+.user {
+    color: white;
 }
 
 .user.member-since {
     font-size: small;
-    color: #454545;
+    color: #e6e6e6;
 }
 
 .menu-content {
     width: 100%;
     margin-bottom: auto;
+    border-top: 1px solid #e6e6e6;
 }
 
 .menu-content li {

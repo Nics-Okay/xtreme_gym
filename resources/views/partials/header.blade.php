@@ -1,44 +1,24 @@
-<div class="header-title">
-    <a href="#">
-        <h1>
-            GYMXTREME
-        </h1>
-    </a>
-</div>
-
-<div class="head-nav-container">
-    <div class="head-nav">
-        <a href="#" id="head-nav1">
-            Home
-        </a>
+<div class="index-top">
+    <div class="index-top-left">
+        <h1 onclick="window.location.href='{{ route('main') }}'">XTREME GYM WORLD</h1>
     </div>
-    <div class="head-nav">
-        <a href="#" id="head-nav2">
-            Rates
-        </a>
-    </div>
-    <div class="head-nav">
-        <a href="#" id="head-nav3">
-            Community
-        </a>
-    </div>
-    <div class="head-nav">
-        <a href="#" id="head-nav3">
-            Contact
-        </a>
-    </div>
-    <div class="head-nav">
-        <a href="#" id="head-nav4">
-            About
-        </a>
+    <div class="index-top-right">
+        @if (Route::has('login'))
+            @auth
+                <div class="index-top-guest" id="sign-up">
+                    <a href="{{ route('filter') }}">Sign up</a>
+                </div>
+                <div class="index-top-guest" id="log-in">
+                    <a href="{{ route('filter') }}">Sign in</a>
+                </div>
+                @else
+                    <div class="index-top-guest" id="sign-up">
+                        <a href="{{ route('register') }}">Sign up</a>
+                    </div>
+                    <div class="index-top-guest" id="log-in">
+                        <a href="{{ route('login') }}">Sign in</a>
+                    </div>
+            @endauth
+        @endif
     </div>
 </div>
-<div class="head-etc-container">
-    <div class="head-etc-guest" id="sign-up">
-        <a href="{{ route('register') }}">Sign up</a>
-    </div>
-    <div class="head-etc-guest" id="log-in">
-        <a href="{{ route('login') }}">Sign in</a>
-    </div>
-</div>
-

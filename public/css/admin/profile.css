@@ -1,0 +1,150 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 50px 0 0;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    height: 78%;
+    width: 90%;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    background-color: white;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 95%;
+    width: 30%;
+    padding: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.26);
+    border-radius: 7px;
+}
+
+.image-container p {
+    width: 100%;
+    padding: 0 0 20px;
+    font-weight: bold;
+}
+
+.image-container form {
+    height: fit-content;
+}
+
+.image-container form button {
+    padding: 6px 15px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #007bff;
+}
+
+.image-holder {
+    width: 85%;
+    aspect-ratio: 1/1;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.image-holder img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    height: 95%;
+    width: 70%;
+    padding: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.26);
+    border-radius: 7px;
+}
+
+.profile-info p:nth-child(1) {
+    font-weight: bold;
+}
+
+.profile-info form {
+    justify-items: end;
+}
+
+.save-button {
+    align-self: flex-end;
+    background: #007bff;
+    color: white;
+    padding: 6px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.delete-button {
+    width: fit-content;
+    margin-left: auto;
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cancel-button {
+    background: gray;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-button:hover {
+    background: darkred;
+}
+
+.cancel-button:hover {
+    background: darkgray;
+}

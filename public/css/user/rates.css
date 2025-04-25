@@ -1,4 +1,6 @@
 .user-content-container {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
 }
@@ -14,13 +16,17 @@
     font-size: x-large;
 }
 
+#header-context {
+    color: white;
+}
+
 .membership-plans {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     column-gap: 50px;
     row-gap: 20px;
-    height: calc(100% - 8%);
+    flex-grow: 1;
     width: 100%;
     padding: 20px 100px 70px;
     overflow-y: auto;
@@ -115,6 +121,10 @@
     align-items: center;
     overflow: hidden;
     font-size: small;
+}
+
+#note-context, #note-context a {
+    color: white;
 }
 
 /* Modal Confirmation Section */

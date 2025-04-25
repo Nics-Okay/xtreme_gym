@@ -1,0 +1,90 @@
+.notification-item {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    background-color: white;
+}
+
+.list-item {
+    height: 100%;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.notification-item:hover {
+    background-color: rgb(231, 231, 231);
+}
+
+.list-item.read {
+    color: #777;
+}
+
+.list-item.unread {
+    color: #000;
+}
+
+.list-item #title {
+    width: 100%;
+    font-size: small;
+    font-weight: bold;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.list-item #context {
+    font-size: small;
+    overflow-y: auto;
+    cursor: pointer;
+}
+
+.action-buttons.notifications {
+    display: flex;
+    align-items: flex-end;
+    width: fit-content;
+    padding: 10px;
+}
+
+.delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    padding: 6px 6px;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: small;
+    border-radius: 3px;
+    background-color: rgb(197, 0, 0);
+}
+
+.delete-button:hover {
+    background-color: rgb(158, 8, 8);
+}
+
+.delete-button i {
+    color: white;
+    font-size: small;
+}
+
+/* Modal Design */
+.notification-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    row-gap: 10px;
+    padding: 15px 0;
+}
+
+.content-value {
+    display: flex;
+    text-align: left;
+    width: 100%;
+}
+
+.content-value h4 {
+    margin-right: auto;
+}

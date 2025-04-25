@@ -9,10 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MembershipController extends Controller
 {
-    public function showMembership() {
-        $rates = Rate::all();
+    public function showMembership()
+    {
+        $walkIn = Rate::whereRaw('LOWER(name) = ?', ['walk-in'])->first();
 
-        return view('user.rates', ['rates' => $rates]);
+        $rates = Rate::whereNot(function ($query) {
+            $query->where('validity_unit', 'day')
+                  ->where('validity_value', 1);
+        })->get();
+
+        return view('user.rates', compact('rates', 'walkIn'));
     }
 
     public function availMembership($rate) {

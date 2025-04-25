@@ -1,0 +1,18 @@
+.image-data {
+    justify-items: center;
+}
+
+.image-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid gray;
+}
+
+.image-holder img {
+    width: 100%;
+}

@@ -6,78 +6,73 @@
 
 @section('head-access')
     <link rel="stylesheet" href="{{ asset('css/admin/rates.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/universalCRUD.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layouts/universalCRUD.css') }}">
 @endsection
 
 @section('main-content')
-    <div class="crud-container">
-        <div class="crud-section return">
+    <div class="content">
+        <div class="page-header">
             <a href="{{ route('rate.show') }}">
                 <ion-icon name="arrow-back-sharp"></ion-icon>
-                <p>Back</p>
+                <h2>Back to Available Plans</h2>
             </a>
         </div>
-        <div>
-            @if(session()->has('success'))
-                <div>
-                    {{session('success')}}
-                </div>
-            @endif
-        </div>
+        <div class="page-content">
+            <div class="crud-container">
+                <div class="crud-content">
+                    <h3 class="crud-header">New Membership Plan</h3>
+                    <div class="crud-form">
+                        <form method="post" action="{{ route('rate.store') }}">
+                            @csrf
 
-        <div class="universal-div">
-            <div class="universal-div-main">
-                <h3 class="universal-div-header">New Membership Plan</h3>
-                <div>
-                    @if(session()->has('success'))
-                        <div>
-                            {{session('success')}}
-                        </div>
-                    @endif
-                </div>
-                <div class="universal-div-content">
-                    <form method="post" action="{{ route('rate.store') }}">
-                        @csrf
-                        @method('post')
-                        <div class="label">
-                            <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" required autofocus>
-                        </div>
-                        <div class="label">
-                            <label for="color">Choose color:</label>
-                            <input type="color" id="color" name="color">
-                        </div>
-                        <div class="label">
-                            <label for="validity_value">Validity:</label>
-                            <input type="number" name="validity_value" id="validity_value" required min="1">
-                            <p id="validity_error" style="color: red; font-size: 14px;"></p>
+                            <div class="form-full">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" placeholder="Name" required autofocus>
+                            </div>
 
-                            <select name="validity_unit" id="validity_unit" required>
-                                <option value="" disabled selected>-Validity Unit-</option>
-                                <option value="day">Day(s)</option>
-                                <option value="month">Month(s)</option>
-                                <option value="year">Year(s)</option>
-                            </select>
-                            <p>
-                                <!-- Instruction -->
-                            </p>
-                        </div>
-                        <div class="label">
-                            <label for="price">Price:</label>
-                            <input type="text" name="price" id="price" required>
-                        </div>
-                        <div class="label">
-                            <label for="description">Description:</label>
-                            <textarea name="description" id="description" rows="3"></textarea>
-                        </div>
-                        <div class="label">
-                            <label for="perks">Perks:</label>
-                            <textarea name="perks" id="perks" rows="3"></textarea>
-                        </div>
-                        <div class="submit-button">
-                            <input type="submit" value="Confirm">
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <div class="form-content">
+                                    <label for="price">Price</label>
+                                    <input type="text" name="price" id="price" placeholder="Price" required>
+                                </div>
+                                <div class="form-content">
+                                    <label for="color">Choose a color</label>
+                                    <input type="color" id="color" name="color" value="#00aaff">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-content">
+                                    <label for="validity_value">Validity Value</label>
+                                    <input type="number" name="validity_value" id="validity_value" required min="1">
+                                    <p id="validity_error" style="color: red; font-size: 14px;"></p>
+                                </div>
+                                <div class="form-content">
+                                    <label for="validity_unit">Validity Unit</label>
+                                    <select name="validity_unit" id="validity_unit" required>
+                                        <option value="" disabled selected>-Validity Unit-</option>
+                                        <option value="day">Day(s)</option>
+                                        <option value="month">Month(s)</option>
+                                        <option value="year">Year(s)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-full">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" rows="3" maxlength="500" placeholder="Provide a brief description."></textarea>
+                            </div>
+
+                            <div class="form-full">
+                                <label for="perks">Perks</label>
+                                <textarea name="perks" id="perks" rows="3" placeholder="Perks for availing the plan."></textarea>
+                            </div>
+
+                            <div class="submit-button">
+                                <input type="submit" value="Confirm">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

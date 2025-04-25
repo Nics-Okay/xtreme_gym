@@ -1,111 +1,154 @@
 <div class="menu-container">
     <h1>XTREME</h1>
 
-    <div class="menu-section user">
-        <p class="user name">Nickname</p>
-        <p class="user role">User</p>
+    <div class="menu-section time-date">
+        <div class="timeDate">
+            <div id="clock"></div>
+            <div id="date"></div>
+        </div>
+        <button id="lock-toggle" onclick="toggleLock()">
+            <ion-icon name="{{ auth()->user()->locked ? 'lock-closed' : 'lock-open' }}"></ion-icon>
+        </button>
     </div>
 
     <div class="menu-section underline"></div>
 
     <div class="menu-content">
         <ul>
-            <li><a href="{{ route('dashboard') }}"><i class="fa-solid fa-chart-simple"></i>Dashboard</a></li>
+            <li><a href="{{ route('dashboard') }}" class="menu-name dashboard"><div class="icon-box"><i class="fa-solid fa-chart-simple"></i></div><p>Dashboard</p></a>
+            </li>
             <li>
                 <div class="menu">
                     <div class="menu-item" onclick="toggleDropdown()">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
                         <p>Members</p>
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Manage Members</a>
-                        <a href="{{ route('rate.show') }}"><i class="fa-solid fa-chart-simple"></i>Membership Plans</a>
+                        <a href="{{ route('member.show') }}" class="menu-name manage-members"><i class="fa-solid fa-users"></i>Manage Members</a>
+                        <a href="{{ route('rate.show') }}" class="menu-name membership-plans"><i class="fa-solid fa-users"></i>Membership Plans</a>
                     </div>
                 </div>
             </li>
             <li>
                 <div class="menu">
                     <div class="menu-item" onclick="toggleDropdown()">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <div class="icon-box">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
                         <p>Guest & Attendees</p>
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Manage Guests</a>
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Attendance</a>
+                        <a href="{{ route('guest.show') }}" class="menu-name manage-guests"><i class="fa-solid fa-chart-simple"></i>Manage Guests</a>
+                        <a href="{{ route('attendee.show') }}" class="menu-name attendance"><i class="fa-solid fa-chart-simple"></i>Attendance</a>
                     </div>
                 </div>
             </li>
             <li>
                 <div class="menu">
                     <div class="menu-item" onclick="toggleDropdown()">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <div class="icon-box">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
                         <p>Trainers</p>
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Manage Trainers</a>
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Class Schedules</a>
+                        <a href="{{ route('trainer.show') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Manage Trainers</a>
+                        <a href="{{ route('classList.show') }}" class="menu-name class-schedules"><i class="fa-solid fa-chart-simple"></i>Class Schedules</a>
+                        <a href="{{ route('student.show') }}" class="menu-name students"><i class="fa-solid fa-chart-simple"></i>Students</a>
                     </div>
                 </div>
             </li>
-            <li><a href="#"><i class="fa-solid fa-chart-simple"></i>Reservations</a></li>
-            <li><a href="#"><i class="fa-solid fa-chart-simple"></i>Events</a></li>
+            <li><a href="{{ route('calendar') }}" class="menu-name reservations">
+                    <div class="icon-box">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    Reservations
+                </a>
+            </li>
+            <li><a href="{{ route('event.show') }}" class="menu-name events">
+                    <div class="icon-box">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    Events
+                </a>
+            </li>
             <li>
                 <div class="menu">
                     <div class="menu-item" onclick="toggleDropdown()">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <div class="icon-box">
+                            <i class="fas fa-money-bill-alt"></i>
+                        </div>
                         <p>Transactions</p>
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Payments History</a>
-                        <a href="{{ route('transaction.membershipRequest') }}"><i class="fa-solid fa-chart-simple"></i>Membership Requests</a>
+                        <a href="{{ route('transaction.show') }}" class="menu-name payments-history"><i class="fa-solid fa-chart-simple"></i>Payments History</a>
+                        <a href="{{ route('transaction.membershipRequest') }}" class="menu-name membership-requests"><i class="fa-solid fa-chart-simple"></i>Membership Requests</a>
                     </div>
                 </div>
             </li>
             <li>
                 <div class="menu">
                     <div class="menu-item" onclick="toggleDropdown()">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
                         <p>Reports & Analytics</p>
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Revenue Reports</a>
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Gym Analytics</a>
+                        <a href="#" class="menu-name revenue-reports"><i class="fa-solid fa-chart-simple"></i>Revenue Reports</a>
+                        <a href="#" class="menu-name gym-analytics"><i class="fa-solid fa-chart-simple"></i>Gym Analytics</a>
                     </div>
                 </div>
             </li>
             <li>
                 <div class="menu">
                     <div class="menu-item" onclick="toggleDropdown()">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
                         <p>Settings </p>
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Control Panel</a>
-                        <a href="{{ route('equipment.show') }}"><i class="fa-solid fa-chart-simple"></i>Gym Equipments</a>
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Reviews</a>
-                        <a href="#"><i class="fa-solid fa-chart-simple"></i>Reminders</a>
+                        <a href="{{ route('control.show')}}" class="menu-name control-panel"><i class="fa-solid fa-chart-simple"></i>Control Panel</a>
+                        <a href="{{ route('equipment.show') }}" class="menu-name gym-equipments"><i class="fa-solid fa-chart-simple"></i>Gym Equipments</a>
+                        <a href="{{ route('notification.show') }}" class="menu-name reminders"><i class="fa-solid fa-chart-simple"></i>Notifications</a>
+                        <a href="{{ route('review.show') }}" class="menu-name reviews"><i class="fa-solid fa-chart-simple"></i>Reviews</a>
+                        <a href="{{ route('profileNew.show') }}" class="menu-name profile-settings"><i class="fa-solid fa-chart-simple"></i>Profile Settings</a>
+                        <a href="#" class="menu-name reminders"><i class="fa-solid fa-chart-simple"></i>Empty</a>
                     </div>
                 </div>
+            </li>
+            <li>
+                <form method="post" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <a href="{{ route('logout') }}" 
+                        onclick="event.preventDefault(); this.closest('form').submit();"    >
+                        <div class="icon-box">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </div>
+                        Log out
+                    </a>
+                </form>
             </li>
         </ul>
     </div>
 
-    <div class="menu-section logout">
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <a href="{{route('logout')}}" onclick="event.preventDefault();
-                                this.closest('form').submit();">
-                <div class="logout-container">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                    <p>Log out</p>
-                </div>
-            </a>
-        </form>
+    <div class="menu-section user">
+        <div class="user-profile" onclick="window.location.href='{{ route('profileNew.show')}}'">
+            <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-placeholder.png') }}" 
+            alt="Profile Image">
+        </div>
+        <div class="user-info">
+            <p class="user name">{{ $user->first_name ?? ' '}}</p>
+            <p class="user role">{{ $user->user_type ?? 'Undefined'}}</p>
+        </div>
     </div>
 </div>
