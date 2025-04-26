@@ -1,36 +1,23 @@
 // Menu functionality
 function initMenu() {
     const currentUrl = window.location.href;
-    let permanentDropdown = null;
 
     document.querySelectorAll(".menu-item").forEach(item => {
         const dropdown = item.nextElementSibling;
         const chevron = item.querySelector(".chevron");
         const links = dropdown ? dropdown.querySelectorAll("a") : [];
 
-        links.forEach(link => {
-            if (link.href === currentUrl) {
-                dropdown?.classList.add("show");
-                chevron?.classList.add("rotate");
-                permanentDropdown = dropdown;
-            }
-        });
-
         item.addEventListener("click", function() {
-            if (dropdown !== permanentDropdown) {
-                document.querySelectorAll(".dropdown-content").forEach(d => {
-                    if (d !== permanentDropdown && d !== dropdown) d.classList.remove("show");
-                });
+            document.querySelectorAll(".dropdown-content").forEach(d => {
+                if (d !== dropdown) d.classList.remove("show");
+            });
 
-                document.querySelectorAll(".chevron").forEach(c => {
-                    if (c !== permanentDropdown?.previousElementSibling.querySelector(".chevron") && c !== chevron) {
-                        c.classList.remove("rotate");
-                    }
-                });
+            document.querySelectorAll(".chevron").forEach(c => {
+                if (c !== chevron) c.classList.remove("rotate");
+            });
 
-                dropdown?.classList.toggle("show");
-                chevron?.classList.toggle("rotate");
-            }
+            dropdown?.classList.toggle("show");
+            chevron?.classList.toggle("rotate");
         });
     });
 }

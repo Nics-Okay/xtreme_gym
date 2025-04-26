@@ -115,14 +115,6 @@
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-control">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
-                </div>
-                <div class="form-control">
-                    <label for="number">Contact Number</label>
-                    <input type="tel" id="number" name="number">
-                </div>
-                <div class="form-control">
                     <label for="reservation_date">Reservation Date</label>
                     <input type="date" id="reservation_date" name="reservation_date" required>
                 </div>
@@ -133,10 +125,6 @@
                 <div class="form-control">
                     <label for="end_time">End Time</label>
                     <input type="time" id="end_time" name="end_time">
-                </div>
-                <div class="form-control">
-                    <label for="number_of_people">Number of People</label>
-                    <input type="number" id="number_of_people" name="number_of_people" min="1">
                 </div>
                 <div class="form-buttons">
                     <button type="button" class="cancel" id="cancelModalButton">Cancel</button>

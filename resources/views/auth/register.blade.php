@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Xtreme Gym World - Register')
+@section('title', 'Register - Xtreme Gym World')
 
 @section('main-content')
     <div class="main-content">
@@ -16,7 +16,7 @@
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
                 <div class="input-field last_name">
-                    <input id="register-input last-name" type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Last name"/>
+                    <input id="register-input last-name" type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Last name" required/>
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
             </div>
@@ -27,12 +27,18 @@
             </div>
 
             <div class="auth-fields password">
-                <input id="register-input password" type="password" name="password" placeholder="Create Password" required autocomplete="new-password" />
+                <input id="password" type="password" name="password" placeholder="Create Password" required autocomplete="new-password" />
+                <button type="button" id="toggle-password-1" class="toggle-password">
+                    <i class="fas fa-eye" id="toggle-password-icon-1"></i>
+                </button>
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="auth-fields password-confirmation">
-                <input id="register-input password-confirmation" type="password" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password" />
+                <input id="password-confirmation" type="password" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password" />
+                <button type="button" id="toggle-password-2" class="toggle-password">
+                    <i class="fas fa-eye" id="toggle-password-icon-2"></i>
+                </button>
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
 
@@ -45,4 +51,5 @@
             <p>Alredy Have an Account? <a href="{{ route('login') }}">Log in</a></p>
         </div>
     </div>
+    <script src="{{ asset('js/password.js') }}"></script>
 @endsection

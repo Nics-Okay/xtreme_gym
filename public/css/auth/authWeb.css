@@ -25,7 +25,6 @@ body {
 }
 
 .main-content {
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -254,4 +253,29 @@ body {
     color: #4B5563;
     font-size: small;
     text-decoration: none;
+}
+
+.auth-fields.password, .auth-fields.password-confirmation {
+    position: relative;
+}
+
+.auth-fields.password input, .auth-fields.password-confirmation input {
+    position: relative;
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.toggle-password i {
+    font-size: 1.2rem;
+    color: #aaa;
 }

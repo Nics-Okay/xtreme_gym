@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{{ asset('css/auth/authMobile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/partials/header.css') }}">
     @yield('head-access')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head> 
 <body>
     <div class="main-container">

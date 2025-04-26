@@ -6,6 +6,7 @@
     <title>@yield('title', 'Xtreme Gym World')</title>
     <link rel="stylesheet" href="{{ asset('css/layouts/adminLayout.css') }}">
     <link rel="stylesheet" href="{{ asset('css/partials/adminMenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
     @yield('head-access')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -21,6 +22,7 @@
             @yield('main-content')
         </div>
     </div>
+
     <div id="locked-status" data-locked="{{ auth()->user()->locked ? 'true' : 'false' }}"></div>
 
     <div id="lock-modal" class="modal hidden">
@@ -28,29 +30,32 @@
             <h3>Enter Admin Pin</h3>
             <form id="unlock-form">
                 @csrf
-                <input type="password" id="pin_code" name="pin_code" maxlength="6" required placeholder="6-digit PIN">
-                <button type="button" onclick="unlockAdmin()">Unlock</button>
+                <div class="input-container">
+                    <input type="password" id="pin_code" name="pin_code" maxlength="6" required autofocus placeholder="6-digit PIN">
+                    <button type="button" id="toggle-password" class="toggle-password">
+                        <i class="fas fa-eye" id="toggle-password-icon"></i>
+                    </button>
+                </div>
+                <button class="unlock-button" type="button" onclick="unlockAdmin()">Unlock</button>
             </form>
             <a href="javascript:void(0);" onclick="sendResetLink()">Forgot Lock Code?</a>
         </div>
     </div>
-    <style>
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-        }
-        .modal.hidden { display: none; }
-        .modal-content { background: white; padding: 20px; border-radius: 8px; }
-    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('toggle-password');
+            const passwordInput = document.getElementById('pin_code');
+            const icon = document.getElementById('toggle-password-icon');
+
+            togglePassword.addEventListener('click', function () {
+                const isPasswordVisible = passwordInput.type === 'text';
+                passwordInput.type = isPasswordVisible ? 'password' : 'text';
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            });
+        });
+    </script>
 
     @yield('js-container')
 
@@ -129,10 +134,8 @@
 
     <script src="{{ asset('js/admin/main.js') }}"></script>
 
-        <!-- Initialize components after DOM loads -->
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Initialize all components
         if (typeof initMenu !== 'undefined') initMenu();
         if (typeof initClock !== 'undefined') initClock();
         if (typeof initStarRating !== 'undefined') initStarRating();
