@@ -101,13 +101,19 @@
     background-color: green;
     border: none;
     padding: 3px 10px;
+    cursor: pointer;
 }
 
 .btn-cancel {
     color: white;
-    background-color: red;
+    background-color: rgb(255, 145, 0);
     border: none;
     padding: 3px 10px;
+    cursor: pointer;
+}
+
+.btn-approve:hover, .btn-cancel:hover {
+    filter: brightness(90%);
 }
 
 .renew-button {

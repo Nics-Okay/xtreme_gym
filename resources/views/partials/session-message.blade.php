@@ -35,6 +35,7 @@
                 alertBox.style.right = '-350px'; // Start off-screen
                 alertBox.style.width = '350px';
                 alertBox.style.padding = '15px';
+                alertBox.style.zIndex = '10000';
                 alertBox.style.borderLeft = messageData.type === 'success' ? '3px solid green' : '3px solid red';
                 alertBox.style.backgroundColor = 'white';
                 alertBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';

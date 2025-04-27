@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apprentice;
+use App\Models\ClassList;
 use App\Models\Guest;
 use App\Models\Notification;
 use App\Models\Rate;
+use App\Models\Student;
+use App\Models\Training;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
@@ -144,6 +148,8 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::with('rate')
         ->whereIn('transaction_type', ['membership_renew', 'membership_avail'])
+        ->where('status', '=', 'pending')
+        ->orderBy('created_at', 'DESC')
         ->paginate(10);
 
         return view('admin.transactions.membershipRequest', compact('transactions'));
@@ -258,9 +264,110 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::with('class_list')
             ->whereIn('transaction_type', ['class_enroll'])
+            ->whereRaw('LOWER(status) = ?', ['pending'])
+            ->whereHas('class_list')
             ->paginate(10);
     
         return view('admin.transactions.studentRequest', compact('transactions'));
     }
 
+    public function studentRequestApprove(Transaction $transaction)
+    {
+        $class = ClassList::where('id', $transaction->payment_code)->first();
+
+        $student = Student::where('user_id', $transaction->user_id)->first();
+
+        if ($student && $class) {
+            $student->update([
+                'student_until' => $class->class_end,
+                'status' => 'Enrolled',
+                'payment_status' => 'Completed',
+            ]);
+
+            $class->number_of_students += 1;
+            $class->save();
+        }
+
+        $transaction->update([
+            'status' => 'Completed',
+        ]);
+
+        return redirect()->route('transaction.studentRequest')->with('success', 'Transaction approved.');
+    }
+
+    public function studentRequestCancel(Transaction $transaction)
+    {
+        $transaction->update([
+            'status' => 'Cancelled',
+        ]);
+    
+        $student = Student::where('user_id', $transaction->user_id)->first();
+    
+        if ($student) {
+            $student->update([
+                'student_until' => null,
+                'status' => 'Declined',
+                'payment_status' => 'Cancelled',
+            ]);
+        }
+    
+        return redirect()->route('transaction.studentRequest')->with('success', 'Transaction canceled.');
+    }
+
+    // Apprentice Request
+    public function apprenticeRequest()
+    {
+        $transactions = Transaction::with('training')
+            ->whereIn('transaction_type', ['training_enroll'])
+            ->whereRaw('LOWER(status) = ?', ['pending'])
+            ->whereHas('training')
+            ->paginate(10);
+    
+        return view('admin.transactions.apprenticeRequest', compact('transactions'));
+    }
+
+    public function apprenticeRequestApprove(Transaction $transaction)
+    {
+        $trainings = Training::where('id', $transaction->payment_code)->first();
+
+        $apprentice = Apprentice::where('user_id', $transaction->user_id)->first();
+        
+        // Update user details
+        $apprentice->update([
+            'student_until' => Carbon::now()->addDays($trainings->duration),
+            'status' => 'Enrolled',
+            'payment_status' => 'Completed',
+        ]);
+
+        $training_identity = Training::find($transaction->payment_code);
+        if ($training_identity) {
+            $training_identity->number_of_students += 1;
+            $training_identity->save();
+        }
+
+        $transaction->update([
+            'status' => 'Completed',
+        ]);
+
+        return redirect()->route('transaction.membershipRequest')->with('success', 'Transaction approved.');
+    }
+
+    public function apprenticeRequestCancel(Transaction $transaction)
+    {
+        $transaction->update([
+            'status' => 'Cancelled',
+        ]);
+
+        $apprentice = Apprentice::where('id', $transaction->user_id)->first();
+
+        if ($apprentice) {
+            $apprentice->update([
+                'student_until' => null,
+                'status' => 'Declined',
+                'payment_status' => 'Cancelled',
+            ]);
+        }
+
+        return redirect()->route('transaction.apprenticeRequest')->with('success', 'Transaction canceled.');
+    }
 }

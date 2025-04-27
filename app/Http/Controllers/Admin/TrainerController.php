@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassList;
 use App\Models\Trainer;
+use App\Models\Training;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -67,7 +69,12 @@ class TrainerController extends Controller
         return redirect()->route('trainer.show')->with('success', 'Trainer updated successfully.');
     }
 
-    public function destroy(Trainer $trainer) {
+    public function destroy(Trainer $trainer)
+    {
+        Training::where('trainer', $trainer->name)->delete();
+
+        ClassList::where('trainer', $trainer->name)->delete();
+
         $trainer->delete();
         return redirect(route('trainer.show'))->with('success', 'Trainer removed successfully');
     }

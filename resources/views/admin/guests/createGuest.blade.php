@@ -28,11 +28,11 @@
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="first_name">First Name</label>
-                                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required/>
+                                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required autofocus/>
                                 </div>
                                 <div class="form-content">
                                     <label for="last_name">Last Name</label>
-                                    <input type="text" id="last_name" name="last_name" placeholder="Last Name"/>
+                                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required/>
                                 </div>
                             </div>
 
@@ -50,11 +50,11 @@
                             <p>Address</p>
                             <div class="form-group">
                                 <div class="form-content">
-                                    <input type="text" id="city" name="city" placeholder="City"/>
+                                    <input type="text" id="city" name="city" placeholder="City" required/>
 
                                 </div>
                                 <div class="form-content">
-                                    <input type="text" id="province" name="province" placeholder="Province"/>
+                                    <input type="text" id="province" name="province" placeholder="Province" required/>
                                 </div>
                             </div>
 

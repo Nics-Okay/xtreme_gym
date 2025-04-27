@@ -87,6 +87,10 @@
 
                     document.getElementById('lock-modal').classList.add('hidden');
                     document.getElementById('locked-status').setAttribute('data-locked', 'false');
+
+                    alert(data.message || "Admin unlocked successfully!");
+
+                    location.reload();
                 } else if (data.status === 'error') {
                     alert(data.message || "Invalid PIN. Please try again.");
                 }
@@ -140,6 +144,7 @@
         if (typeof initClock !== 'undefined') initClock();
         if (typeof initStarRating !== 'undefined') initStarRating();
         if (typeof initCalendar !== 'undefined') initCalendar();
+        if (typeof initCalendarPreview !== 'undefined') initCalendarPreview();
         if (typeof initLockUnlock !== 'undefined') initLockUnlock();
     });
     </script>

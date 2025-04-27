@@ -49,7 +49,7 @@
                             </div>
 
                             @php
-                                $addressParts = explode(', ', $member->address ?? '');
+                                $addressParts = explode(', ', $guest->address ?? '');
                                 $city = $addressParts[0] ?? ''; // Extract city
                                 $province = $addressParts[1] ?? ''; // Extract province
                             @endphp

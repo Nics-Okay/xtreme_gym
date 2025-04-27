@@ -108,7 +108,7 @@
                     <div class="dropdown-content" id="dropdown">
                         <a href="{{ route('transaction.show') }}" class="menu-name payments-history"><i class="fa-solid fa-chart-simple"></i>Payments History</a>
                         <a href="{{ route('transaction.studentRequest') }}" class="menu-name class-schedules"><i class="fa-solid fa-chart-simple"></i>Student Request</a>
-                        <a href="{{ route('trainer.show') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Apprentice Request</a>
+                        <a href="{{ route('transaction.apprenticeRequest') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Apprentice Request</a>
                     </div>
                 </div>
             </li>

@@ -33,4 +33,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(ClassList::class, 'payment_code', 'id');
     }
+
+    public function training()
+    {
+        return $this->belongsTo(Training::class, 'payment_code', 'id');
+    }
 }

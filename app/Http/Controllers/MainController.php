@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendee;
+use App\Models\Event;
 use App\Models\Notification;
 use App\Models\Reservation;
 use App\Models\User;
@@ -94,8 +95,11 @@ class MainController extends Controller
         return response()->json(['new_notifications' => $newNotifications]);
     }
 
-    public function home() {
-        return view('user.home');
+    public function home()
+    {
+        $events = Event::all();
+
+        return view('user.home', compact('events'));
     }
 
     public function showRightDashboard()
@@ -122,7 +126,13 @@ class MainController extends Controller
 
         if (Hash::check($request->pin_code, auth()->user()->lock_code)) {
             auth()->user()->update(['locked' => false]);
-            return response()->json(['status' => 'unlocked']);
+
+            session()->flash('status', 'Unlocked Successfully');
+        
+            return response()->json([
+                'status' => 'unlocked',
+                'message' => session('status')
+            ]);
         }
 
         return response()->json(['status' => 'error', 'message' => 'Invalid PIN'], 403);

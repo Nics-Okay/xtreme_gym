@@ -92,6 +92,7 @@ Route::middleware(['auth', 'verified', 'otp.verified'])->group(function () {
     Route::get('/admin/reviews', [ReviewController::class, 'show'])->name('review.show');
     Route::get('/calendar', [ReservationController::class, 'calendar'])->name('calendar');
     Route::get('/calendar/events', [ReservationController::class, 'getEvents'])->name('calendar.events');
+    Route::get('/calendar/preview', [ReservationController::class, 'getPreview'])->name('calendar.preview');
     Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 
 });
@@ -121,7 +122,7 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::get('/admin/members', [MemberController::class, 'show'])->name('member.show');
     Route::get('/admin/members/create', [MemberController::class, 'create'])->name('member.create');
     Route::post('/admin/members/store', [MemberController::class, 'store'])->name('member.store');
-    Route::get('/admin/members/{first_name}/{last_name}/{rate}/{payment}/store', [MemberController::class, 'storeData'])->name('member.storeData');
+    Route::get('/admin/members/{phone}/{rate}/{payment}/store', [MemberController::class, 'storeData'])->name('member.storeData');
     Route::get('/admin/members/{member}/edit', [MemberController::class, 'edit'])->name('member.edit');
     Route::put('/admin/members/{member}/update', [MemberController::class, 'update'])->name('member.update');
     Route::delete('/admin/members/{member}/destroy', [MemberController::class, 'destroy'])->name('member.destroy');
@@ -150,6 +151,7 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::get('/admin/transactions/membership/request', [TransactionController::class, 'membershipRequest'])->name('transaction.membershipRequest');
     Route::put('/admin/transactions/membership/request/{transaction}/approve', [TransactionController::class, 'membershipRequestApprove'])->name('transactions.membershipRequestApprove');
     Route::put('/admin/transactions/membership/request/{transaction}/cancel', [TransactionController::class, 'membershipRequestCancel'])->name('transactions.membershipRequestCancel');
+    Route::delete('/admin/transactions/membership/request/{transaction}/destroy', [TransactionController::class, 'destroyRequest'])->name('transaction.membershipRequestDestroy');
 
     Route::get('/admin/transactions/student/request', [TransactionController::class, 'studentRequest'])->name('transaction.studentRequest');
     Route::put('/admin/transactions/student/request/{transaction}/approve', [TransactionController::class, 'studentRequestApprove'])->name('transactions.studentRequestApprove');

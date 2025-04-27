@@ -16,51 +16,41 @@ class ReservationController extends Controller
     
         // Upcoming Reservations
         $upcomingReservations = Reservation::query()
-            ->whereNotNull('reservation_date') // Ensure there's a reservation date
-            ->where(function ($query) use ($currentTime) {
-                $query->where(function ($subQuery) use ($currentTime) {
-                    $subQuery->whereDate('reservation_date', '>', $currentTime->toDateString()) // Future date
-                             ->orWhere(function ($innerQuery) use ($currentTime) {
-                                 $innerQuery->whereDate('reservation_date', '=', $currentTime->toDateString()) // Today
-                                            ->where(function ($timeQuery) use ($currentTime) {
-                                                $timeQuery->whereNull('start_time') // No start time
-                                                          ->orWhere('start_time', '>', $currentTime->toTimeString()); // Start time in future
-                                            });
-                             });
-                })
-                ->orWhere(function ($subQuery) use ($currentTime) {
-                    $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString()) // Today
-                             ->where('start_time', '>', $currentTime->toTimeString()) // Start time in future
-                             ->where('end_time', '>', $currentTime->toTimeString()); // End time also in future
-                });
-            })
-            ->get();
+        ->whereNotNull('reservation_date')
+        ->where(function ($query) use ($currentTime) {
+            $query->whereDate('reservation_date', '>', $currentTime->toDateString())
+                  ->orWhere(function ($subQuery) use ($currentTime) {
+                      $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString())
+                               ->where(function ($timeQuery) use ($currentTime) {
+                                   $timeQuery->whereNull('start_time')
+                                             ->orWhere('start_time', '>', $currentTime->toTimeString());
+                               });
+                  });
+        })
+        ->get();
+
     
         // Ongoing Reservations
         $ongoingReservations = Reservation::query()
-            ->whereNotNull('reservation_date') // Ensure there's a reservation date
+            ->whereNotNull('reservation_date')
+            ->whereDate('reservation_date', '=', $currentTime->toDateString())
+            ->where('start_time', '<=', $currentTime->toTimeString())
             ->where(function ($query) use ($currentTime) {
-                $query->where(function ($subQuery) use ($currentTime) {
-                    $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString()) // Today
-                             ->where('start_time', '<=', $currentTime->toTimeString()) // Start time in past or now
-                             ->where(function ($timeQuery) use ($currentTime) {
-                                 $timeQuery->whereNull('end_time') // No end time
-                                           ->orWhere('end_time', '>', $currentTime->toTimeString()); // End time in future
-                             });
-                });
+                $query->whereNull('end_time')
+                    ->orWhere('end_time', '>', $currentTime->toTimeString());
             })
             ->get();
     
         // Past Reservations
         $pastReservations = Reservation::query()
-            ->whereNotNull('reservation_date') // Ensure there's a reservation date
+            ->whereNotNull('reservation_date')
             ->where(function ($query) use ($currentTime) {
-                $query->whereDate('reservation_date', '<', $currentTime->toDateString()) // Past date
-                      ->orWhere(function ($subQuery) use ($currentTime) {
-                          $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString()) // Today
-                                   ->whereNotNull('start_time') // Start time is set
-                                   ->where('end_time', '<=', $currentTime->toTimeString()); // End time in the past
-                      });
+                $query->whereDate('reservation_date', '<', $currentTime->toDateString())
+                    ->orWhere(function ($subQuery) use ($currentTime) {
+                        $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString())
+                                ->whereNotNull('start_time')
+                                ->where('end_time', '<=', $currentTime->toTimeString());
+                    });
             })
             ->get();
     
@@ -125,6 +115,44 @@ class ReservationController extends Controller
     
         return response()->json($events);
     } 
+
+    public function getPreview(Request $request)
+    {
+        $currentTime = Carbon::now();
+    
+        // Fetch only incoming reservations
+        $reservations = Reservation::query()
+            ->whereNotNull('reservation_date') // Ensure there's a reservation date
+            ->where(function ($query) use ($currentTime) {
+                $query->whereDate('reservation_date', '>', $currentTime->toDateString()) // Future dates
+                      ->orWhere(function ($subQuery) use ($currentTime) {
+                          $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString()) // Today's date
+                                   ->where(function ($timeQuery) use ($currentTime) {
+                                       $timeQuery->whereNull('start_time') // No start time, default as upcoming
+                                                 ->orWhere('start_time', '>', $currentTime->toTimeString()); // Upcoming time
+                                   });
+                      });
+            })
+            ->get(['id', 'reservation_date', 'start_time', 'end_time', 'reservation_type']); // Fetch only required fields
+    
+        $events = [];
+    
+        foreach ($reservations as $reservation) {
+            // Concatenate date and time for start
+            $start = $reservation->reservation_date . ($reservation->start_time ? ' ' . $reservation->start_time : '');
+    
+            // Default end time to 11 PM if not provided
+            $end = $reservation->reservation_date . ' ' . ($reservation->end_time ?? '23:00:00');
+    
+            $events[] = [
+                'title' => $reservation->reservation_type ?? 'Reservation',
+                'start' => $start,
+                'end' => $end,
+            ];
+        }
+    
+        return response()->json($events);
+    }    
 
     public function store(Request $request)
     {

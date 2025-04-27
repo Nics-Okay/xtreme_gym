@@ -14,6 +14,7 @@ class StudentController extends Controller
     public function show()
     {
         $students = Student::with(['classList', 'user'])
+        ->whereRaw('LOWER(status) = ?', ['enrolled'])
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
     

@@ -36,10 +36,10 @@
                             @foreach($apprentices as $apprentice)
                                 <tr>
                                     <td>{{ ($apprentices->currentPage() - 1) * $apprentices->perPage() + $loop->iteration }}</td>
-                                    <td>{{ $apprentice->training->name }}</td>
+                                    <td>{{ $apprentice->training ? $apprentice->training->name : 'No training assigned' }}</td>
                                     <td>{{ $apprentice->user->unique_id }}</td>
                                     <td>{{ $apprentice->user->first_name ?? '' }} {{ $apprentice->user->last_name ?? '' }}</td>
-                                    <td>{{ $apprentice->student_until }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($apprentice->student_until)->format('F j, Y') }}</td>
                                     <td>
                                         <div class="action-button">
                                             <a href="{{route('apprentice.edit', ['apprentice' => $apprentice])}}" class="edit-button"><i class="fa-solid fa-pen-to-square"></i></a>

@@ -34,7 +34,11 @@ class MemberController extends Controller
     }
 
     public function create() {
-        $rates = Rate::all();
+        $rates = Rate::whereNot(function ($query) {
+            $query->where('validity_unit', 'day')
+                  ->where('validity_value', 1);
+        })->get();
+    
         return view('admin.members.createMember', ['rates' => $rates]);
     }
 
@@ -44,7 +48,7 @@ class MemberController extends Controller
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
             'email' => 'nullable|email|max:100',
-            'phone' => 'required|string|min:11|max:13',
+            'phone' => 'required|string|min:11|max:13|unique:users,phone',
             'city' => 'required|string|max:100',
             'province' => 'required|string|max:100',
             'emergency_contact_name' => 'nullable|string|max:100',
@@ -61,10 +65,8 @@ class MemberController extends Controller
     
         $validity = now()->add($duration, $unit);
     
-        // Generate a random 8-digit password
         $password = str_pad(random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
     
-        // Create the user
         User::create([
             'first_name' => $validated['first_name'],
             'last_name' => $validated['last_name'],
@@ -82,11 +84,12 @@ class MemberController extends Controller
             'membership_type' => $rate->name,
             'membership_validity' => $validity,
             'membership_status' => 'Active',
+            'visits' => 1,
+            'is_in_gym' => true,
         ]);
     
         return redirect()->route('member.storeData', [
-            'first_name' => urlencode($validated['first_name']),
-            'last_name' => urlencode($validated['last_name']),
+            'phone' => urlencode($validated['phone']),
             'payment' => urlencode(
                 $validated['payment_method'] === 'other'
                     ? $validated['other_payment_method']
@@ -96,14 +99,14 @@ class MemberController extends Controller
         ]);
     }
 
-    public function storeData($first_name, $last_name, $rate, $payment)
+    public function storeData($phone, $rate, $payment)
     {
-        $user = User::where('first_name', $first_name)
-        ->where('last_name', $last_name)
-        ->first();
+        $user = User::where('phone', $phone)->first();
 
-        if (!$user) {
-            return redirect()->back()->withErrors(['error' => 'User not found.']);
+        if (is_null($user)) {
+            return redirect()->back()->withErrors([
+                'error' => "User with phone number {$phone} not found."
+            ]);
         }
 
         $rate = Rate::findOrFail($rate);

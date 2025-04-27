@@ -22,7 +22,7 @@
                         <th>Amount</th>
                         <th>Payment Method</th>
                         <th>Date</th>
-                        <th>Status</th>
+                        <th>Type</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -35,8 +35,8 @@
                             <td>{{ $transaction->rate->name ?? 'Rate not found' }}</td>
                             <td>{{ $transaction->rate->price ?? 'Rate not found' }}</td>
                             <td>{{ $transaction->payment_method }}</td>
-                            <td>{{ $transaction->created_at }}</td>
-                            <td>{{ $transaction->status }}</td>
+                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('F j, Y g:i A') }}</td>
+                            <td>{{ $transaction->transaction_type == 'membership_renew' ? 'Renewal' : 'New Membership' }}</td>
                             <td>
                                 <div class="action-button">
                                     @if(strtolower($transaction->status) === 'pending')
@@ -51,7 +51,7 @@
                                             <button class="btn-cancel">Cancel</button>
                                         </form>
                                     @else
-                                        <span>N/A</span>
+                                        <p>All Done!</p>
                                     @endif
                                 </div>
                             </td>

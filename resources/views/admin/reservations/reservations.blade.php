@@ -57,7 +57,7 @@
                                 <div class="list-item">
                                     <span style="display: inline-flex; align-items: center;">
                                         <h4 style="margin: 0;">{{ $upcomingReservation->name }}</h4>
-                                        <span style="margin: 0 0.5rem;">&bull;</span> <!-- This is the bullet -->
+                                        <span style="margin: 0 0.5rem;">&bull;</span>
                                         <p style="margin: 0;">{{ $upcomingReservation->number_of_people ?? 'No. of people not set.' }}</p>
                                     </span>
                                     <p>

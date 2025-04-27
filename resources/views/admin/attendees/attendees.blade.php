@@ -52,11 +52,11 @@
                                 <td>{{ $attendee->name }}</td>
                                 <td>{{ $attendee->membership_type }}</td>
                                 <td>{{ $attendee->membership_status }}</td>
-                                <td>{{ $attendee->membership_validity }}</td>
-                                <td>{{ $attendee->time_in }}</td>
+                                <td>{{ \Carbon\Carbon::parse($attendee->membership_validity)->format('F j, Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($attendee->time_in)->format('F j, Y g:i A') }}</td>
                                 <td>
                                     @if ($attendee->time_out)
-                                        {{ $attendee->time_out }}
+                                        {{ \Carbon\Carbon::parse($attendee->time_out)->format('F j, Y g:i A') }}
                                     @elseif (\Carbon\Carbon::parse($attendee->time_in)->isBefore(\Carbon\Carbon::today()))
                                         Did not time-out
                                     @else

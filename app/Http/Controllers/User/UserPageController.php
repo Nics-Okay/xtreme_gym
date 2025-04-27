@@ -11,6 +11,7 @@ use App\Models\Student;
 use App\Models\Trainer;
 use App\Models\Training;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -125,7 +126,7 @@ class UserPageController extends Controller
 
         Apprentice::create([
             'user_id' => $user->unique_id,
-            'training_id    ' => $training->id,
+            'training_id' => $training->id,
             'status' => 'Unconfirmed Enrollment',
             'payment_method' => $validated['payment_method'],
         ]);

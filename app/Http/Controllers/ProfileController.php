@@ -73,7 +73,7 @@ class ProfileController extends Controller
             $user->save();
         }
 
-        return redirect()->route('profileUser.show')->with('success', 'Profile image updated successfully!');
+        return redirect()->route('profileNew.show')->with('success', 'Profile image updated successfully!');
     }
 
     /**
