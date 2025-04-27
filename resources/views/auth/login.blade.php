@@ -18,7 +18,7 @@
             <div class="auth-fields password" id="login-pass">
                 <input id="password" type="password" name="password" placeholder="Password" required/>
                 <button type="button" id="toggle-password" class="toggle-password">
-                    <i class="fas fa-eye" id="toggle-password-icon"></i>
+                    <i class="fas fa-eye-slash" id="toggle-password-icon"></i>
                 </button>
                 <x-input-error :messages="$errors->get('password')" class="error password" />
             </div>

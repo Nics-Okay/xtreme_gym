@@ -21,12 +21,7 @@
                     <div class="crud-form">
                         <form method="post" action="{{ route('trainer.store') }}">
                             @csrf
-
-                            <div class="form-full">
-                                <label for="name">User ID</label>
-                                <input type="text" name="user_id" id="user_id" placeholder="User ID" autofocus>
-                            </div>
-
+                            
                             <div class="form-full">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" id="name" placeholder="Name" required>

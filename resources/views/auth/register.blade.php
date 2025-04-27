@@ -27,17 +27,17 @@
             </div>
 
             <div class="auth-fields password">
-                <input id="password" type="password" name="password" placeholder="Create Password" required autocomplete="new-password" />
+                <input id="password" type="password" name="password" value="{{ old('password') }}" placeholder="Create Password" required autocomplete="new-password" />
                 <button type="button" id="toggle-password-1" class="toggle-password">
-                    <i class="fas fa-eye" id="toggle-password-icon-1"></i>
+                    <i class="fas fa-eye-slash" id="toggle-password-icon-1"></i>
                 </button>
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="auth-fields password-confirmation">
-                <input id="password-confirmation" type="password" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password" />
+                <input id="password-confirmation" type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" placeholder="Confirm Password" required autocomplete="new-password" />
                 <button type="button" id="toggle-password-2" class="toggle-password">
-                    <i class="fas fa-eye" id="toggle-password-icon-2"></i>
+                    <i class="fas fa-eye-slash" id="toggle-password-icon-2"></i>
                 </button>
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>

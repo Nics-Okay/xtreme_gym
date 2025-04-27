@@ -28,4 +28,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Rate::class, 'payment_code', 'id');
     }
+
+    public function class_list()
+    {
+        return $this->belongsTo(ClassList::class, 'payment_code', 'id');
+    }
 }

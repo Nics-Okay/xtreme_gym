@@ -1,13 +1,19 @@
-@extends('layouts.UserLayout')
+@extends('layouts.UserDesign')
 
 @section('title', 'Settings - Xtreme Gym World')
 
 @section('head-access')
-    <link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/templates/userModules.css') }}">
 @endsection
 
 @section('main-content')
     <style>
+        .main-section {
+            height: 100%;
+            width: 100%;
+            padding: 0 10px 10px;
+        }
+
         .settings-container {
             height: fit-content;
             width: 100%;
@@ -85,12 +91,19 @@
                                 <p>Leave a Review</p>
                             </a>
                         </li>
-                        <li><a href="#" class="menu-name">
-                                <div class="icon-box">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                </div>
-                                <p>Log out</p>
-                            </a>
+                        <li>
+                            <form method="post" action="{{ route('logout') }}" style="display: flex; align-items: center; width: 100%; margin: 0;">
+                                @csrf
+                                <a href="#" 
+                                onclick="event.preventDefault(); this.closest('form').submit();" 
+                                class="menu-name" 
+                                style="display: flex; align-items: center; width: 100%; text-decoration: none;">
+                                    <div class="icon-box">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    </div>
+                                    <p>Log out</p>
+                                </a>
+                            </form>
                         </li>
                     </ul>
                 </div>

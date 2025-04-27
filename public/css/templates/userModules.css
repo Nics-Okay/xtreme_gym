@@ -1,0 +1,111 @@
+.user-content-container {
+    height: 100%;
+    width: 100%;
+}
+
+.user-content-header {
+    display: flex;
+    align-items: center;
+    height: 8%;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.custom-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.custom-header-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    white-space: nowrap;
+}
+
+.custom-header a {
+    margin-right: auto;
+    color: black;
+    text-decoration: none;
+}
+
+.custom-header a:hover {
+    color: rgb(39, 39, 39);
+}
+
+.custom-header i {
+    font-size: x-large;
+}
+
+@media (max-width: 639px) {
+    .custom-header h3 {
+        font-size: large;
+    }
+
+    .custom-header i {
+        font-size: large;
+    }
+}
+
+/* Header Button */
+.user-content-header h3 {
+    margin-right: auto;
+}
+
+.user-content-button {
+    border-radius: 8px;
+    border: 2px solid rgba(28, 37, 54);
+    box-shadow: 0 2px 4px rgb(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.user-content-button a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px 8px 9px;
+    color: rgba(28, 37, 54);
+    font-size: small;
+    text-decoration: none;
+    background-color: white;
+}
+
+.user-content-button-history a {
+    padding: 0 0 0 10px;
+    color: rgba(28, 37, 54);
+}
+
+.user-content-button a:hover, .user-content-button-history a:hover {
+    background-color: rgb(223, 223, 223);
+}
+
+.user-content-button i {
+    padding-right: 3px;
+    font-size: small;
+}
+
+.user-content-button-history i {
+    font-size: x-large;
+}
+
+.user-content-button span {
+    margin-top: -2px;
+}
+/* End of Header Button */
+
+@media (max-width: 639px) {
+    .user-content-button-history i {
+        font-size: large;
+    }
+}
+
+.user-main-content {
+    height: 92%;
+    width: 100%;
+}

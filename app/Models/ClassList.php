@@ -28,4 +28,9 @@ class ClassList extends Model
     {
         return $this->hasMany(Student::class, 'class_id');
     }
+
+    public function instructor()
+    {
+        return $this->belongsTo(Trainer::class, 'trainer', 'name');
+    }
 }

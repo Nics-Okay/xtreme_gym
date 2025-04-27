@@ -1,9 +1,9 @@
-@extends('layouts.UserLayout')
+@extends('layouts.UserDesign')
 
 @section('title', 'Gym Equipments - Xtreme Gym World')
 
 @section('head-access')
-    <link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/templates/userModules.css') }}">
 @endsection
 
 @section('main-content')
@@ -119,7 +119,10 @@
     </style>
     <div class="user-content-container">
         <div class="user-content-header">
-            <h3>Gym Equipments</h3> 
+            <div class="custom-header">
+                <a href="{{ route('user.settings')}}"><i class="fa-solid fa-arrow-left"></i></a>
+                <h3>Gym Equipments</h3> 
+            </div>
         </div>
         <div class="user-main-content">
             <div class="main-section">

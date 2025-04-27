@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $classList->name }}</td>
-                                    <td>{{ $classList->trainer ?? 'Unassigned' }}</td>
+                                    <td>Coach {{ $classList->trainer ?? 'Unassigned' }}</td>
                                     <td>{{ $classList->schedule ?? 'TBA'}}</td>
                                     <td>{{ $classList->duration ?? 'TBA' }}</td>
                                     <td>{{ $classList->class_start ?? 'TBA' }}</td>

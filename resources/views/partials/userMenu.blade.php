@@ -14,25 +14,22 @@
     <div class="menu-content">
         <ul>
             <li><a href="{{ route('user.home') }}"><ion-icon name="home" id="nav-homepage-icon"></ion-icon>Home</a></li>
-            <li><a href="{{ route('user.membership') }}"><ion-icon name="pricetags"></ion-icon>Membership Plans</a></li>
-            <li><a href="{{ route('reservations.create') }}"><ion-icon name="settings" id="nav-settings-icon"></ion-icon></i>Reservations</a></li>
-            <li><a href="#"><ion-icon name="calendar"></ion-icon>Personal Training</a></li>
-            <li><a href="#"><ion-icon name="calendar"></ion-icon>Gym Classes</a></li>
+            <li><a href="{{ route('user.membership') }}"><ion-icon name="pricetags"></ion-icon>Membership</a></li>
+            <li><a href="{{ route('reservations.create') }}"><ion-icon name="settings" id="nav-settings-icon"></ion-icon></i>Facility Reservation</a></li>
+            <li><a href="{{ route('user.training') }}"><ion-icon name="calendar"></ion-icon>Personal Training</a></li>
+            <li><a href="{{ route('user.class') }}"><ion-icon name="calendar"></ion-icon>Gym Classes</a></li>
             <li><a href="#"><ion-icon name="calendar"></ion-icon>Tournaments</a></li>
-            <li><a href="{{ route('review.create') }}"><i class="fa-solid fa-chart-simple"></i>Attendance Tracker</a></li>
             <li><a href="{{ route('user.settings') }}"><ion-icon name="settings" id="nav-settings-icon"></ion-icon>Settings</a></li>
+            <li>
+                <form method="post" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <a href="{{ route('logout') }}" 
+                        onclick="event.preventDefault(); this.closest('form').submit();">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Log out
+                    </a>
+                </form>
+            </li>
         </ul>
-    </div>
-    <div class="menu-section logout">
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <a href="{{route('logout')}}" onclick="event.preventDefault();
-                                this.closest('form').submit();">
-                <div class="logout-container">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                    <p>Log out</p>
-                </div>
-            </a>
-        </form>
     </div>
 </div>

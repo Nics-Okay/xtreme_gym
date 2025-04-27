@@ -28,7 +28,7 @@
                     </div>
                     <div class="dropdown-content" id="dropdown">
                         <a href="{{ route('member.show') }}" class="menu-name manage-members"><i class="fa-solid fa-users"></i>Manage Members</a>
-                        <a href="{{ route('rate.show') }}" class="menu-name membership-plans"><i class="fa-solid fa-users"></i>Membership Plans</a>
+                        <a href="{{ route('transaction.membershipRequest') }}" class="menu-name membership-requests"><i class="fa-solid fa-users"></i>Membership Requests</a>
                     </div>
                 </div>
             </li>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="dropdown-content" id="dropdown">
                         <a href="{{ route('guest.show') }}" class="menu-name manage-guests"><i class="fa-solid fa-chart-simple"></i>Manage Guests</a>
-                        <a href="{{ route('attendee.show') }}" class="menu-name attendance"><i class="fa-solid fa-chart-simple"></i>Attendance</a>
+                        <a href="{{ route('attendee.show') }}" class="menu-name attendance"><i class="fa-solid fa-chart-simple"></i>Manage Attendees</a>
                     </div>
                 </div>
             </li>
@@ -53,13 +53,15 @@
                         <div class="icon-box">
                             <i class="fas fa-dumbbell"></i>
                         </div>
-                        <p>Trainers</p>
+                        <p>Classes & Trainers</p>
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="{{ route('trainer.show') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Manage Trainers</a>
-                        <a href="{{ route('classList.show') }}" class="menu-name class-schedules"><i class="fa-solid fa-chart-simple"></i>Class Schedules</a>
-                        <a href="{{ route('student.show') }}" class="menu-name students"><i class="fa-solid fa-chart-simple"></i>Students</a>
+                        <a href="{{ route('trainer.show') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Trainer Management</a>
+                        <a href="{{ route('training.show') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Training Management</a>
+                        <a href="{{ route('apprentice.show') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Apprentice Management</a>
+                        <a href="{{ route('classList.show') }}" class="menu-name class-schedules"><i class="fa-solid fa-chart-simple"></i>Class Management</a>
+                        <a href="{{ route('student.show') }}" class="menu-name students"><i class="fa-solid fa-chart-simple"></i>Student Management</a>
                     </div>
                 </div>
             </li>
@@ -70,13 +72,30 @@
                     Reservations
                 </a>
             </li>
-            <li><a href="{{ route('event.show') }}" class="menu-name events">
+            <li><a href="{{ route('rate.show') }}" class="menu-name events">
                     <div class="icon-box">
-                        <i class="fas fa-bullhorn"></i>
+                        <i class="fas fa-solid fa-users"></i>
                     </div>
-                    Events
+                    Membership Plans
                 </a>
             </li>
+
+            <li>
+                <div class="menu">
+                    <div class="menu-item" onclick="toggleDropdown()">
+                        <div class="icon-box">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <p>Events & Tournaments</p>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <div class="dropdown-content" id="dropdown">
+                        <a href="{{ route('event.show') }}" class="menu-name manage events"><i class="fa-solid fa-users"></i>Events Management</a>
+                        <a href="{{ route('tournaments.index') }}" class="menu-name tournaments"><i class="fa-solid fa-users"></i>Tournament Management</a>
+                    </div>
+                </div>
+            </li>
+
             <li>
                 <div class="menu">
                     <div class="menu-item" onclick="toggleDropdown()">
@@ -88,7 +107,8 @@
                     </div>
                     <div class="dropdown-content" id="dropdown">
                         <a href="{{ route('transaction.show') }}" class="menu-name payments-history"><i class="fa-solid fa-chart-simple"></i>Payments History</a>
-                        <a href="{{ route('transaction.membershipRequest') }}" class="menu-name membership-requests"><i class="fa-solid fa-chart-simple"></i>Membership Requests</a>
+                        <a href="{{ route('transaction.studentRequest') }}" class="menu-name class-schedules"><i class="fa-solid fa-chart-simple"></i>Student Request</a>
+                        <a href="{{ route('trainer.show') }}" class="menu-name manage-trainers"><i class="fa-solid fa-chart-simple"></i>Apprentice Request</a>
                     </div>
                 </div>
             </li>
@@ -122,7 +142,6 @@
                         <a href="{{ route('notification.show') }}" class="menu-name reminders"><i class="fa-solid fa-chart-simple"></i>Notifications</a>
                         <a href="{{ route('review.show') }}" class="menu-name reviews"><i class="fa-solid fa-chart-simple"></i>Reviews</a>
                         <a href="{{ route('profileNew.show') }}" class="menu-name profile-settings"><i class="fa-solid fa-chart-simple"></i>Profile Settings</a>
-                        <a href="#" class="menu-name reminders"><i class="fa-solid fa-chart-simple"></i>Empty</a>
                     </div>
                 </div>
             </li>

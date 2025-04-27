@@ -1,0 +1,143 @@
+.modal {
+    position: fixed;
+    display: none;
+    justify-items: center;
+    align-content: center;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+}
+
+.modal-content h3 {
+    text-align: center;
+    width: 100%;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-history {
+    position: fixed;
+    justify-items: center;
+    background-color: #e6e6e6;
+    width: 100%;
+    height: 92%;
+
+    bottom: 0;
+    left: 0;
+    display: none;
+    z-index: 999;
+    padding: 10px 0 0;
+}
+
+.modal-history-content {
+    height: 95%;
+    width: 60%;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.modal-history-content h3 {
+    justify-self: center;
+    padding: 5px 0 10px;
+}
+
+.modal-history-header {
+    display: flex;
+    justify-content: flex-start;
+    height: 5%;
+    width: 100%;
+}
+
+.modal-history-header button {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control label {
+    font-weight: bold;
+}
+
+.form-control input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.form-buttons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-buttons .cancel {
+    background-color: #ccc;
+    color: #000;
+}
+
+.form-buttons .submit {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.past-item {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 5px 0 10px;
+}
+
+.past-item h4 {
+    margin-right: 7px;
+}
+
+@media (max-width: 639px) {
+    .modal-content {
+        width: 90%;
+    }
+
+    .modal-history-content {
+        width: 100%;
+    }
+
+    .modal-history-header button {
+        font-size: large;
+    }
+}
+
+#other-payment-method {
+    margin-bottom: 5px;
+}
+
+#other-payment-method input {
+    height: 25px;
+}

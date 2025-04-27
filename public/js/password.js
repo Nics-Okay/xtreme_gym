@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     togglePassword.addEventListener('click', function () {
         const isPasswordVisible = passwordInput.type === 'text';
         passwordInput.type = isPasswordVisible ? 'password' : 'text';
-        icon.classList.toggle('fa-eye');
         icon.classList.toggle('fa-eye-slash');
+        icon.classList.toggle('fa-eye');
     });
 });
 
@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     togglePassword1.addEventListener('click', function () {
         const isPasswordVisible = passwordInput1.type === 'text';
         passwordInput1.type = isPasswordVisible ? 'password' : 'text';
-        icon1.classList.toggle('fa-eye');
         icon1.classList.toggle('fa-eye-slash');
+        icon1.classList.toggle('fa-eye');
     });
 
     // Second password confirmation field toggle
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     togglePassword2.addEventListener('click', function () {
         const isPasswordVisible = passwordInput2.type === 'text';
         passwordInput2.type = isPasswordVisible ? 'password' : 'text';
-        icon2.classList.toggle('fa-eye');
         icon2.classList.toggle('fa-eye-slash');
+        icon2.classList.toggle('fa-eye');
     });
 });

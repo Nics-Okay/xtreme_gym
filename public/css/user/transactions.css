@@ -1,0 +1,48 @@
+.transactions-container {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.transactions-container h4 {
+    text-align: center;
+}
+
+.transactions-container li {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1px;
+    padding: 10px;
+    background-color: white;
+}
+
+.transactions-info-one {
+    align-content: center;
+    width: 70%;
+    margin-right: auto;
+}
+
+.transactions-title {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.transactions-id, .transactions-date {
+    font-size: small;
+}
+
+.transactions-info-two {
+    width: 30%;
+    justify-items: flex-end;
+}
+
+.transactions-amount {
+    font-weight: bold;
+}
+
+.transactions-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}

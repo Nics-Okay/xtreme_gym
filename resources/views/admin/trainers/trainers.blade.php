@@ -22,7 +22,6 @@
                     <tr>
                         <th>#</th>
                         <th>Photo</th>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Specialization</th>
                         <th>Phone</th>
@@ -34,7 +33,7 @@
                 <tbody>
                     @if($trainers->isEmpty())
                         <tr>
-                            <td colspan="8" style="text-align: center;">No trainer available.</td>
+                            <td colspan="9" style="text-align: center;">No trainer available.</td>
                         </tr>
                     @else
                         @foreach($trainers as $trainer)
@@ -42,10 +41,9 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="image-data">
                                     <div class="image-holder">
-                                        <img src="{{ $trainer->user->image ? asset('storage/' . $user->image) : asset('images/profile-placeholder.png') }}" alt="Member Image">
+                                        <img src="{{ $trainer->image ? asset('storage/' . $trainer->image) : asset('images/profile-placeholder.png') }}" alt="Member Image">
                                     </div>
                                 </td>
-                                <td>{{ $trainer->user_id }}</td>
                                 <td>{{ $trainer->name }}</td>
                                 <td>{{ $trainer->specialization }}</td>
                                 <td>{{ $trainer->phone }}</td>

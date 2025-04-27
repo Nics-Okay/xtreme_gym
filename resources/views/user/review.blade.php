@@ -1,54 +1,67 @@
-<style>
-.star-rating {
-    display: flex;
-    flex-direction: row;
-}
+@extends('layouts.UserDesign')
 
-.star {
-    font-size: 2rem;
-    color: #ccc;
-    cursor: pointer;
-    transition: color 0.2s;
-}
+@section('title', 'Module - Xtreme Gym World')
 
-.star.selected {
-    color: #f5b301;
-}
+@section('head-access')
+    <link rel="stylesheet" href="{{ asset('css/templates/userModules.css') }}">
+@endsection
 
-.review-history {
-    margin-top: 20px;
-}
+@section('main-content')
+    <!-- Design -->
+    <style>
+        .main-section {
+            height: 100%;
+            width: 100%;
+            padding: 0 10px 10px;
+        }
+    </style>
 
-.review-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
+    <!-- Structure -->
+    <div class="user-content-container">
+        <div class="user-content-header">
 
-.admin-reply {
-    margin-top: 10px;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-left: 5px solid #f5b301;
-}
+            <h3>My Reviews</h3>
 
-.admin-replies {
-    margin-top: 10px;
-    padding-left: 20px;
-    border-left: 2px solid #f0f0f0;
-}
+            <div class="user-content-button">
+                <a href="#" id="openModalButton"><i class="fa-solid fa-plus"></i><span>Send a Review</span></a>
+            </div>
+             
+        </div>
+        <div class="user-main-content">
+            <div class="main-section">
+                <div class="review-container">
+                    <div class="">
+                    @forelse ($reviews as $review)
+                        <div>
+                            <p><strong>User:</strong> {{ $review->user->first_name }}</p>
+                            <p><strong>Rating:</strong> {{ $review->rating }} &#9733;</p>
+                            <p><strong>Comment:</strong> {{ $review->comment }}</p>
+                            <p><strong>Date:</strong> {{ $review->created_at->format('F j, Y') }}</p>
 
-.reply-item {
-    margin-bottom: 10px;
-}
+                            @if ($review->replies->count())
+                                <div class="admin-replies">
+                                    <strong>Admin Replies:</strong>
+                                    @foreach ($review->replies as $reply)
+                                        <div class="reply-item">
+                                            <strong>{{ $reply->admin->first_name }}:</strong>
+                                            <p>{{ $reply->reply }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <p><strong>No admin replies yet.</strong></p>
+                            @endif
+                        </div>
+                    @empty
+                        <p>You have not submitted any reviews yet.</p>
+                    @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-textarea {
-    width: 100%;
-    margin-bottom: 10px;
-}
-</style>
-
+    <div style="display: none;">
 <h1>Write a Review</h1>
 
 @if(session('success'))
@@ -76,49 +89,12 @@ textarea {
 
     <button type="submit">Submit</button>
 </form>
-
-<h2>Your Reviews</h2>
-@foreach ($reviews as $review)
-    <div>
-        <strong>{{ $review->user->name }}</strong> ({{ $review->type }})
-        @if ($review->rating)
-            - {{ $review->rating }} Star{{ $review->rating > 1 ? 's' : '' }}
-        @endif
-        <p>{{ $review->comment }}</p>
-
-        @if ($review->reply)
-            <div>
-                <strong>Admin Reply:</strong>
-                <p>{{ $review->reply->reply }}</p>
-            </div>
-        @endif
-    </div>
-@endforeach
-
-<!-- Display Replies -->
-<div class="replies">
-    @foreach($review->replies as $reply)
-        <div class="reply-item">
-            <strong>{{ $reply->admin->name }}:</strong>
-            <p>{{ $reply->reply }}</p>
-        </div>
-    @endforeach
 </div>
 
-@forelse ($reviews as $review)
-    <div class="review-item">
-        <p><strong>Rating:</strong> {{ $review->rating }} &#9733;</p>
-        <p><strong>Comment:</strong> {{ $review->comment }}</p>
-        <p><strong>Date:</strong> {{ $review->created_at->format('F j, Y') }}</p>
+    <!-- Script -->
+    <script src="{{ asset('js/star-rating.js')}}"></script>
+@endsection
 
-        <!-- Admin Reply -->
-        @if ($review->reply)
-            <div class="admin-reply">
-                <strong>Admin Reply:</strong> {{ $review->reply->reply }}
-                <p>By: Admin {{ $review->reply->admin->first_name }} {{ $review->reply->admin->last_name }}</p>
-            </div>
-        @endif
-    </div>
-@empty
-    <p>You have not submitted any reviews yet.</p>
-@endforelse
+@section('js-container')
+    <!-- Backup Js -->
+@endsection

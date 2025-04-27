@@ -1,5 +1,6 @@
-<?php
+    <?php
 
+use App\Http\Controllers\Admin\ApprenticeController;
 use App\Http\Controllers\Admin\AttendeeController;
 use App\Http\Controllers\Admin\ClassListController;
 use App\Http\Controllers\Admin\ControlPanelController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TournamentController;
 use App\Http\Controllers\Admin\TrainerController;
+use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PageController;
@@ -34,6 +36,10 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('index');
 })->name('main');
+
+Route::get('/test-only', function () {
+    return view('user.test-size');
+})->name('test.only');
 
 Route::get('/plans', [PageController::class, 'plans'])->name('page.plans');
 Route::get('/about', [PageController::class, 'about'])->name('page.about');
@@ -78,24 +84,15 @@ Route::middleware(['auth', 'verified', 'otp.verified'])->group(function () {
     Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profileNew.destroy');
 
     /* Review Routes User */
+    Route::get('/reviews', [ReviewController::class, 'create'])->name('review.create');
     Route::post('/admin/reviews/{review}/reply', [ReviewController::class, 'reply'])->name('review.reply');
     Route::post('/reviews', [ReviewController::class, 'store'])->name('review.store');
 
-    Route::get('/reviews', [ReviewController::class, 'create'])->name('review.create');
-
-
     /* Reviews Routes Admin */
     Route::get('/admin/reviews', [ReviewController::class, 'show'])->name('review.show');
-
     Route::get('/calendar', [ReservationController::class, 'calendar'])->name('calendar');
     Route::get('/calendar/events', [ReservationController::class, 'getEvents'])->name('calendar.events');
     Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
-
-    /* Tournament */
-    Route::resource('tournaments', TournamentController::class);
-    Route::get('tournaments/{tournament}/results', [TournamentController::class, 'showResults'])->name('tournaments.results');
-    Route::post('tournaments/{tournament}/register', [TournamentController::class, 'registerParticipant'])->name('tournaments.register');
-
 
 });
 
@@ -153,6 +150,14 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::get('/admin/transactions/membership/request', [TransactionController::class, 'membershipRequest'])->name('transaction.membershipRequest');
     Route::put('/admin/transactions/membership/request/{transaction}/approve', [TransactionController::class, 'membershipRequestApprove'])->name('transactions.membershipRequestApprove');
     Route::put('/admin/transactions/membership/request/{transaction}/cancel', [TransactionController::class, 'membershipRequestCancel'])->name('transactions.membershipRequestCancel');
+
+    Route::get('/admin/transactions/student/request', [TransactionController::class, 'studentRequest'])->name('transaction.studentRequest');
+    Route::put('/admin/transactions/student/request/{transaction}/approve', [TransactionController::class, 'studentRequestApprove'])->name('transactions.studentRequestApprove');
+    Route::put('/admin/transactions/student/request/{transaction}/cancel', [TransactionController::class, 'studentRequestCancel'])->name('transactions.studentRequestCancel');
+
+    Route::get('/admin/transactions/apprentice/request', [TransactionController::class, 'apprenticeRequest'])->name('transaction.apprenticeRequest');
+    Route::put('/admin/transactions/apprentice/request/{transaction}/approve', [TransactionController::class, 'apprenticeRequestApprove'])->name('transactions.apprenticeRequestApprove');
+    Route::put('/admin/transactions/apprentice/request/{transaction}/cancel', [TransactionController::class, 'apprenticeRequestCancel'])->name('transactions.apprenticeRequestCancel');
 
     /* Attendees Routes */
     Route::get('/admin/attendees', [AttendeeController::class, 'show'])->name('attendee.show');
@@ -218,6 +223,17 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::put('admin/tournaments/{tournament}/update', [ClassListController::class, 'update'])->name('tournament.update');
     Route::delete('/admin/tournaments/{tournament}/destroy', [ClassListController::class, 'destroy'])->name('tournament.destroy');
 
+    Route::get('tournaments', [TournamentController::class, 'index'])->name('tournaments.index');
+    Route::get('tournaments/create', [TournamentController::class, 'create'])->name('tournaments.create');
+    Route::post('tournaments', [TournamentController::class, 'store'])->name('tournaments.store');
+    Route::get('tournaments/{tournament}', [TournamentController::class, 'show'])->name('tournaments.show');
+    Route::get('tournaments/{tournament}/edit', [TournamentController::class, 'edit'])->name('tournaments.edit');
+    Route::put('tournaments/{tournament}', [TournamentController::class, 'update'])->name('tournaments.update');
+    Route::patch('tournaments/{tournament}', [TournamentController::class, 'update'])->name('tournaments.update');
+    Route::delete('tournaments/{tournament}', [TournamentController::class, 'destroy'])->name('tournaments.destroy');
+    Route::get('tournaments/{tournament}/results', [TournamentController::class, 'showResults'])->name('tournaments.results');
+    Route::post('tournaments/{tournament}/register', [TournamentController::class, 'registerParticipant'])->name('tournaments.register');
+
     /* Notifications */
     Route::get('/get-new-notifications-count', [MainController::class, 'getNewNotificationsCount']);
     Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notification.readNow');
@@ -228,6 +244,22 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::get('admin/notifications/{notification}/edit', [NotificationController::class, 'edit'])->name('notification.edit');
     Route::put('admin/notifications/{notification}/update', [NotificationController::class, 'update'])->name('notification.update');
     Route::delete('/admin/notifications/{notification}/destroy', [NotificationController::class, 'destroy'])->name('notification.destroy');
+
+    /* Apprentices Routes */
+    Route::get('admin/apprentices', [ApprenticeController::class, 'show'])->name('apprentice.show');
+    Route::get('/admin/apprentices/create', [ApprenticeController::class, 'create'])->name('apprentice.create');
+    Route::post('/admin/apprentices/store', [ApprenticeController::class, 'store'])->name('apprentice.store');
+    Route::get('admin/apprentices/{apprentice}/edit', [ApprenticeController::class, 'edit'])->name('apprentice.edit');
+    Route::put('admin/apprentices/{apprentice}/update', [ApprenticeController::class, 'update'])->name('apprentice.update');
+    Route::delete('/admin/apprentices/{apprentice}/destroy', [ApprenticeController::class, 'destroy'])->name('apprentice.destroy');
+
+    /* Trainings Routes */
+    Route::get('admin/trainings', [TrainingController::class, 'show'])->name('training.show');
+    Route::get('/admin/trainings/create', [TrainingController::class, 'create'])->name('training.create');
+    Route::post('/admin/trainings/store', [TrainingController::class, 'store'])->name('training.store');
+    Route::get('admin/trainings/{training}/edit', [TrainingController::class, 'edit'])->name('training.edit');
+    Route::put('admin/trainings/{training}/update', [TrainingController::class, 'update'])->name('training.update');
+    Route::delete('/admin/trainings/{training}/destroy', [TrainingController::class, 'destroy'])->name('training.destroy');
 });
 
 /* Authenticated, Verified, OTP Verified, Admin role, and Staff role only */
@@ -235,11 +267,20 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin,staff'])->gro
     // routes accessible to admin or staff
 });
 
-Route::middleware(['auth', 'verified', 'otp.verified', 'role:user'])->group(function () {
+Route::middleware(['auth', 'verified', 'otp.verified'])->group(function () {
     Route::get('/home', [MainController::class, 'home'])->name('user.home');
     Route::get('/settings', [UserPageController::class, 'settings'])->name('user.settings');
     Route::get('/equipments', [UserPageController::class, 'equipments'])->name('user.equipments');
     Route::get('/transactions', [UserPageController::class, 'transactions'])->name('user.transactions');
+
+    Route::get('/class', [UserPageController::class, 'class'])->name('user.class');
+    Route::post('/class/avail', [UserPageController::class, 'availClass'])->name('user.availClass');
+    Route::get('/class/cancel', [UserPageController::class, 'cancelClass'])->name('user.cancelClass');
+
+    Route::get('/training', [UserPageController::class, 'training'])->name('user.training');
+    Route::post('/training/avail', [UserPageController::class, 'availTraining'])->name('user.availTraining');
+    Route::get('/training/cancel', [UserPageController::class, 'cancelTraining'])->name('user.cancelTraining');
+
     Route::get('/membership', [MembershipController::class, 'showMembership'])->name('user.membership');
     Route::get('/membership/avail/{rate}', [MembershipController::class, 'availMembership'])->name('membership.avail');
     Route::get('/membership/renewal/{rate}', [MembershipController::class, 'renewMembership'])->name('membership.renew');

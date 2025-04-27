@@ -23,13 +23,6 @@
             <div class="crud-container">
                 <div class="crud-content">
                     <h3 class="crud-header">Create Tournament</h3>
-                    @if ($errors->any())
-                        <ul style="color: red;">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
                     <div class="crud-form">
                         <form method="post" action="{{ route('tournaments.store') }}">
                             @csrf
@@ -46,18 +39,18 @@
                                 </div>
                                 <div class="form-content">
                                     <label for="tournament_date">Date</label>
-                                    <input type="date" id="tournament_date" name="tournament_date" maxlength="255" onclick="this.showPicker()">
+                                    <input type="date" id="tournament_date" name="tournament_date" onclick="this.showPicker()" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="semi_finals">Semi Finals</label>
-                                    <input type="date" id="semi_finals" name="semi_finals" onclick="this.showPicker()" maxlength="255">
+                                    <input type="date" id="semi_finals" name="semi_finals" onclick="this.showPicker()">
                                 </div>
                                 <div class="form-content">
                                     <label for="finals">Finals</label>
-                                    <input type="date" id="finals" name="finals" maxlength="255" onclick="this.showPicker()">
+                                    <input type="date" id="finals" name="finals" onclick="this.showPicker()">
                                 </div>
                             </div>
 
@@ -65,19 +58,19 @@
 
                             <div class="form-group">
                                 <div class="form-content">
-                                    <label for="start">Start Date</label>
-                                    <input type="date" id="start" name="start" onclick="this.showPicker()" maxlength="255">
+                                    <label for="start">Registration Start</label>
+                                    <input type="date" id="start" name="start" onclick="this.showPicker()">
                                 </div>
                                 <div class="form-content">
-                                    <label for="end">End Date</label>
-                                    <input type="date" id="end" name="end" maxlength="255" onclick="this.showPicker()">
+                                    <label for="end">Registration End</label>
+                                    <input type="date" id="end" name="end" onclick="this.showPicker()">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="registration_fee">Registration Fee</label>
-                                    <input type="number" id="registration_fee" name="registration_fee" placeholder="Registration Fee" maxlength="255" required>
+                                    <input type="number" id="registration_fee" name="registration_fee" placeholder="Registration Fee" required>
                                 </div>
                                 <div class="form-content">
                                     <label for="status">Tournament Status</label>
@@ -88,15 +81,15 @@
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="first_prize">1st Prize</label>
-                                    <input type="number" id="first_prize" name="first_prize" placeholder="1st" maxlength="255" required>
+                                    <input type="number" id="first_prize" name="first_prize" placeholder="1st">
                                 </div>
                                 <div class="form-content">
                                     <label for="second_prize">2nd Prize</label>
-                                    <input type="number" id="second_prize" name="second_prize" maxlength="255" placeholder="2nd" required>
+                                    <input type="number" id="second_prize" name="second_prize" placeholder="2nd">
                                 </div>
                                 <div class="form-content">
                                     <label for="third_prize">3rd Prize</label>
-                                    <input type="number" id="third_prize" name="third_prize" maxlength="255" placeholder="3rd" required>
+                                    <input type="number" id="third_prize" name="third_prize" placeholder="3rd">
                                 </div>
                             </div>
 

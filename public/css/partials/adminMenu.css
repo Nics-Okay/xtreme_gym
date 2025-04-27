@@ -48,7 +48,7 @@
 .menu-section.underline {
     height: 1px;
     width: calc(100% + 40px);
-    margin: 20px 0;
+    margin: 20px 0 10px;
     background-color: rgb(49, 63, 88);
 }
 

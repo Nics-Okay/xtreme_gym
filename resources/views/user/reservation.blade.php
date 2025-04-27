@@ -1,14 +1,34 @@
-@extends('layouts.UserLayout')
+@extends('layouts.UserDesign')
 
 @section('title', 'Reservation - Xtreme Gym World')
 
 @section('head-access')
-    <link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/templates/userModules.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/reservation.css') }}">
 @endsection
 
 @section('main-content')
+    <!-- Design -->
+    <style>
+        .main-section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            row-gap: 10px;
+            padding: 0 10px 10px;
+        }
+    </style>
+    
     <div class="user-content-container">
         <div class="user-content-header">
+            <!--
+            <div class="custom-header">
+                <a href="{{ route('user.home')}}"><i class="fa-solid fa-arrow-left"></i></a>
+                <h3>Module Title</h3> 
+            </div>
+            -->
+
             <h3>My Reservations</h3>
 
             <div class="user-content-button">
@@ -51,11 +71,11 @@
                             </div>
                             <div class="reservation-info on">
                                 <h4>Status:</h4>
-                                <p>{{ $ongoingReservation->status ?? 'Unconfirmed' }}</p>
+                                <p>{{ $ongoingReservations->status ?? 'Unconfirmed' }}</p>
                             </div>
                             <div class="reservation-info on">
                                 <h4>Payment Status:</h4>
-                                <p>{{ $ongoingReservation->payment_status ?? 'Unpaid' }}</p>
+                                <p>{{ $ongoingReservations->payment_status ?? 'Unpaid' }}</p>
                             </div>
                         @endif
                     </div>

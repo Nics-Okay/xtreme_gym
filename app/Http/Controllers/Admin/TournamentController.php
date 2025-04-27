@@ -17,7 +17,12 @@ class TournamentController extends Controller
 
     public function create()
     {
-        return view('admin.tournaments.createtournament');
+        return view('admin.tournaments.createTournament');
+    }
+
+    public function edit(Tournament $tournament)
+    {
+        return view('admin.tournaments.editTournament', ['tournament' => $tournament]);
     }
 
     public function store(Request $request)
@@ -43,6 +48,29 @@ class TournamentController extends Controller
         return redirect()->route('tournaments.index')->with('success', 'Tournament created successfully.');
     }
 
+    public function update(Request $request, Tournament $tournament)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'tournament_date' => 'required|date|after_or_equal:today',
+            'semi_finals' => 'nullable|date',
+            'finals' => 'nullable|date',
+            'registration_fee' => 'required|numeric|min:0',
+            'first_prize' => 'nullable|numeric|min:0',
+            'second_prize' => 'nullable|numeric|min:0',
+            'third_prize' => 'nullable|numeric|min:0',
+            'description' => 'required|string',
+            'start_date' => 'nullable|date|after_or_equal:today',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'status' => 'nullable|string|in:Registration,Ongoing,Completed',
+        ]);
+    
+        $tournament->update($validated);
+    
+        return redirect()->route('tournaments.index')->with('success', 'Tournament updated successfully.');
+    }
+
     public function show(Tournament $tournament)
     {
         $participants = $tournament->participants;
@@ -66,5 +94,12 @@ class TournamentController extends Controller
     {
         $results = $tournament->results;
         return view('tournaments.results', compact('tournament', 'results'));
+    }
+
+    public function destroy(Tournament $tournament)
+    {
+        $tournament->delete();
+
+        return redirect()->route('tournaments.index')->with('success', 'Tournament Deleted Successfully');
     }
 }

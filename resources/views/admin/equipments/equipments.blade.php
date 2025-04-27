@@ -21,7 +21,7 @@
                 @foreach ($equipments as $equipment)
                     <div class="list-content">
                         <div class="equipment-info-header">
-                            <p>{{ $loop->iteration }}. {{ $equipment->name }} x{{ $equipment->available_number }}</p>
+                            <p>{{ $loop->iteration }}. {{ $equipment->name }}</p>
                         </div>
                         <div class="equipment-info-container">
                             <div class="equipment-image">

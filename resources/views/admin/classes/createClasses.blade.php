@@ -23,40 +23,45 @@
                             @csrf
 
                             <div class="form-full">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" placeholder="Name" required autofocus>
+                                <label for="name">Title</label>
+                                <input type="text" name="name" id="name" placeholder="Class Title" required autofocus>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="trainer">Trainer</label>
-                                    <input type="text" id="trainer" name="trainer" placeholder="Trainer" maxlength="255">
+                                    <select name="trainer" id="trainer" required>
+                                        <option value="" disabled selected>-Choose Trainer-</option>
+                                        @foreach( $trainers as $trainer)
+                                            <option value="{{ $trainer->id }}">Coach {{ $trainer->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-content">
                                     <label for="schedule">Schedule</label>
-                                    <input type="text" id="schedule" name="schedule" maxlength="255" placeholder="Ex. 8:00 AM - 11:00 AM">
+                                    <input type="text" id="schedule" name="schedule" maxlength="255" placeholder="Ex. 8:00 AM - 11:00 AM" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="start">Start Date</label>
-                                    <input type="date" id="start" name="start" onclick="this.showPicker()" maxlength="255">
+                                    <input type="date" id="start" name="start" onclick="this.showPicker()" required>
                                 </div>
                                 <div class="form-content">
                                     <label for="end">End Date</label>
-                                    <input type="date" id="end" name="end" maxlength="255" onclick="this.showPicker()">
+                                    <input type="date" id="end" name="end" onclick="this.showPicker()" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="price">Price</label>
-                                    <input type="text" id="price" name="price" placeholder="Price" maxlength="255" required>
+                                    <input type="text" id="price" name="price" placeholder="Price" required>
                                 </div>
                                 <div class="form-content">
                                     <label for="duration">Duration</label>
-                                    <input type="text" id="duration" name="duration" maxlength="255" placeholder="Duration" required>
+                                    <input type="text" id="duration" name="duration" placeholder="Ex. 200 Hours, 20 Days" required>
                                 </div>
                             </div>
 

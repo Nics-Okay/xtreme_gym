@@ -1,15 +1,29 @@
-@extends('layouts.UserLayout')
+@extends('layouts.UserDesign')
 
 @section('title', 'Transactions - Xtreme Gym World')
 
 @section('head-access')
-    <link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/templates/userModules.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/transactions.css') }}">
+
 @endsection
 
 @section('main-content')
+    <!-- Design -->
+    <style>
+        .main-section {
+            height: 100%;
+            width: 100%;
+            padding: 0 10px 10px;
+        }
+    </style>
+
     <div class="user-content-container">
         <div class="user-content-header">
-            <h3>Transactions</h3> 
+            <div class="custom-header">
+                <a href="{{ route('user.settings')}}"><i class="fa-solid fa-arrow-left"></i></a>
+                <h3>Transactions</h3> 
+            </div>
         </div>
         <div class="user-main-content">
             <div class="main-section">

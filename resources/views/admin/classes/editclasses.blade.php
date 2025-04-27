@@ -24,29 +24,36 @@
                             @method('put')
 
                             <div class="form-full">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" value="{{ $classList->name }}" placeholder="Name" required autofocus>
+                                <label for="name">Title</label>
+                                <input type="text" name="name" id="name" value="{{ $classList->name }}" placeholder="Class Title" required autofocus>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="trainer">Trainer</label>
-                                    <input type="text" id="trainer" name="trainer" value="{{ $classList->trainer }}" placeholder="Trainer" maxlength="255">
+                                    <select name="trainer" id="trainer" required>
+                                        <option value="" disabled {{ !$classList->trainer ? 'selected' : '' }}>-Choose Trainer-</option>
+                                        @foreach($trainers as $trainer)
+                                            <option value="{{ $trainer->id }}" {{ $classList->trainer == $trainer->id ? 'selected' : '' }}>
+                                                Coach {{ $trainer->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-content">
                                     <label for="schedule">Schedule</label>
-                                    <input type="text" id="schedule" name="schedule" maxlength="255" value="{{ $classList->schedule }}" placeholder="Ex. 8:00 AM - 11:00 AM">
+                                    <input type="text" id="schedule" name="schedule" maxlength="255" value="{{ $classList->schedule }}" placeholder="Ex. 8:00 AM - 11:00 AM" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-content">
                                     <label for="start">Start Date</label>
-                                    <input type="date" id="start" name="start" onclick="this.showPicker()" maxlength="255" value="{{ $classList->class_start }}">
+                                    <input type="date" id="start" name="start" onclick="this.showPicker()" value="{{ $classList->class_start }}" required>
                                 </div>
                                 <div class="form-content">
                                     <label for="end">End Date</label>
-                                    <input type="date" id="end" name="end" maxlength="255" onclick="this.showPicker()" value="{{ $classList->class_end }}">
+                                    <input type="date" id="end" name="end" onclick="this.showPicker()" value="{{ $classList->class_end }}" required>
                                 </div>
                             </div>
 
@@ -57,7 +64,7 @@
                                 </div>
                                 <div class="form-content">
                                     <label for="duration">Duration</label>
-                                    <input type="text" id="duration" name="duration" maxlength="255" value="{{ $classList->duration }}" placeholder="Duration" required>
+                                    <input type="text" id="duration" name="duration" maxlength="255" value="{{ $classList->duration }}" placeholder="Ex. 200 Hours, 20 Days" required>
                                 </div>
                             </div>
 

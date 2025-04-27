@@ -252,4 +252,15 @@ class TransactionController extends Controller
 
         return redirect()->route('transaction.membershipRequest')->with('success', 'Transaction canceled.');
     }
+
+    // Student Transactions 
+    public function studentRequest()
+    {
+        $transactions = Transaction::with('class_list')
+            ->whereIn('transaction_type', ['class_enroll'])
+            ->paginate(10);
+    
+        return view('admin.transactions.studentRequest', compact('transactions'));
+    }
+
 }

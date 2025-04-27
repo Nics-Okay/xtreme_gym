@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClassList;
+use App\Models\Trainer;
 use Illuminate\Http\Request;
 
 class ClassListController extends Controller
@@ -15,44 +16,55 @@ class ClassListController extends Controller
         return view('admin.classes.classes', compact('classLists'));
     }
 
-    public function create(){
-        return view('admin.classes.createClasses');
+    public function create()
+    {
+        $trainers = Trainer::all();
+
+        return view('admin.classes.createClasses', compact('trainers'));
     }
 
     public function edit(ClassList $classList)
     {
-        return view('admin.classes.editClasses', ['classList' => $classList]);
+        $trainers = Trainer::all();
+
+        return view('admin.classes.editClasses', [
+            'classList' => $classList,
+            'trainers' => $trainers,
+        ]);
     }
 
     public function store(Request $request)
     {
-        // Validate the request data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'trainer' => 'nullable|string|max:255',
-            'schedule' => 'nullable|string|max:255',
-            'start' => 'nullable|date',
-            'end' => 'nullable|date|after_or_equal:start',
+            'trainer' => 'required|exists:trainers,id',
+            'schedule' => 'required|string|max:255',
+            'start' => 'required|date',
+            'end' => 'required|date|after_or_equal:start',
             'price' => 'required|numeric|min:0',
             'duration' => 'required|string|max:255',
             'status' => 'required|string|max:255',
             'description' => 'required|string|max:500',
         ]);
 
-        // Create a new record
+        $trainer = Trainer::find($validated['trainer']);
+
+        if (!$trainer) {
+            return redirect()->back()->withErrors(['trainer' => 'Trainer not found.']);
+        }
+
         ClassList::create([
             'name' => $validated['name'],
-            'trainer' => $validated['trainer'] ?? null,
-            'schedule' => $validated['schedule'] ?? null,
-            'class_start' => $validated['start'] ?? null,
-            'class_end' => $validated['end'] ?? null,
+            'trainer' => $trainer->name,
+            'schedule' => $validated['schedule'],
+            'class_start' => $validated['start'],
+            'class_end' => $validated['end'],
             'price' => $validated['price'],
             'duration' => $validated['duration'],
             'status' => $validated['status'],
             'description' => $validated['description'],
         ]);
 
-        // Redirect or return response
         return redirect()->route('classList.show')->with('success', 'Class added successfully!');
     }
 
@@ -60,22 +72,28 @@ class ClassListController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'trainer' => 'nullable|string|max:255',
-            'schedule' => 'nullable|string|max:255',
-            'start' => 'nullable|date',
-            'end' => 'nullable|date|after_or_equal:start',
+            'trainer' => 'required|exists:trainers,id',
+            'schedule' => 'required|string|max:255',
+            'start' => 'required|date',
+            'end' => 'required|date|after_or_equal:start',
             'price' => 'required|numeric|min:0',
             'duration' => 'required|string|max:255',
             'status' => 'required|string|max:255',
             'description' => 'required|string|max:500',
         ]);
 
+        $trainer = Trainer::find($validated['trainer']);
+
+        if (!$trainer) {
+            return redirect()->back()->withErrors(['trainer' => 'Trainer not found.']);
+        }
+
         $classList->update([
             'name' => $validated['name'],
-            'trainer' => $validated['trainer'] ?? null,
-            'schedule' => $validated['schedule'] ?? null,
-            'class_start' => $validated['start'] ?? null,
-            'class_end' => $validated['end'] ?? null,
+            'trainer' => $trainer->name,
+            'schedule' => $validated['schedule'],
+            'class_start' => $validated['start'],
+            'class_end' => $validated['end'],
             'price' => $validated['price'],
             'duration' => $validated['duration'],
             'status' => $validated['status'],

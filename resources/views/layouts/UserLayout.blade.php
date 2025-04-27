@@ -24,7 +24,11 @@
             @yield('main-content')
         </div>
     </div>
+
+    <script src="{{ asset('js/mobile-sizing.js') }}"></script>
+    
     <script src="{{ asset('js/userMenu.js') }}"></script>
+
     @yield('js-container')
 </body>
 </html>

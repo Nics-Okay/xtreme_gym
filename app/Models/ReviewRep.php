@@ -19,11 +19,11 @@ class ReviewRep extends Model
 
     public function review()
     {
-        return $this->belongsTo(Review::class);
+        return $this->belongsTo(Review::class, 'review_id', 'id');
     }
 
     public function admin()
     {
-        return $this->belongsTo(User::class, 'admin_id');
+        return $this->belongsTo(User::class, 'admin_id', 'unique_id');
     }
 }

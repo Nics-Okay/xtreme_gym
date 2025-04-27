@@ -1,6 +1,6 @@
 @extends('layouts.AdminLayout')
 
-@section('title', 'Rates')
+@section('title', 'Member Request - Xtreme Gym World')
 
 @section('head-access')
     <link rel="stylesheet" href="{{ asset('css/layouts/tables.css') }}">
@@ -12,29 +12,16 @@
             <h2>MEMBERSHIP PAYMENTS</h2> 
         </div>
         <div class="table-container">
-            <div>
-                @if(session()->has('success'))
-                    <div>
-                        {{session('success')}}
-                    </div>
-                @endif
-                @if(isset($operationError))
-                    <script>
-                        window.alert("{{ $operationError }}");
-                    </script>
-                @endif
-            </div>
             <table class="table-content">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Membership Plan</th>
+                        <th>Class Enrolled</th>
                         <th>Amount</th>
                         <th>Payment Method</th>
                         <th>Date</th>
-                        <th>Valid Until</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -49,7 +36,6 @@
                             <td>{{ $transaction->rate->price ?? 'Rate not found' }}</td>
                             <td>{{ $transaction->payment_method }}</td>
                             <td>{{ $transaction->created_at }}</td>
-                            <td></td>
                             <td>{{ $transaction->status }}</td>
                             <td>
                                 <div class="action-button">

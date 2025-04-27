@@ -22,12 +22,7 @@
                         <form method="post" action="{{ route('trainer.update', [ 'trainer' => $trainer ]) }}">
                             @csrf
                             @method('put')
-
-                            <div class="form-full">
-                                <label for="name">User ID</label>
-                                <input type="text" name="user_id" id="user_id" value="{{ $trainer->user_id }}" placeholder="User ID" autofocus>
-                            </div>
-
+                            
                             <div class="form-full">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" id="name" value="{{ $trainer->name }}" placeholder="Name" required>

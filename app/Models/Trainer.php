@@ -24,4 +24,9 @@ class Trainer extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'unique_id');
     }
+
+    public function classes()
+    {
+        return $this->hasMany(ClassList::class, 'trainer', 'name');
+    }
 }
