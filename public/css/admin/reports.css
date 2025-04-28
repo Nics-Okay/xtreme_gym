@@ -1,0 +1,23 @@
+.section-content {
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.report-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+    width: 30%;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.report-box p {
+    font-size: small;
+    align-self: normal;
+}

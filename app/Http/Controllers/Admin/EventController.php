@@ -29,6 +29,10 @@ class EventController extends Controller
         ]);
     }
 
+    public function edit(Event $event) {
+        return view('admin.events.editEvent', ['event' => $event]);
+    }
+
     public function create(){
         return view('admin.events.createEvent');
     }
@@ -48,7 +52,7 @@ class EventController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('thumbnail')) {
-            $imagePath = $request->file('thumbnail')->store('event_thumbnails', 'public');
+            $imagePath = $request->file('thumbnail')->store('thumbnails', 'public');
         }
 
         Event::create([

@@ -44,7 +44,7 @@
                 <div class="ongoing">
                     <p>Current Reservation</p>
                     <div class="ongoing-reservation">
-                        @if(!$ongoingReservations)
+                        @if(!$ongoingReservations || $ongoingReservations->isEmpty())
                             <p>No ongoing reservation.</p>
                         @else
                             <div class="reservation-info on">
@@ -166,23 +166,17 @@
                         <h4>ID:</h4>
                         <p>{{ $pastReservation->id }}</p>
                     </div>
-
                     <div class="reservation-info past">
                         <h4>Name:</h4>
                         <p>{{ $pastReservation->name }}</p>
                     </div>
-
-                    <div class="reservation-info past">
-                        <h4>Facility:</h4>
-                        <p>{{ $pastReservation->reservation_type ?? 'Not Provided' }}</p>
-                    </div>
-
+                    <!-- Fix: Changed to use pastReservation -->
                     <div class="reservation-info past">
                         <h4>Date:</h4>
-                        <p>{{ \Carbon\Carbon::parse($upcomingReservation->reservation_date)->format('F j, Y') }}, 
-                            {{ $upcomingReservation->start_time ? \Carbon\Carbon::parse($upcomingReservation->start_time)->format('g:i A') : 'Not set' }}
+                        <p>{{ \Carbon\Carbon::parse($pastReservation->reservation_date)->format('F j, Y') }}, 
+                            {{ $pastReservation->start_time ? \Carbon\Carbon::parse($pastReservation->start_time)->format('g:i A') : 'Not set' }}
                             -
-                            {{ $upcomingReservation->end_time ? \Carbon\Carbon::parse($upcomingReservation->end_time)->format('g:i A') : 'Not set' }}
+                            {{ $pastReservation->end_time ? \Carbon\Carbon::parse($pastReservation->end_time)->format('g:i A') : 'Not set' }}
                         </p>
                     </div>
 

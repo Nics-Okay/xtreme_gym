@@ -24,14 +24,14 @@
                         <img src="{{ asset('storage/' . $upcomingEvent->image) }}" alt="Event Image">
                     </div>
                     <div class="list-info">
-                        <p>{{ $upcomingEvent->name }}</p>
-                        <p>{{ $upcomingEvent->event_type }}</p>
-                        <p>{{ $upcomingEvent->date  ?? 'TBA'}}</p>
-                        <p>{{ $upcomingEvent->location  ?? 'TBA'}}</p>
-                        <p>{{ $upcomingEvent->status  ?? 'Ongoing'}}</p>
-                        <p>{{ $upcomingEvent->organizer  ?? 'Xtreme Management'}}</p>
-                        <p>{{ $upcomingEvent->going }}</p>
-                        <p>{{ $upcomingEvent->description }}</p>
+                        <h3>{{ $upcomingEvent->name }}</h3>
+                        <p><strong>What:</strong> {{ $upcomingEvent->event_type }}</p>
+                        <p><strong>When:</strong> {{ $upcomingEvent->date  ?? 'TBA'}}</p>
+                        <p><strong>Where:</strong> {{ $upcomingEvent->location  ?? 'TBA'}}</p>
+                        <p><strong>Event Status:</strong> {{ $upcomingEvent->status  ?? 'Ongoing'}}</p>
+                        <p><strong>Organizer:</strong> {{ $upcomingEvent->organizer  ?? 'Xtreme Management'}}</p>
+                        <p><strong>No. of people going:</strong> {{ $upcomingEvent->going }}</p>
+                        <p><strong>Description:</strong> {{ $upcomingEvent->description }}</p>
                     </div>
                     <div class="action-buttons events">
                         <a href="{{route('event.edit', ['event' => $upcomingEvent])}}" class="edit-button"><i class="fa-solid fa-pen-to-square"></i><p>Edit</p></a>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GuestController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RateController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TournamentController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\User\UserReservationController;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 /* No Middleware Routes */
 Route::get('/', function () {
@@ -262,6 +264,9 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::get('admin/trainings/{training}/edit', [TrainingController::class, 'edit'])->name('training.edit');
     Route::put('admin/trainings/{training}/update', [TrainingController::class, 'update'])->name('training.update');
     Route::delete('/admin/trainings/{training}/destroy', [TrainingController::class, 'destroy'])->name('training.destroy');
+
+    Route::get('admin/reports', [ReportController::class, 'show'])->name('report.show');
+    Route::get('admin/analytics', [ReportController::class, 'showAnalytics'])->name('analytic.show');
 });
 
 /* Authenticated, Verified, OTP Verified, Admin role, and Staff role only */

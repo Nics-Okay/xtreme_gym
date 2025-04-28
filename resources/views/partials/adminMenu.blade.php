@@ -122,8 +122,8 @@
                         <i class="fa-solid fa-chevron-right chevron"></i>
                     </div>
                     <div class="dropdown-content" id="dropdown">
-                        <a href="#" class="menu-name revenue-reports"><i class="fa-solid fa-chart-simple"></i>Revenue Reports</a>
-                        <a href="#" class="menu-name gym-analytics"><i class="fa-solid fa-chart-simple"></i>Gym Analytics</a>
+                        <a href="{{ route('report.show')}}" class="menu-name revenue-reports"><i class="fa-solid fa-chart-simple"></i>Revenue Reports</a>
+                        <a href="{{ route('analytic.show')}}" class="menu-name gym-analytics"><i class="fa-solid fa-chart-simple"></i>Gym Analytics</a>
                     </div>
                 </div>
             </li>
