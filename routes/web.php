@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ClassListController;
 use App\Http\Controllers\Admin\ControlPanelController;
 use App\Http\Controllers\Admin\EquipmentController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\GuestController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\NotificationController;
@@ -42,6 +43,55 @@ Route::get('/index', function () {
 Route::get('/test-only', function () {
     return view('user.test-size');
 })->name('test.only');
+
+Route::get('/menu-test', function () {
+    return view('partials.test-menu');
+})->name('test.menu');
+
+Route::get('/test-calendar', function () {
+    return view('testing.calendars');
+})->name('test.calendar');
+
+Route::get('/test-calendar-2', function () {
+    return view('testing.calendars-2');
+})->name('test.calendar-2');
+
+Route::get('/test-reservation', function () {
+    return view('testing.test-reservation-modal');
+})->name('test.testReservation');
+
+Route::get('/calendar', [ReservationController::class, 'calendar'])->name('calendar');
+Route::get('admin/reservations', [ReservationController::class, 'show'])->name('reservation.show');
+Route::get('admin/reservations/final', [ReservationController::class, 'showFinal'])->name('reservation.showFinal');
+
+/* USER RESERVATION STORE */
+Route::post('/reservations', [UserReservationController::class, 'store'])->name('reservations.store');
+
+/* Reservations Routes */
+// Route to view the reservation details for a specific date
+Route::get('/admin/reservations/view-details/{date}', [ReservationController::class, 'viewDetails'])->name('reservations.viewDetails');
+
+// Fetch events for a specific day (from FullCalendar API call)
+Route::get('/admin/reservations/get-events-by-date', [ReservationController::class, 'getEventsByDate'])->name('reservations.getEventsByDate');
+
+Route::get('/users/{id}', [ReservationController::class, 'fetchUser'])->name('users.fetch');
+Route::get('/admin/reservations/fetch', [ReservationController::class, 'getCalendarEvents'])->name('reservation.fetchEvents');
+Route::get('/reservations/fetchReservedSlots', [ReservationController::class, 'fetchReservedSlots'])->name('reservation.fetchReservedSlots');
+Route::get('/admin/reservations/create', [ReservationController::class, 'create'])->name('reservation.create');
+Route::post('/admin/reservations/store', [ReservationController::class, 'store'])->name('reservation.store');
+
+Route::get('admin/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
+Route::put('admin/reservations/{reservation}/update', [ReservationController::class, 'update'])->name('reservation.update');
+Route::put('admin/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
+Route::delete('/admin/reservations/{reservation}/destroy', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+
+/* Reservations Routes
+Route::get('/calendar', [ReservationController::class, 'getEvents'])->name('calendar.events');
+Route::get('admin/reservations', [ReservationController::class, 'show'])->name('reservation.show');
+Route::get('admin/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
+Route::put('admin/reservations/{reservation}/update', [ReservationController::class, 'update'])->name('reservation.update');
+Route::delete('/admin/reservations/{reservation}/destroy', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+*/
 
 Route::get('/plans', [PageController::class, 'plans'])->name('page.plans');
 Route::get('/about', [PageController::class, 'about'])->name('page.about');
@@ -95,7 +145,6 @@ Route::middleware(['auth', 'verified', 'otp.verified'])->group(function () {
     Route::get('/calendar', [ReservationController::class, 'calendar'])->name('calendar');
     Route::get('/calendar/events', [ReservationController::class, 'getEvents'])->name('calendar.events');
     Route::get('/calendar/preview', [ReservationController::class, 'getPreview'])->name('calendar.preview');
-    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 
 });
 
@@ -107,6 +156,9 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::post('/admin/update-lock-code', [ControlPanelController::class, 'updateLockCode'])->name('admin.update-lock-code');
     Route::post('/admin/reset-lock-code', [ControlPanelController::class, 'sendResetLink'])->name('admin.reset-lock-code');
     Route::get('/admin/reset-lock-code/{token}', [ControlPanelController::class, 'resetLockCode'])->name('admin.reset-lock-code-link');
+
+    Route::post('/admin/carousel', [ControlPanelController::class, 'store'])->name('admin.carousel.store');
+    Route::delete('/admin/carousel/{id}', [ControlPanelController::class, 'destroy'])->name('admin.carousel.delete');
 
 
 
@@ -137,6 +189,13 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::put('/admin/plans/{rate}/update', [RateController::class, 'update'])->name('rate.update');
     Route::delete('/admin/plans/{rate}/destroy', [RateController::class, 'destroy'])->name('rate.destroy');
 
+    Route::get('/admin/facilities', [FacilityController::class, 'show'])->name('facility.show');
+    Route::get('/admin/facilities/create', [FacilityController::class, 'create'])->name('facility.create');
+    Route::post('/admin/facilities/store', [FacilityController::class, 'store'])->name('facility.store');
+    Route::get('/admin/facilities/{facility_list}/edit', [FacilityController::class, 'edit'])->name('facility.edit');
+    Route::put('/admin/facilities/{facility_list}/update', [FacilityController::class, 'update'])->name('facility.update');
+    Route::delete('/admin/facilities/{facility_list}/destroy', [FacilityController::class, 'destroy'])->name('facility.destroy');
+
     /* Equipments Routes */
     Route::get('/admin/equipments', [EquipmentController::class, 'show'])->name('equipment.show');
     Route::get('/admin/equipments/create', [EquipmentController::class, 'create'])->name('equipment.create');
@@ -162,6 +221,10 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::get('/admin/transactions/apprentice/request', [TransactionController::class, 'apprenticeRequest'])->name('transaction.apprenticeRequest');
     Route::put('/admin/transactions/apprentice/request/{transaction}/approve', [TransactionController::class, 'apprenticeRequestApprove'])->name('transactions.apprenticeRequestApprove');
     Route::put('/admin/transactions/apprentice/request/{transaction}/cancel', [TransactionController::class, 'apprenticeRequestCancel'])->name('transactions.apprenticeRequestCancel');
+
+    Route::get('/admin/transactions/reservation/request', [TransactionController::class, 'reservationRequest'])->name('transaction.reservationRequest');
+    Route::put('/admin/transactions/reservation/request/{transaction}/approve', [TransactionController::class, 'reservationRequestApprove'])->name('transactions.reservationRequestApprove');
+    Route::put('/admin/transactions/reservation/request/{transaction}/cancel', [TransactionController::class, 'reservationRequestCancel'])->name('transactions.reservationRequestCancel');
 
     /* Attendees Routes */
     Route::get('/admin/attendees', [AttendeeController::class, 'show'])->name('attendee.show');
@@ -192,16 +255,6 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::get('admin/events/{event}/edit', [EventController::class, 'edit'])->name('event.edit');
     Route::put('admin/events/{event}/update', [EventController::class, 'update'])->name('event.update');
     Route::delete('/admin/events/{event}/destroy', [EventController::class, 'destroy'])->name('event.destroy');
-
-    /* Reservations Routes
-    Route::get('/calendar', [ReservationController::class, 'getEvents'])->name('calendar.events');
-    Route::get('admin/reservations', [ReservationController::class, 'show'])->name('reservation.show');
-    Route::get('/admin/reservations/create', [ReservationController::class, 'create'])->name('reservation.create');
-    Route::post('/admin/reservations/store', [ReservationController::class, 'store'])->name('reservation.store');
-    Route::get('admin/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
-    Route::put('admin/reservations/{reservation}/update', [ReservationController::class, 'update'])->name('reservation.update');
-    Route::delete('/admin/reservations/{reservation}/destroy', [ReservationController::class, 'destroy'])->name('reservation.destroy');
-    */
 
     /* Class Routes */
     Route::get('admin/class', [ClassListController::class, 'show'])->name('classList.show');
@@ -267,6 +320,9 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
 
     Route::get('admin/reports', [ReportController::class, 'show'])->name('report.show');
     Route::get('admin/analytics', [ReportController::class, 'showAnalytics'])->name('analytic.show');
+    Route::get('/monthly-membership-data', [ReportController::class, 'getMembershipData']);
+    Route::get('/monthly-reservation-data', [ReportController::class, 'getReservationData']);
+    Route::get('/top-user-addresses', [ReportController::class, 'getTopUserAddresses']);
 });
 
 /* Authenticated, Verified, OTP Verified, Admin role, and Staff role only */

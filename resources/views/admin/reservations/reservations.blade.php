@@ -16,7 +16,7 @@
         <div class="page-header">
             <h2>Facility Reservations</h2>
             <div class="page-button">
-                <a href="#"><ion-icon name="add-outline"></ion-icon>Add New Reservation</a>
+                <a href="{{ route('reservation.create') }}"><ion-icon name="add-outline"></ion-icon>Add New Reservation</a>
             </div>
         </div>
         <div class="page-content">

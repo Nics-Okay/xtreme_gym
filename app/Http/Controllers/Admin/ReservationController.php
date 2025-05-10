@@ -3,13 +3,77 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\FacilityList;
 use App\Models\Reservation;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
+    public function getCalendarEvents()
+    {
+        $reservations = Reservation::selectRaw('reservation_date as date, COUNT(*) as count')
+            ->groupBy('reservation_date')
+            ->get();
+    
+        return response()->json($reservations);
+    }     
+
+    public function viewDetails(Request $request)
+    {
+        $date = $request->date;
+        $reservations = Reservation::all();
+
+        return view('admin.reservations.reservationDetails', compact('reservations', 'date'));
+    }
+
+    public function fetchUser($id)
+    {
+        $user = User::where('unique_id', $id)->first();
+
+        if ($user) {
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'name' => ($user->first_name ?? '') . ' ' . ($user->last_name ?? ''),
+                    'phone_number' => $user->phone_number,
+                    'address' => $user->address,
+                ],
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+            ]);
+        }
+    }
+
+    public function fetchReservedSlots(Request $request)
+    {
+        $date = $request->query('date');
+
+        // Fetch reservations for the selected date
+        $reservations = Reservation::whereDate('reservation_date', $date)->get();
+
+        $reservedSlots = [];
+
+        // Loop through reservations and determine reserved time slots
+        foreach ($reservations as $reservation) {
+            $startHour = Carbon::parse($reservation->start_time)->hour;
+            $endHour = Carbon::parse($reservation->end_time)->hour;
+
+            for ($hour = $startHour; $hour < $endHour; $hour++) {
+                $reservedSlots[] = $hour;
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'reservedSlots' => $reservedSlots,
+        ]);
+    }
+
     public function calendar()
     {
         $currentTime = Carbon::now();
@@ -54,6 +118,52 @@ class ReservationController extends Controller
         ->get();
 
         return view('admin.reservations.reservations', compact('upcomingReservations', 'ongoingReservations', 'pastReservations'));
+    }       
+
+    public function show()
+    {
+        $currentTime = Carbon::now();
+    
+        // Upcoming Reservations
+        $upcomingReservations = Reservation::query()
+        ->whereDate('reservation_date', '>', $currentTime->toDateString())
+        ->orWhere(function ($query) use ($currentTime) {
+            $query->whereDate('reservation_date', '=', $currentTime->toDateString())
+                  ->where(function ($timeQuery) use ($currentTime) {
+                      $timeQuery->whereNull('start_time')
+                                ->orWhere('start_time', '>', $currentTime->toTimeString());
+                  })
+                  ->where(function ($excludeOngoingQuery) use ($currentTime) {
+                      $excludeOngoingQuery->whereNull('end_time')
+                                          ->orWhere('end_time', '<=', $currentTime->toTimeString());
+                  });
+        })
+        ->get();
+
+    
+        // Ongoing Reservations
+        $ongoingReservations = Reservation::query()
+        ->whereDate('reservation_date', '=', $currentTime->toDateString())
+        ->where('start_time', '<=', $currentTime->toTimeString())
+        ->where(function ($query) use ($currentTime) {
+            $query->whereNull('end_time')
+                  ->orWhere('end_time', '>', $currentTime->toTimeString());
+        })
+        ->get();
+    
+        // Past Reservations
+        $pastReservations = Reservation::query()
+        ->where(function ($query) use ($currentTime) {
+            $query->whereDate('reservation_date', '<', $currentTime->toDateString())
+                  ->orWhere(function ($subQuery) use ($currentTime) {
+                      $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString())
+                               ->whereNotNull('start_time')
+                               ->where('end_time', '<=', $currentTime->toTimeString());
+                  });
+        })
+        ->get();
+
+        return view('testing.reservations', compact('upcomingReservations', 'ongoingReservations', 'pastReservations'));
     }       
 
     public function getEvents(Request $request)
@@ -153,43 +263,115 @@ class ReservationController extends Controller
         return response()->json($events);
     }    
 
-    public function store(Request $request)
+    public function create()
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|min:3|max:255',
-            'email' => 'nullable|email|max:255',
-            'number' => 'nullable|string|max:15',
-            'reservation_date' => 'required|date|after_or_equal:today',
-            'start_time' => 'nullable|date_format:H:i',
-            'end_time' => 'nullable|date_format:H:i|after:start_time',
-            'number_of_people' => 'nullable|integer|min:1',
-        ]);
+        $facility_lists = FacilityList::all();
 
-        // Transform time inputs to ensure correct format
-        $start_time = $validatedData['start_time']
-            ? Carbon::createFromFormat('H:i', $validatedData['start_time'])->format('H:i')
-            : null;
-
-        $end_time = $validatedData['end_time']
-            ? Carbon::createFromFormat('H:i', $validatedData['end_time'])->format('H:i')
-            : null;
-
-        $user = Auth::user();
-
-        Reservation::create([
-            'user_id' => $user->unique_id ?? null,
-            'name' => $validatedData['name'] ?? $user->name,
-            'email' => $validatedData['email'] ?? $user->email,
-            'number' => $validatedData['number'] ?? $user->phone ?? null,
-            'reservation_type' => 'Court',
-            'reservation_date' => $validatedData['reservation_date'],
-            'start_time' => $start_time,
-            'end_time' => $end_time,
-            'number_of_people' => $validatedData['number_of_people'] ?? null,
-            'payment_status' => 'Pending',
-        ]);
-
-        return redirect()->back()->with('success', 'Reservation created successfully!');
+        return view('admin.reservations.createReservation', compact('facility_lists'));
     }
 
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'user_id' => 'nullable|string|min:14|max:14|exists:users,unique_id',
+            'name' => 'required|string|min:3|max:255',
+            'number' => 'required|string|max:15',
+            'address' => 'required|string|max:255',
+            'reservation_date' => 'required|date|after_or_equal:today',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'number_of_people' => 'nullable|integer',
+            'facility_id' => 'required|exists:facility_lists,id',
+            'payment_status' => 'required|string|max:255',
+            'payment_method' => 'required|string|in:card,gcash,cash,other',
+            'other_payment_method' => 'nullable|required_if:payment_method,other|string|max:100',
+        ]);
+        
+        $user = $validated['user_id'] 
+        ? User::where('unique_id', $validated['user_id'])->first() 
+        : null;
+
+        $facility = FacilityList::find($validated['facility_id']);
+
+        $startTime = new Carbon($validated['start_time']);
+        $endTime = new Carbon($validated['end_time']);
+        $hours = abs($endTime->diffInHours($startTime));
+        $reservation_cost = $hours * ($facility->hourly_rate ?? 0);
+
+        Reservation::create([
+            'user_id' => $user?->id,
+            'name' => $user 
+                ? trim(($user->first_name ?? '') . ' ' . ($user->last_name ?? '')) 
+                : $validated['name'],
+            'email' => $user?->email,
+            'number' => $user?->number ?? $validated['number'],
+            'address' => $user?->address ?? $validated['address'],
+            'reservation_type' => $facility->name ?? 'Unknown Facility',
+            'amount' => $reservation_cost,
+            'reservation_date' => $validated['reservation_date'],
+            'start_time' => $validated['start_time'],
+            'end_time' => $validated['end_time'],
+            'number_of_people' => $validated['number_of_people'] ?? null,
+            'payment_method' => $validated['payment_method'] === 'other'
+                ? $validated['other_payment_method']
+                : $validated['payment_method'],
+            'payment_status' => $validated['payment_status'] ?? 'pending',
+        ]);
+
+        return redirect()->route('reservation.show')->with('success', 'Reservation created successfully!');
+    }
+
+    public function showFinal()
+    {
+        $currentTime = Carbon::now();
+    
+        // Upcoming Reservations
+        $upcomingReservations = Reservation::query()
+        ->whereDate('reservation_date', '>', $currentTime->toDateString())
+        ->orWhere(function ($query) use ($currentTime) {
+            $query->whereDate('reservation_date', '=', $currentTime->toDateString())
+                  ->where(function ($timeQuery) use ($currentTime) {
+                      $timeQuery->whereNull('start_time')
+                                ->orWhere('start_time', '>', $currentTime->toTimeString());
+                  })
+                  ->where(function ($excludeOngoingQuery) use ($currentTime) {
+                      $excludeOngoingQuery->whereNull('end_time')
+                                          ->orWhere('end_time', '<=', $currentTime->toTimeString());
+                  });
+        })
+        ->get();
+
+    
+        // Ongoing Reservations
+        $ongoingReservations = Reservation::query()
+        ->whereDate('reservation_date', '=', $currentTime->toDateString())
+        ->where('start_time', '<=', $currentTime->toTimeString())
+        ->where(function ($query) use ($currentTime) {
+            $query->whereNull('end_time')
+                  ->orWhere('end_time', '>', $currentTime->toTimeString());
+        })
+        ->get();
+    
+        // Past Reservations
+        $pastReservations = Reservation::query()
+        ->where(function ($query) use ($currentTime) {
+            $query->whereDate('reservation_date', '<', $currentTime->toDateString())
+                  ->orWhere(function ($subQuery) use ($currentTime) {
+                      $subQuery->whereDate('reservation_date', '=', $currentTime->toDateString())
+                               ->whereNotNull('start_time')
+                               ->where('end_time', '<=', $currentTime->toTimeString());
+                  });
+        })
+        ->get();
+
+        return view('testing.reservations-final', compact('upcomingReservations', 'ongoingReservations', 'pastReservations'));
+    }      
+    
+    public function cancel(Reservation $reservation)
+    {
+        $reservation->update([
+            'status' => 'cancelled',
+        ]);
+        return redirect()->route('reservation.show')->with('success', 'Reservation Cancelled Successfully.');
+    }
 }

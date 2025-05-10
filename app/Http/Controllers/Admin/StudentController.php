@@ -30,14 +30,15 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        return view('admin.students.editStudent', ['student' => $student]);
+        $classLists = ClassList::all();
+
+        return view('admin.students.editStudent', compact('student', 'classLists'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'user_id' => 'nullable|string|max:100',
+            'user_id' => 'nullable|string|max:100|exists:users,unique_id',
             'class_id' => 'required|exists:class_lists,id',
             'payment_status' => 'nullable|string|in:completed,pending',
             'payment_method' => 'required|string|in:card,gcash,cash,other',
@@ -46,16 +47,10 @@ class StudentController extends Controller
 
         $user = User::where('unique_id', $validated['user_id'])->first();
 
-        if (!$user) {
-            $user = User::create([
-                'first_name' => $validated['name'],
-            ]);
-        }
-
         $classList = ClassList::find($validated['class_id']);
 
         Student::create([
-            'user_id' => $user->unique_id,
+            'user_id' => $user?->unique_id,
             'class_id' => $classList->id,
             'student_until' => $classList->class_end ?? null,
             'attended' => 1,
@@ -65,6 +60,32 @@ class StudentController extends Controller
         ]);
 
         return redirect()->route('student.show')->with('success', 'Student added successfully.');
+    }
+
+    public function update(Student $student, Request $request) 
+    {
+        $validated = $request->validate([
+            'user_id' => 'nullable|string|max:100|exists:users,unique_id',
+            'class_id' => 'required|exists:class_lists,id',
+            'payment_status' => 'nullable|string|in:completed,pending',
+            'payment_method' => 'required|string|in:card,gcash,cash,other',
+            'other_payment_method' => 'nullable|required_if:payment_method,other|string|max:100',
+        ]);
+
+        $user = User::where('unique_id', $validated['user_id'])->first();
+
+        $classList = ClassList::find($validated['class_id']);
+
+        $student->update([
+            'user_id' => $user?->unique_id,
+            'class_id' => $classList->id,
+            'student_until' => $classList->class_end ?? null,
+            'status' => \Carbon\Carbon::parse($classList->class_start)->isFuture() ? 'Enrolled' : 'Ongoing',
+            'payment_status' => $validated['payment_status'] ?? 'pending',
+            'payment_method' => $validated['payment_method'],
+        ]);
+
+        return redirect()->route('student.show')->with('success', 'Student Updated Successfully');
     }
 
     public function destroy(Student $student)

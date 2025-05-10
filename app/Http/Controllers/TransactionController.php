@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Apprentice;
 use App\Models\ClassList;
+use App\Models\FacilityList;
 use App\Models\Guest;
 use App\Models\Notification;
 use App\Models\Rate;
+use App\Models\Reservation;
 use App\Models\Student;
 use App\Models\Training;
 use App\Models\Transaction;
@@ -369,5 +371,47 @@ class TransactionController extends Controller
         }
 
         return redirect()->route('transaction.apprenticeRequest')->with('success', 'Transaction canceled.');
+    }
+
+
+    public function reservationRequest()
+    {
+        $transactions = Reservation::whereNull('status')
+        ->orWhereRaw('LOWER(status) = ?', ['pending'])
+        ->paginate(10);
+    
+        return view('admin.transactions.reservationRequest', compact('transactions'));
+    }
+
+    public function reservationRequestApprove(Reservation $transaction)
+    {
+        $transaction->update([
+            'status' => 'approved',
+        ]);
+
+        $pay_code = FacilityList::where('name', $transaction->reservation_type)->first();
+
+        Transaction::create([
+            'user_id' => $transaction->user_id,
+            'name' => $transaction->name,
+            'phone' => $transaction->number,
+            'amount' => $transaction->amount,
+            'transaction_type' => 'reservation_guest',
+            'payment_date' => $transaction->updated_at,
+            'payment_method' => $transaction->payment_method,
+            'payment_code' => $pay_code->id ?? null,
+            'status' => $transaction->payment_status,
+            'remarks' => $pay_code->name . ' Reservation Payment',
+        ]);
+
+        return redirect()->route('transaction.reservationRequest')->with('success', 'Reservation Approved.');
+    }
+
+    public function reservationRequestCancel(Reservation $transaction)
+    {
+        $transaction->update([
+            'status' => 'cancelled',
+        ]);
+        return redirect()->route('transaction.reservationRequest')->with('success', 'Reservation Cancelled Successfully.');
     }
 }

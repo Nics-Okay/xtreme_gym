@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apprentice;
 use App\Models\Attendee;
+use App\Models\CarouselImage;
 use App\Models\Event;
 use App\Models\Notification;
 use App\Models\Reservation;
+use App\Models\Student;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -59,7 +63,6 @@ class MainController extends Controller
             })
             ->get();
 
-
         return view('admin.dashboard.dashboard', compact(
             'lockedStatus',
             'notifications',
@@ -68,14 +71,15 @@ class MainController extends Controller
             'activeMembers',
             'totalMembers',
             'attendees',
-            'upcomingReservations'));
+            'upcomingReservations',
+        ));
     }
 
     public function getRevenueSummary()
     {
-        $revenueData = DB::table('transactions')
-            ->selectRaw('MONTH(updated_at) as month, SUM(amount) as total_revenue')
-            ->groupBy(DB::raw('MONTH(updated_at)'))
+        $revenueData = Transaction::selectRaw('MONTH(updated_at) as month, SUM(amount) as total_revenue')
+            ->whereRaw('LOWER(status) = ?', ['completed']) // Include only completed transactions
+            ->groupByRaw('MONTH(updated_at)')
             ->pluck('total_revenue', 'month');
 
         $formattedData = [];
@@ -98,8 +102,9 @@ class MainController extends Controller
     public function home()
     {
         $events = Event::all();
-
-        return view('user.home', compact('events'));
+        $carouselImages = CarouselImage::all();
+    
+        return view('user.home', compact('events', 'carouselImages'));
     }
 
     public function showRightDashboard()

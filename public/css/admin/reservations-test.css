@@ -1,0 +1,225 @@
+/* Menu Adjustment */
+.menu-name.reservations {
+    background-color: rgb(49, 63, 88);
+    border-radius: 5px;
+}
+
+.reservations {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.rs-section-ongoing-and-calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 64%;
+}
+
+.rs-section-ongoing {
+    height: calc(15% - 10px);
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    background-color: white;
+}
+
+.rs-section-ongoing::-webkit-scrollbar {
+    display: none;
+}
+
+.rs-section-calendar {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    background-color: white;
+}
+
+.calendar {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.rs-section-upcoming {
+    height: 100%;
+    width: calc(36% - 10px);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    background-color: white;
+}
+
+.list {
+    max-height: 50%;
+    width: 100%;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.rs-ongoing-list-item {
+    position: relative;
+    padding: 5px 0 0;
+    font-size: small;
+}
+
+.list-item {
+    position: relative;
+    padding: 5px 0;
+    font-size: small;
+    border-bottom: 1px solid black;
+}
+
+:root {
+    --fc-border-color: rgb(91, 206, 91);
+    --fc-today-bg-color: #cfeed1;
+    --fc-button-text-color: #ffffff;
+    --fc-button-bg-color: rgba(28, 37, 54);
+    --fc-button-border-color: none;
+    --fc-button-active-text-color: #ffffff;
+    --fc-button-hover-bg-color: rgb(199, 212, 236);
+    --fc-button-hover-border-color: rgba(28, 37, 54);
+    --fc-button-active-bg-color: none;
+    --fc-button-active-border-color: none;
+}
+
+.fc .fc-toolbar-title {
+    font-size: large !important;
+}
+
+.fc .fc-toolbar {
+    font-size: 10px !important;
+}
+
+.fc-toolbar-chunk .fc-button {
+    font-size: small;
+}
+
+.fc-toolbar-chunk .fc-button:hover {
+    color: black;
+}
+
+.fc-event {
+    text-align: center;
+}
+
+.fc-event-time {
+    display: none !important;
+}
+
+.fc-daygrid-event {
+    background-color: transparent !important;
+    border: none !important;
+    color: inherit;
+    box-shadow: none;
+}
+
+.reservation-day {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.reservation-day h3 {
+    font-size: 14px;
+    color: #1b1b1b;
+}
+
+.reservation-day .count {
+    font-size: x-large;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.reservation-day .btn-view-details {
+    display: inline-block;
+    padding: 6px;
+    width: 90%;
+    font-size: 14px;
+    color: #fff;
+    background-color: rgb(44, 62, 94);
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reservation-day .btn-view-details:hover {
+    background-color: rgb(67, 88, 124);
+}
+
+/* Buttons */
+.action-buttons {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    column-gap: 10px;
+    bottom: 5px;
+    right: 5px;
+}
+
+.edit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    height: 100%;
+    width: 70px;
+    font-size: small;
+    color: black;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: orange;
+}
+
+.edit-button:hover {
+    background-color: rgb(199, 131, 6);
+}
+
+.edit-button i {
+    margin-top: -1px;
+}
+
+.edit-button p {
+    margin-top: -2px;
+}
+
+.cancel-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    height: 100%;
+    width: 70px;
+    font-size: small;
+    color: white;
+    border: none;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: rgb(197, 0, 0);
+}
+
+.cancel-button:hover {
+    background-color: rgb(158, 8, 8);
+}
+
+.cancel-button i {
+    color: white;
+    font-size: small;
+}
+
+.cancel-button p {
+    margin-top: -2px;
+}
+
+.action-buttons form {
+    height: 100%;
+}

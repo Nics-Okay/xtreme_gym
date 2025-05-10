@@ -85,7 +85,7 @@
 
 .modal-content {
     background-color: #fff;
-    margin: 10% auto;
+    margin: 0 auto;
     padding: 20px;
     border-radius: 10px;
     width: 40%;
@@ -93,8 +93,7 @@
 
 .modal-content form {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: column; 
 }
 
 .modal-history {
@@ -103,7 +102,6 @@
     background-color: #e6e6e6;
     width: 100%;
     height: 92%;
-
     bottom: 0;
     left: 0;
     display: none;
@@ -186,6 +184,135 @@
 
 .past-item h4 {
     margin-right: 7px;
+}
+
+/* */
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-content label {
+    font-size: small;
+    font-weight: bold;
+}
+
+.form-content input {
+    width: 100%;
+    margin: 2px 0 3px;
+    padding: 6px 10px;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: small;
+}
+
+.form-content select {
+    margin: 2px 0 3px;
+    padding: 5px 10px 5px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: small;
+}
+
+#other-payment-method input {
+    width: 100%;
+    margin: 5px 0 0;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-group.payment {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3px; /* spacing between fields */
+}
+
+.form-group.payment input, .form-group.payment textarea {
+    padding: 0 5px;
+    font-size: small;
+}
+
+.form-group.payment label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    margin-bottom: 2px; /* space between label and input */
+}
+
+.payment-options label {
+    font-weight: normal;
+}
+
+.section-create-reservation-right {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 10px;
+}
+
+.reservation-start-end-time {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background-color: rgb(236, 236, 236);
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    width: 100%;
+    margin: 5px auto 10px;
+}
+
+.time-slot {
+    padding: 3px 0;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: rgb(207, 255, 211); /* Available */
+    color: rgb(51, 51, 51);
+}
+
+.time-slot:hover {
+    background-color: rgb(161, 196, 164);
+}
+
+.time-slot.selected {
+    background-color: #2196f3; /* Selected */
+    color: white;
+}
+
+.time-slot.unavailable {
+    background-color: #ccc; /* Unavailable */
+    color: #666;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.feedback {
+    height: 100%;
+    width: 100%;
+    text-align: center;
 }
 
 @media (max-width: 639px) {

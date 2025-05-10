@@ -63,7 +63,7 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         if ($request->hasFile('profile_image')) {
-            $imagePath = $request->file('profile_image')->store('profile_images', 'public');
+            $imagePath = $request->file('profile_image')->store('profile_pictures', 'public');
 
             if ($user->image) {
                 Storage::disk('public')->delete($user->image);

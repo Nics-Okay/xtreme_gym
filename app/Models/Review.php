@@ -21,7 +21,7 @@ class Review extends Model
     // Review belongs to a user
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'unique_id');
+        return $this->belongsTo(User::class, 'user_id');
     }    
 
     // A review can have multiple admin replies

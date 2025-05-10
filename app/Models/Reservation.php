@@ -19,11 +19,13 @@ class Reservation extends Model
         'number',
         'address',
         'reservation_type',
+        'amount',
         'reservation_date',
         'start_time',
         'end_time',
         'status',
         'number_of_people',
+        'payment_method',
         'payment_status',
         'cancellation_reason',
     ];

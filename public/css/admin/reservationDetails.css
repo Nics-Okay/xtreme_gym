@@ -1,0 +1,148 @@
+.reservations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.reservations h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+}
+
+.rs-section-calendar {
+    height: 90%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+#rs-list-day-calendar {
+    height: 100%;
+    width: 100%;
+}
+
+.fc-list-day {
+    font-family: 'Arial', sans-serif;
+}
+
+.fc-list-event-title,
+.fc-list-event-time {
+    font-size: 14px;
+    color: #333;
+}
+
+.fc-list-event-title {
+    font-weight: bold;
+}
+
+.fc-list-event-description {
+    font-style: italic;
+    font-size: 12px;
+    color: #555;
+}
+
+:root {
+    --fc-border-color: rgb(91, 206, 91);
+    --fc-today-bg-color: #E8F5E9;
+    --fc-button-text-color: #ffffff;
+    --fc-button-bg-color: rgba(28, 37, 54);
+    --fc-button-border-color: none;
+    --fc-button-active-text-color: #ffffff;
+    --fc-button-hover-bg-color: rgb(199, 212, 236);
+    --fc-button-hover-border-color: rgba(28, 37, 54);
+    --fc-button-active-bg-color: none;
+    --fc-button-active-border-color: none;
+}
+
+.fc .fc-toolbar-title {
+    font-size: large !important;
+}
+
+.fc .fc-toolbar {
+    font-size: 10px !important;
+}
+
+.fc-toolbar-chunk .fc-button {
+    font-size: small;
+}
+
+.fc-toolbar-chunk .fc-button:hover {
+    color: black;
+}
+
+/* Buttons */
+.fc-event-actions {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    column-gap: 10px;
+    bottom: 5px;
+    right: 5px;
+}
+
+.edit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
+    height: 100%;
+    width: 70px;
+    font-size: small;
+    color: black !important;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: orange;
+}
+
+.edit-button:hover {
+    background-color: rgb(199, 131, 6);
+}
+
+.edit-button i {
+    margin-top: -1px;
+    font-size: 14px !important;
+    margin-bottom: -2px !important;
+}
+
+.edit-button p {
+    margin-top: -2px;
+}
+
+.cancel-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    height: 100%;
+    width: 70px;
+    font-size: small;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: rgb(197, 0, 0);
+}
+
+.cancel-button:hover {
+    background-color: rgb(158, 8, 8);
+}
+
+.cancel-button i {
+    color: white !important;
+    font-size: 14px !important;
+    margin-bottom: -2px !important;
+}
+
+.cancel-button p {
+    margin-top: -2px;
+}
+
+.fc-event-actions form {
+    height: 100%;
+}

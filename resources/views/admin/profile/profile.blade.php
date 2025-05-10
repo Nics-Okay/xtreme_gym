@@ -21,7 +21,7 @@
                         <div class="image-holder">
                             <img 
                                 id="profile-image-preview"
-                                src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-placeholder.png') }}" 
+                                src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-placeholder.png') }}"
                                 alt="Profile Image">
                         </div>
 
@@ -30,7 +30,6 @@
                             <input 
                                 type="file" 
                                 name="profile_image" 
-                                accept="image/*" 
                                 style="display: none;" 
                                 id="profile-image-upload" 
                                 onchange="previewSelectedImage(event)">

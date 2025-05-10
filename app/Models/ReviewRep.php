@@ -24,6 +24,6 @@ class ReviewRep extends Model
 
     public function admin()
     {
-        return $this->belongsTo(User::class, 'admin_id', 'unique_id');
+        return $this->belongsTo(User::class, 'admin_id');
     }
 }

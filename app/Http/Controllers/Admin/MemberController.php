@@ -50,7 +50,7 @@ class MemberController extends Controller
             'email' => 'nullable|email|max:100|unique:users,email',
             'phone' => 'required|string|min:11|max:13|unique:users,phone',
             'city' => 'required|string|max:100',
-            'province' => 'required|string|max:100',ddddddddddddddddd78
+            'province' => 'required|string|max:100',
             'emergency_contact_name' => 'nullable|string|max:100',
             'emergency_contact_number' => 'nullable|string|min:11|max:13',
             'rate_id' => 'required|exists:rates,id',

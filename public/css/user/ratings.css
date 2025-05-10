@@ -10,8 +10,16 @@
     transition: color 0.2s;
 }
 
+.star:hover {
+    color: #a5a5a5;
+}
+
 .star.selected {
     color: #f5b301;
+}
+
+.star.selected:hover {
+    color: #c28e00;
 }
 
 .review-history {
@@ -45,4 +53,26 @@
 textarea {
     width: 100%;
     margin-bottom: 10px;
+}
+
+.review-item {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.rw-review-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.rw-review-form form button {
+    padding: 10px;
+    border: none;
+    color: white;
+    background-color: rgb(61, 112, 252);
+}
+
+.rw-review-form form button:hover {
+    background-color: rgb(45, 78, 172);
 }

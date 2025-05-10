@@ -69,3 +69,27 @@
 .button:hover {
     background-color: #2b6cb0; /* hover:bg-blue-500 */
 }
+
+/* CAROUSEL */
+.carousel-settings-section {
+    margin-top: 20px;
+}
+
+.carousel-settings-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.carousel-settings-section ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.carousel-settings-section ul li img {
+    margin-right: 10px;
+}
+
+.carousel-settings-section ul li form {
+    margin-left: 10px;
+}

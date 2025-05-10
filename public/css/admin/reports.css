@@ -5,19 +5,88 @@
     width: 100%;
     margin-bottom: 30px;
 }
-.report-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+.as-report-box {
     height: 100px;
     width: 30%;
-    padding: 10px;
+}
+
+.menu-link {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0 0px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgb(0, 0, 0, 0.2);
+    transition: background-color 0.3s;  
     background-color: white;
 }
 
-.report-box p {
-    font-size: small;
-    align-self: normal;
+.page-menu {
+    height: 100%;
+    width: 60%;
+    border-radius: 10px 0 0 10px;
+}
+
+.menu-link:hover {
+    background-color: #4b556321;
+}
+
+.menu-title {
+    box-sizing: border-box;
+    height: 40%;
+    width: 100%;
+    font-size: 11px;
+    border-radius: 10px 0 0 0;
+    color: #4b5563;
+    padding: 15px 0 0 10px;
+    transition: 0.3s;
+}
+
+.menu-link:hover .menu-title {
+    color: black;
+}
+
+.menu-info {
+    height: 60%;
+    width: 100%;
+    color: rgb(0, 0, 0, 0.7);
+    border-radius: 0px 0px 0px 10px;
+    padding: 0 0 0 10px;
+    font-size: 25px;
+}
+
+.page-icon {
+    height: 100%;
+    width: 40%;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.menu-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.menu-icon ion-icon, .menu-icon i {
+    font-size: 30px;
+    color: rgb(48, 47, 47);
+}
+
+.as-chart { 
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 30%;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: white;
 }

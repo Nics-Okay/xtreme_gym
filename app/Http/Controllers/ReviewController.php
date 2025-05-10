@@ -13,13 +13,14 @@ class ReviewController extends Controller
     {
         // Eager load replies and their associated admin
         $reviews = Review::with(['replies.admin', 'user'])->orderBy('created_at', 'DESC')->get();
+
         return view('admin.reviews.reviews', compact('reviews'));
     }
 
     public function create()
     {
         // Eager load replies and their associated admin, filtered by the logged-in user
-        $reviews = Review::with(['replies.admin'])
+    $reviews = Review::with(['replies.admin', 'user'])
             ->where('user_id', Auth::id())
             ->orderBy('created_at', 'DESC')
             ->get();

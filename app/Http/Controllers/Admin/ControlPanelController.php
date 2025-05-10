@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CarouselImage;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -13,11 +14,41 @@ use Illuminate\Support\Facades\URL;
 
 class ControlPanelController extends Controller
 {
+    public function store(Request $request)
+    {
+        $request->validate([
+            'carousel_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $path = $request->file('carousel_image')->store('carousel', 'public');
+
+        CarouselImage::create([
+            'filename' => basename($path),
+        ]);
+
+        return back()->with('success', 'Image uploaded successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $image = CarouselImage::findOrFail($id);
+        \Illuminate\Support\Facades\Storage::disk('public')->delete('carousel/' . $image->filename);
+        $image->delete();
+
+        return back()->with('success', 'Image deleted successfully.');
+    }
+
+    /* ADMIN LOCK */
     public function show()
     {
         $setting = Setting::firstOrCreate([], ['locked' => false]);
-    
-        return view('admin.cPanel', ['locked' => $setting->locked]);
+
+        $carouselImages = CarouselImage::all();
+
+        return view('admin.cPanel', [
+            'locked' => $setting->locked,
+            'carouselImages' => $carouselImages,
+        ]);
     }
 
     public function toggleLockedStatus(Request $request)
