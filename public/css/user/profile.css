@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 70%;
+    height: 55%;
     width: 30%;
     padding: 10px;
     border-radius: 7px;
@@ -12,13 +12,12 @@
 }
 
 .image-holder {
-    width: 50%;
+    width: 40%;
     aspect-ratio: 1/1;
     margin-bottom: 20px;
     border-radius: 50%;
     border: 3px solid black;
     overflow: hidden;
-    background-color: darkolivegreen;
 }
 
 .image-holder img {
@@ -32,7 +31,8 @@
     padding: 10px 15px;
     text-decoration: none;
     color: white;
-    border-radius: 8px;
+    border: none;
+    border-radius: 4px;
     background-color: rgba(28, 37, 54);
 }
 
@@ -40,26 +40,33 @@
     background-color: rgb(45, 54, 71);
 }
 
-.profile-section-two {
-    display: flex;
-    align-items: center;
-    width: 30%;
-    background-color: white
+.edit-profile i {
+    margin-right: 5px;
 }
 
-.profile-section-two a {
+.profile-section-two {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 30%;
+}
+
+.profile-section-two button {
+    text-align: left;
     padding: 15px;
     width: 100%;
+    border: none;
     text-decoration: none;
     color: black;
+    background-color: white
 }
 
 .profile-section-two i {
     margin-right: 5px;
 }
 
-.profile-section-two:hover {
-    background-color: rgb(199, 194, 194);
+.profile-section-two button:hover {
+    background-color: rgb(202, 202, 202);
 }
 
 @media (max-width: 639px) {
@@ -79,4 +86,155 @@
     .profile-section-two {
         width: 100%;
     }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-content h3 {
+    text-align: center;
+}
+
+.modal-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.pe-two form {
+    width: 100%;
+}
+
+.pe-two form input {
+    margin: 5px 0;
+    padding: 5px;
+    width: 100%;
+}
+
+.pe-two .modal-actions {
+    margin-top: 5px;
+}
+
+.pe-submit-button {
+    background: rgb(51, 106, 255);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pe-submit-button:hover {
+    background: rgb(42, 90, 223);
+}
+
+.pe-cancel-button {
+    background: rgb(138, 138, 138);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pe-cancel-button:hover {
+    background: rgb(112, 112, 112);
+}
+
+.delete-button {
+    width: fit-content;
+    margin-left: auto;
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-button:hover {
+    background: darkred;
+}
+
+.pe-profile-image-modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.pe-preview-image-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 1/1;
+    margin: 10px 0 0;
+    overflow: hidden;
+    border: 1px solid gray;
+}
+
+.pe-profile-image-modal form {
+    width: 100%;
+}
+
+.pe-profile-image-modal .modal-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.pe-profile-image-modal .modal-actions button:nth-of-type(1) {
+    padding: 10px 0;
+    border: 2px solid rgb(51, 106, 255) !important;
+    color: rgb(51, 106, 255);
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.pe-profile-image-modal .modal-actions button:nth-of-type(1):hover {
+    background-color: rgb(238, 238, 238);
+}
+
+.pe-profile-image-modal img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.pe-modal-three-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: large;
+    color: #000;
+    cursor: pointer;
+}
+
+.pe-modal-three-close-button:hover {
+    color: rgb(53, 53, 53)
 }

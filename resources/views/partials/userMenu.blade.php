@@ -18,7 +18,7 @@
             <li><a href="{{ route('reservations.create') }}"><ion-icon name="settings" id="nav-settings-icon"></ion-icon></i>Facility Reservation</a></li>
             <li><a href="{{ route('user.training') }}"><ion-icon name="calendar"></ion-icon>Personal Training</a></li>
             <li><a href="{{ route('user.class') }}"><ion-icon name="calendar"></ion-icon>Gym Classes</a></li>
-            <li><a href="#"><ion-icon name="calendar"></ion-icon>Tournaments</a></li>
+            <li><a href="{{ route('user.tournaments') }}"><ion-icon name="calendar"></ion-icon>Tournaments</a></li>
             <li><a href="{{ route('user.settings') }}"><ion-icon name="settings" id="nav-settings-icon"></ion-icon>Settings</a></li>
             <li>
                 <form method="post" action="{{ route('logout') }}" style="display: inline;">

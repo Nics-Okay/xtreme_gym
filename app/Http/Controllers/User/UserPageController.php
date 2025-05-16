@@ -7,7 +7,9 @@ use App\Models\Apprentice;
 use App\Models\ClassList;
 use App\Models\Equipment;
 use App\Models\Notification;
+use App\Models\Participant;
 use App\Models\Student;
+use App\Models\Tournament;
 use App\Models\Trainer;
 use App\Models\Training;
 use App\Models\Transaction;
@@ -17,6 +19,51 @@ use Illuminate\Support\Facades\Auth;
 
 class UserPageController extends Controller
 {
+    public function getParticipants($id)
+    {
+        $participants = Participant::where('tournament_id', $id)
+            ->select('participant_name', 'created_at')
+            ->get();
+
+        return response()->json($participants);
+    }
+
+    public function tournaments()
+    {
+        $userId = Auth::user()->unique_id;
+
+        $tournaments = Tournament::all();
+
+        $participations = Participant::where('user_id', $userId)->get();
+
+        return view('user.userTournaments', compact('tournaments', 'participations'));
+    }
+
+    public function registerTournament(Request $request)
+    {
+        $request->validate([
+            'tournament' => 'required|exists:tournaments,id',
+            'payment_method' => 'required|string',
+            'payment_method' => 'required|string|in:card,gcash,cash,other',
+            'other_payment_method' => 'nullable|string|max:100|required_if:payment_method,other',
+        ], [
+            'payment_method.in' => 'The selected payment method is invalid.',
+            'other_payment_method.required_if' => 'Please specify the payment method when selecting "Other".',
+        ]);
+
+        $user = Auth::user();
+
+        $participant = Participant::create([
+            'user_id' => $user->unique_id,
+            'tournament_id' => $request->tournament,
+            'participant_name' => $user->first_name . ' ' . $user->last_name,
+            'contact_details' => $user->phone ?? null,
+            'payment_method' => $request->payment_method === 'other' ? $request->other_payment_method : $request->payment_method,
+        ]);
+
+        return redirect()->route('user.tournaments')->with('success', 'Successfully registered for the tournament!');
+    }
+
     public function settings()
     {
         return view('user.settings');

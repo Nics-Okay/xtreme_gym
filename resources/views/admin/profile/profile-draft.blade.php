@@ -35,7 +35,6 @@
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
                         </p>
-
                         <div class="form-group" style="padding: 0;">
                             <div class="form-content">
                                 <label>ID</label>
@@ -120,8 +119,6 @@
             <h3>Account Deletion</h3>
             <p style="align-self: center;">Deleting your account will permanently erase all data.</p>
             <form method="post" action="/profile/delete">
-                @csrf 
-                @method('delete')
                 <input type="password" name="password" placeholder="Enter password to continue..." required>
                 <div class="modal-actions">
                     <button type="button" id="closeModalTwoBtn" class="pe-cancel-button">Close</button>
@@ -134,7 +131,7 @@
     <div class="modal" id="pe-modal-three">
         <div class="modal-content pe-profile-image-modal">
 
-            <button type="button" id="closeModalThreeBtn" class="pe-modal-three-close-button">
+            <button type="button" class="pe-modal-three-close-button" onclick="closeModalThreeBtn()">
                 <i class="fas fa-times"></i>
             </button>
 
@@ -154,7 +151,6 @@
                     style="display: none;" 
                     id="profile-image-upload" 
                     onchange="previewSelectedImage(event)">
-
                 <div class="modal-actions">
                     <button type="button" onclick="document.getElementById('profile-image-upload').click()">Upload New Image</button>
                     <button type="submit" class="pe-submit-button">Save</button>
@@ -215,7 +211,6 @@
                         <input type="text" id="last_name" name="last_name" value="{{ old('last_name', $user->last_name) }}" placeholder="Enter Last Name" required>
                     </div>
                 </div>
-                
                 <div class="modal-actions">
                     <button type="button" id="closeModalFourBtn" class="pe-cancel-button">Close</button>
                     <button type="submit" class="pe-submit-button">Submit</button>

@@ -71,14 +71,17 @@
                         @if($events->isEmpty())
                         <p>Events will be shown here. Nothing exists at the moment.</p>
                         @else
-                        @foreach($events as $event)
-                        <div class="event">
-                            <h3>{{ $event->name }}</h3>
-                            <p><strong>What:</strong> {{ $event->event_type }}</p>
-                            <p><strong>When:</strong> {{ $event->date ?? 'To be announced'}}</p>
-                            <p><strong>Description: </strong>{{ $event->description }}</p>
-                        </div>
-                        @endforeach
+                            @foreach($events as $event)
+                                <div class="event">
+                                    <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->name }}" class="event-image">
+                                    <div class="event-details">
+                                        <h3>{{ $event->name }}</h3>
+                                        <p><strong>What:</strong> {{ $event->event_type }}</p>
+                                        <p><strong>When:</strong> {{ $event->date ?? 'To be announced' }}</p>
+                                        <p><strong>Description: </strong>{{ $event->description }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
                         @endif
                     </div>
                 </div>

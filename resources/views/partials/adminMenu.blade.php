@@ -82,6 +82,7 @@
                     <div class="dropdown-content" id="dropdown">
                         <a href="{{ route('facility.show') }}" class="menu-item m-facilities"><i class="fa-solid fa-users"></i>Facilities</a>
                         <a href="{{ route('reservation.show') }}" class="menu-item m-reservations"><i class="fa-solid fa-users"></i>Reservation Management</a>
+                        <a href="{{ route('reservation.history') }}" class="menu-item m-reservations-history"><i class="fa-solid fa-users"></i>Reservation History</a>
                     </div>
                 </div>
             </li>
@@ -103,7 +104,8 @@
                     </div>
                     <div class="dropdown-content" id="dropdown">
                         <a href="{{ route('event.show') }}" class="menu-item m-manage-events"><i class="fa-solid fa-users"></i>Events Management</a>
-                        <a href="{{ route('tournaments.index') }}" class="menu-item m-tournaments"><i class="fa-solid fa-users"></i>Tournament Management</a>
+                        <a href="{{ route('tournament.show') }}" class="menu-item m-tournaments"><i class="fa-solid fa-users"></i>Tournament Management</a>
+                        <a href="{{ route('result.show') }}" class="menu-item m-tournaments"><i class="fa-solid fa-users"></i>Tournament Results</a>
                     </div>
                 </div>
             </li>

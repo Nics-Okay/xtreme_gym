@@ -1,0 +1,197 @@
+.tournament-container {
+    position: relative;
+    justify-items: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.tournament-item {
+    position: relative;
+    display: none;
+    height: 95%;
+    width: 90%;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #000000, #7b2cbf, #ff758c);
+    background: rgba(28, 37, 54);
+}
+
+.tournament-item.active {
+    display: block; /* show only active */
+}
+
+.tournament-item h3 {
+    width: 100%;
+    text-align: center;
+}
+
+/* Action buttons absolute in top right of tournament item */
+.ts-action-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.ts-action-button a, 
+.ts-action-button button {
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+
+.ts-action-button a:hover, 
+.ts-action-button button:hover {
+    background: #0061c9;
+}
+
+/* Prev/Next buttons container */
+.pagination-buttons {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    transform: translateY(-50%);
+    padding: 0 10px;
+    pointer-events: none;
+}
+
+.pagination-buttons button {
+    pointer-events: auto; /* enable pointer events on buttons */
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    gap: 5px;
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.pagination-buttons button:hover {
+    filter: brightness(90%);
+}
+
+.pagination-buttons button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Prize and participants styles */
+.prizes {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.prizes p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    width: 30%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #7b2cbf, #2ec4b6);
+    background: rgb(16, 25, 46);
+}
+
+.prizes ion-icon {
+    font-size: 20px;
+    color: gold;
+}
+
+.participants-list {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    max-height: 55%;
+    overflow-y: auto;
+}
+
+.participants-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.participants-list th,
+.participants-list td {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.participants-list thead tr {
+    border-bottom: 1px solid #bbb; /* Adds border only to the first row */
+}
+
+.participants-list tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Optional, subtle borders for rows */
+}
+
+.participants-list tbody tr:last-child {
+    border-bottom: none; /* Removes border from the last row */
+}
+
+.participants-list tbody tr:hover {
+    background-color: #e6f7ff; /* Highlight rows on hover */
+}
+
+
+
+
+
+
+.ts-add-participant {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 15px;
+    right: 15px;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    background-color: green;
+}
+
+.ts-add-participant i {
+    color: white;
+    font-size: large;
+    margin-right: 5px;
+}
+
+.ts-add-participant:hover {
+    background-color: rgb(0, 97, 0);
+}

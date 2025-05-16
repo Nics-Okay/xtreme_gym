@@ -33,11 +33,13 @@ class ProfileController extends Controller
     {
         $request->validate([
             'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $request->user()->id,
         ]);
 
         $user = $request->user();
         $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
 
         if ($user->isDirty('email')) {
@@ -48,7 +50,7 @@ class ProfileController extends Controller
 
         return redirect()->back()
         ->with('status', 'profile-updated')
-        ->with('success', 'Profile updated successfully.');
+        ->with('success', 'Profile Information Updated Successfully.');
     }
 
     /**
@@ -57,13 +59,14 @@ class ProfileController extends Controller
     public function updateImage(Request $request)
     {
         $request->validate([
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user = Auth::user();
 
+        $imagePath = null;
         if ($request->hasFile('profile_image')) {
-            $imagePath = $request->file('profile_image')->store('profile_pictures', 'public');
+            $imagePath = $request->file('profile_image')->store('equipment_images', 'public');
 
             if ($user->image) {
                 Storage::disk('public')->delete($user->image);
@@ -73,7 +76,7 @@ class ProfileController extends Controller
             $user->save();
         }
 
-        return redirect()->route('profileNew.show')->with('success', 'Profile image updated successfully!');
+        return redirect()->back()->with('success', 'Profile image updated successfully!');
     }
 
     /**
@@ -97,7 +100,7 @@ class ProfileController extends Controller
 
         return redirect()->back()
         ->with('status', 'password-updated')
-        ->with('success', 'Profile updated successfully.');
+        ->with('success', 'Password updated successfully.');
     }
 
     /**
@@ -107,6 +110,8 @@ class ProfileController extends Controller
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
+        ], [
+            'password.current_password' => 'The password you entered is incorrect.',
         ]);
 
         $user = $request->user();

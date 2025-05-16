@@ -1,6 +1,7 @@
 .list-container {
     height: 100%;
     width: 100%;
+    overflow-y: auto;
 }
 
 .list-container h2 {
@@ -22,8 +23,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    aspect-ratio: 2/1;
+    height: fit-content;
+    width: 30%;
     overflow: hidden;
 }
 
@@ -34,6 +35,14 @@
 .list-info {
     height: 100%;
     flex-grow: 1;
+}
+
+.list-info h3 {
+    text-align: center;
+}
+
+.list-info p {
+    margin: 5px 0;
 }
 
 .action-buttons.events {

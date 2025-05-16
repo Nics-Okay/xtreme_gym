@@ -44,27 +44,16 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="form-content">
-                                    <label for="semi_finals">Semi Finals</label>
-                                    <input type="date" id="semi_finals" name="semi_finals" value="{{ $tournament->semi_finals }}" onclick="this.showPicker()">
-                                </div>
-                                <div class="form-content">
-                                    <label for="finals">Finals</label>
-                                    <input type="date" id="finals" name="finals" value="{{ $tournament->finals }}" onclick="this.showPicker()">
-                                </div>
-                            </div>
-
                             <h5 style="justify-self: normal; width: 100%; padding-left: 10px;">Registration Details</h5>
 
                             <div class="form-group">
                                 <div class="form-content">
-                                    <label for="start">Registration Start</label>
-                                    <input type="date" id="start" name="start" value="{{ $tournament->start_date }}" onclick="this.showPicker()">
+                                    <label for="start_date">Registration Start</label>
+                                    <input type="date" id="start_date" name="start_date" value="{{ $tournament->start_date }}" onclick="this.showPicker()">
                                 </div>
                                 <div class="form-content">
-                                    <label for="end">Registration End</label>
-                                    <input type="date" id="end" name="end" value="{{ $tournament->end_date }}" onclick="this.showPicker()">
+                                    <label for="end_date">Registration End</label>
+                                    <input type="date" id="end_date" name="end_date" value="{{ $tournament->end_date }}" onclick="this.showPicker()">
                                 </div>
                             </div>
 

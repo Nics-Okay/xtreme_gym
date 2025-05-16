@@ -12,7 +12,7 @@
 @section('main-content')
     <div class="content">
         <div class="page-header">
-            <h2>Facility Reservations</h2>
+            <h2>Facilityy Reservations</h2>
             <div class="page-button">
                 <a href="{{ route('reservation.create') }}"><ion-icon name="add-outline"></ion-icon>Add New Reservation</a>
             </div>

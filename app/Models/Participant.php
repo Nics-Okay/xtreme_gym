@@ -16,6 +16,8 @@ class Participant extends Model
         'tournament_id',
         'participant_name',
         'contact_details',
+        'payment_method',
+        'payment_status',
         'team_name'
     ];
 

@@ -57,8 +57,8 @@
                             </div>
 
                             <div class="form-full">
-                                <label for="image">Thumbnail</label>
-                                <input type="file" id="image" name="image" style="border: none; padding: 2px 0 6px 0;" accept="image/*">
+                                <label for="thumbnail">Thumbnail</label>
+                                <input type="file" id="thumbnail" name="thumbnail" style="border: none; padding: 2px 0 6px 0;" accept="image/*">
                             </div>
 
                             <div class="submit-button">

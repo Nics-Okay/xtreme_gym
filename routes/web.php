@@ -26,12 +26,9 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\MembershipController;
 use App\Http\Controllers\User\UserPageController;
 use App\Http\Controllers\User\UserReservationController;
-use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
-use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
-/* No Middleware Routes */
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -60,39 +57,27 @@ Route::get('/test-reservation', function () {
     return view('testing.test-reservation-modal');
 })->name('test.testReservation');
 
-Route::get('/calendar', [ReservationController::class, 'calendar'])->name('calendar');
+/* RESERVATIONS FINAL */
 Route::get('admin/reservations', [ReservationController::class, 'show'])->name('reservation.show');
-Route::get('admin/reservations/final', [ReservationController::class, 'showFinal'])->name('reservation.showFinal');
+Route::get('admin/reservations/history', [ReservationController::class, 'history'])->name('reservation.history');
+Route::get('/admin/reservations/fetch', [ReservationController::class, 'getCalendarEvents'])->name('reservation.fetchEvents');
+Route::get('/admin/reservations/view-details/{date}', [ReservationController::class, 'viewDetails'])->name('reservations.viewDetails');
+Route::get('/admin/reservations/create', [ReservationController::class, 'create'])->name('reservation.create');
+Route::get('/users/{id}', [ReservationController::class, 'fetchUser'])->name('users.fetch');
+Route::get('/reservations/fetchReservedSlots', [ReservationController::class, 'fetchReservedSlots'])->name('reservation.fetchReservedSlots');
+Route::post('/admin/reservations/store', [ReservationController::class, 'store'])->name('reservation.store');
+Route::get('admin/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
+Route::put('admin/reservations/{reservation}/update', [ReservationController::class, 'update'])->name('reservation.update');
+Route::patch('admin/reservations/{reservation}/paid', [ReservationController::class, 'paid'])->name('reservation.paid');
+Route::delete('admin/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
 
-/* USER RESERVATION STORE */
+/* Under Observation Routes */
+Route::get('/admin/reservations/get-events-by-date', [ReservationController::class, 'getEventsByDate'])->name('reservations.getEventsByDate');
+Route::get('/calendar', [ReservationController::class, 'calendar'])->name('calendar');
+Route::get('admin/reservations/final', [ReservationController::class, 'showFinal'])->name('reservation.showFinal');
 Route::post('/reservations', [UserReservationController::class, 'store'])->name('reservations.store');
 
-/* Reservations Routes */
-// Route to view the reservation details for a specific date
-Route::get('/admin/reservations/view-details/{date}', [ReservationController::class, 'viewDetails'])->name('reservations.viewDetails');
-
-// Fetch events for a specific day (from FullCalendar API call)
-Route::get('/admin/reservations/get-events-by-date', [ReservationController::class, 'getEventsByDate'])->name('reservations.getEventsByDate');
-
-Route::get('/users/{id}', [ReservationController::class, 'fetchUser'])->name('users.fetch');
-Route::get('/admin/reservations/fetch', [ReservationController::class, 'getCalendarEvents'])->name('reservation.fetchEvents');
-Route::get('/reservations/fetchReservedSlots', [ReservationController::class, 'fetchReservedSlots'])->name('reservation.fetchReservedSlots');
-Route::get('/admin/reservations/create', [ReservationController::class, 'create'])->name('reservation.create');
-Route::post('/admin/reservations/store', [ReservationController::class, 'store'])->name('reservation.store');
-
-Route::get('admin/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
-Route::put('admin/reservations/{reservation}/update', [ReservationController::class, 'update'])->name('reservation.update');
-Route::put('admin/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
-Route::delete('/admin/reservations/{reservation}/destroy', [ReservationController::class, 'destroy'])->name('reservation.destroy');
-
-/* Reservations Routes
-Route::get('/calendar', [ReservationController::class, 'getEvents'])->name('calendar.events');
-Route::get('admin/reservations', [ReservationController::class, 'show'])->name('reservation.show');
-Route::get('admin/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
-Route::put('admin/reservations/{reservation}/update', [ReservationController::class, 'update'])->name('reservation.update');
-Route::delete('/admin/reservations/{reservation}/destroy', [ReservationController::class, 'destroy'])->name('reservation.destroy');
-*/
-
+/* USER */ 
 Route::get('/plans', [PageController::class, 'plans'])->name('page.plans');
 Route::get('/about', [PageController::class, 'about'])->name('page.about');
 Route::get('/contact', [PageController::class, 'contact'])->name('page.contact');
@@ -132,7 +117,7 @@ Route::middleware(['auth', 'verified', 'otp.verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'showUser'])->name('profileUser.show');
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profileNew.update');
     Route::post('/profile/update-image', [ProfileController::class, 'updateImage'])->name('profileNew.updateImage');
-    Route::post('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profileNew.updatePassword');
+    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profileNew.updatePassword');
     Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profileNew.destroy');
 
     /* Review Routes User */
@@ -228,6 +213,8 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
 
     /* Attendees Routes */
     Route::get('/admin/attendees', [AttendeeController::class, 'show'])->name('attendee.show');
+    Route::get('/admin/attendees/add/member', [AttendeeController::class, 'addMemberAttendee'])->name('attendee.addMemberAttendee');
+    Route::get('/admin/attendees/add/guest', [AttendeeController::class, 'addGuestAttendee'])->name('attendee.addGuestAttendee');
     Route::post('/admin/attendees/store', [AttendeeController::class, 'store'])->name('attendee.store');    
     Route::get('/admin/attendees/guest/{first_name}/{last_name}/{payment}/store', [AttendeeController::class, 'guestStore'])->name('guestAttendee.store');
     Route::delete('/admin/attendees/{attendee}/destroy', [AttendeeController::class, 'destroy'])->name('attendee.destroy');
@@ -273,23 +260,29 @@ Route::middleware(['auth', 'verified', 'otp.verified', 'role:admin'])->group(fun
     Route::delete('/admin/students/{student}/destroy', [StudentController::class, 'destroy'])->name('student.destroy');
 
     /* Tournaments Routes */
-    Route::get('admin/tournaments', [ClassListController::class, 'show'])->name('tournament.show');
-    Route::get('/admin/tournaments/create', [ClassListController::class, 'create'])->name('tournament.create');
-    Route::post('/admin/tournaments/store', [ClassListController::class, 'store'])->name('tournament.store');
-    Route::get('admin/tournaments/{tournament}/edit', [ClassListController::class, 'edit'])->name('tournament.edit');
-    Route::put('admin/tournaments/{tournament}/update', [ClassListController::class, 'update'])->name('tournament.update');
-    Route::delete('/admin/tournaments/{tournament}/destroy', [ClassListController::class, 'destroy'])->name('tournament.destroy');
+    Route::get('admin/tournaments', [TournamentController::class, 'show'])->name('tournament.show');
+    Route::get('/tournaments/create', [TournamentController::class, 'create'])->name('tournaments.create');
+    Route::post('/tournaments', [TournamentController::class, 'store'])->name('tournaments.store');
+    Route::get('/tournaments/{tournament}', [TournamentController::class, 'show'])->name('tournaments.show');
+    Route::get('/tournaments/{tournament}/edit', [TournamentController::class, 'edit'])->name('tournaments.edit');
+    Route::put('/tournaments/{tournament}', [TournamentController::class, 'update'])->name('tournaments.update');
+    Route::patch('/tournaments/{tournament}', [TournamentController::class, 'update'])->name('tournaments.update');
+    Route::delete('/tournaments/{tournament}', [TournamentController::class, 'destroy'])->name('tournaments.destroy');
+    Route::get('/tournaments/{tournament}/results', [TournamentController::class, 'showResults'])->name('tournaments.results');
+    Route::post('/tournaments/{tournament}/register', [TournamentController::class, 'registerParticipant'])->name('tournaments.register');
 
-    Route::get('tournaments', [TournamentController::class, 'index'])->name('tournaments.index');
-    Route::get('tournaments/create', [TournamentController::class, 'create'])->name('tournaments.create');
-    Route::post('tournaments', [TournamentController::class, 'store'])->name('tournaments.store');
-    Route::get('tournaments/{tournament}', [TournamentController::class, 'show'])->name('tournaments.show');
-    Route::get('tournaments/{tournament}/edit', [TournamentController::class, 'edit'])->name('tournaments.edit');
-    Route::put('tournaments/{tournament}', [TournamentController::class, 'update'])->name('tournaments.update');
-    Route::patch('tournaments/{tournament}', [TournamentController::class, 'update'])->name('tournaments.update');
-    Route::delete('tournaments/{tournament}', [TournamentController::class, 'destroy'])->name('tournaments.destroy');
-    Route::get('tournaments/{tournament}/results', [TournamentController::class, 'showResults'])->name('tournaments.results');
-    Route::post('tournaments/{tournament}/register', [TournamentController::class, 'registerParticipant'])->name('tournaments.register');
+    Route::get('/admin/tournaments/participants/{tournament}/create', [TournamentController::class, 'participantCreate'])->name('participant.create');
+    Route::post('/admin/tournaments/participants/store', [TournamentController::class, 'participantStore'])->name('participant.store');
+    Route::get('/admin/tournaments/participants/{participant}/edit', [TournamentController::class, 'participantEdit'])->name('participant.edit');
+    Route::put('/admin/tournaments/participants/{participant}/update', [TournamentController::class, 'participantUpdate'])->name('participant.update');
+    Route::delete('/admin/tournaments/participants/{participant}/destroy', [TournamentController::class, 'participantDestroy'])->name('participant.destroy');
+
+    Route::get('/admin/tournaments/results', [TournamentController::class, 'resultShow'])->name('result.show');
+    Route::get('/admin/tournaments/results/create', [TournamentController::class, 'resultCreate'])->name('result.create');
+    Route::post('/admin/tournaments/results/store', [TournamentController::class, 'resultStore'])->name('result.store');
+    Route::get('/admin/tournaments/results/{result}/edit', [TournamentController::class, 'resultEdit'])->name('result.edit');
+    Route::put('/admin/tournaments/results/{result}/update', [TournamentController::class, 'resultUpdate'])->name('result.update');
+    Route::delete('/admin/tournaments/results/{result}/destroy', [TournamentController::class, 'resultDestroy'])->name('result.destroy');
 
     /* Notifications */
     Route::get('/get-new-notifications-count', [MainController::class, 'getNewNotificationsCount']);
@@ -335,6 +328,9 @@ Route::middleware(['auth', 'verified', 'otp.verified'])->group(function () {
     Route::get('/settings', [UserPageController::class, 'settings'])->name('user.settings');
     Route::get('/equipments', [UserPageController::class, 'equipments'])->name('user.equipments');
     Route::get('/transactions', [UserPageController::class, 'transactions'])->name('user.transactions');
+    Route::get('/tournaments', [UserPageController::class, 'tournaments'])->name('user.tournaments');
+    Route::post('/tournaments', [UserPageController::class, 'registerTournament'])->name('user.registerTournament');
+    Route::get('/tournaments/{id}/participants', [UserPageController::class, 'getParticipants'])->name('tournaments.participants');
 
     Route::get('/class', [UserPageController::class, 'class'])->name('user.class');
     Route::post('/class/avail', [UserPageController::class, 'availClass'])->name('user.availClass');

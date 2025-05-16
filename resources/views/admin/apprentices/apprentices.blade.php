@@ -15,52 +15,7 @@
             </div>
         </div>
         <div class="page-content">
-            <div class="table-container">
-                <table class="table-content">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Training</th>
-                            <th>User ID</th>
-                            <th>Name</th>
-                            <th>Student Until</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if($apprentices->isEmpty())
-                            <tr>
-                                <td colspan="6" style="text-align: center;">No stuedent records available.</td>
-                            </tr>
-                        @else
-                            @foreach($apprentices as $apprentice)
-                                <tr>
-                                    <td>{{ ($apprentices->currentPage() - 1) * $apprentices->perPage() + $loop->iteration }}</td>
-                                    <td>{{ $apprentice->training ? $apprentice->training->name : 'No training assigned' }}</td>
-                                    <td>{{ $apprentice->user->unique_id }}</td>
-                                    <td>{{ $apprentice->user->first_name ?? '' }} {{ $apprentice->user->last_name ?? '' }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($apprentice->student_until)->format('F j, Y') }}</td>
-                                    <td>
-                                        <div class="action-button">
-                                            <a href="{{route('apprentice.edit', ['apprentice' => $apprentice])}}" class="edit-button"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <form method="post" action="{{route('apprentice.destroy', ['apprentice' => $apprentice])}}">
-                                                @csrf 
-                                                @method('delete')
-                                                <button type="submit" class="delete-button" style="background: none; border: none; cursor: pointer;">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
-                <div class="pagination">
-                    {{ $apprentices->links() }}
-                </div>
-            </div>
+            
         </div>
     </div>
 @endsection

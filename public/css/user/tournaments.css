@@ -1,0 +1,293 @@
+.tournament-list {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.tournament-item {
+    position: relative;
+    height: fit-content;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #000000, #7b2cbf, #ff758c);
+}
+
+.prizes {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+.prizes p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 35px;
+    width: 100%;
+    padding: 10px;
+    font-size: medium;
+    color: black;
+    margin: 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.prizes ion-icon {
+    font-size: 20px;
+    color: gold;
+}
+
+.us-buttons {
+    display: flex;
+    width: 100%;
+    column-gap: 10px;
+    margin-top: 10px;
+}
+
+.us-buttons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    padding: 10px;
+    width: 50%;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.us-buttons a:nth-of-type(1) {
+    color: white;
+    background-color: #2196f3;
+}
+
+.us-buttons a:nth-of-type(2) {
+    color: white;
+    background-color: #4caf50;
+}
+
+.ts-modal {
+    position: fixed;
+    display: none;
+    justify-items: center;
+    align-content: center;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ts-modal-content {
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+}
+
+.ts-participants-modal-content {
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+}
+
+
+.ts-modal-content form {
+    display: flex;
+    flex-direction: column; 
+}
+
+.ts-modal-history {
+    position: fixed;
+    justify-items: center;
+    background-color: #e6e6e6;
+    width: 100%;
+    height: 92%;
+    bottom: 0;
+    left: 0;
+    display: none;
+    z-index: 999;
+    padding: 10px 0 0;
+    overflow-y: auto;
+}
+
+.ts-modal-history-content {
+    height: 95%;
+    width: 60%;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.ts-modal-history-content h3 {
+    justify-self: center;
+    padding: 5px 0 10px;
+}
+
+.ts-modal-history-header {
+    display: flex;
+    justify-content: flex-start;
+    height: 5%;
+    width: 100%;
+}
+
+.ts-modal-history-header button {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control label {
+    font-weight: bold;
+}
+
+.form-control input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.form-buttons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ts-participants-modal-close {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ccc;
+    color: #000;
+}
+
+.ts-participants-modal-close:hover {
+    background-color: #aaa;
+}
+
+.form-buttons .ts-cancel {
+    background-color: #ccc;
+    color: #000;
+}
+
+.form-buttons .ts-cancel:hover {
+    background-color: #aaa;
+}
+
+.form-buttons .ts-submit {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.form-buttons .ts-submit:hover {
+    background-color: #005fc5;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-content label {
+    font-size: small;
+    font-weight: bold;
+}
+
+.form-content input {
+    width: 100%;
+    margin: 2px 0 3px;
+    padding: 6px 10px;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: small;
+}
+
+.form-content select {
+    margin: 2px 0 3px;
+    padding: 5px 10px 5px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: small;
+}
+
+#other-payment-method input {
+    width: 100%;
+    margin: 5px 0 0;
+}
+
+.form-group.payment {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3px; /* spacing between fields */
+}
+
+.form-group.payment input, .form-group.payment textarea {
+    padding: 0 5px;
+    font-size: small;
+}
+
+.form-group.payment label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    margin-bottom: 2px; /* space between label and input */
+}
+
+.payment-options label {
+    font-weight: normal;
+}
+
+@media (max-width: 639px) {
+    .ts-modal-content {
+        width: 90%;
+    }
+
+    .ts-participants-modal-content {
+        width: 90%;
+    }
+
+    .ts-modal-history-content {
+        width: 100%;
+    }
+
+    .ts-modal-history-header button {
+        font-size: large;
+    }
+}

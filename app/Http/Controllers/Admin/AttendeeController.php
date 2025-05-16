@@ -225,6 +225,17 @@ class AttendeeController extends Controller
         return redirect()->route('guest.show')->with('success', 'Transaction for ' . $guest->first_name . ' ' . $guest->last_name . ' completed successfully!');
     }
 
+    public function addMemberAttendee()
+    {
+        return view('admin.attendees.addMemberAttendee');
+    }
+
+    public function addGuestAttendee()
+    {
+        return view('admin.attendees.addGuestAttendee');
+    }
+
+
     public function destroy(Attendee $attendee){
         $attendee->delete();
         return redirect(route('attendee.show'))->with('success', 'Attendee Deleted Successfully.');

@@ -58,6 +58,8 @@
                         start: event.reservation_date + 'T' + event.start_time,
                         end: event.reservation_date + 'T' + event.end_time,
                         extendedProps: {
+                            id: event.id, 
+                            payment_status: event.payment_status,
                             time: `${start12Hour} - ${end12Hour}`,
                             description: event.reservation_type
                         }
@@ -66,25 +68,55 @@
                 eventContent: function (arg) {
                     let eventDetails = document.createElement('div');
                     eventDetails.style.position = 'relative';
+
+                    const editUrl = `{{ route('reservation.edit', ['reservation' => ':id']) }}`.replace(':id', arg.event.extendedProps.id);
+                    const markAsPaidUrl = `{{ route('reservation.paid', ['reservation' => ':id']) }}`.replace(':id', arg.event.extendedProps.id);
+                    const cancelUrl = `{{ route('reservation.cancel', ['reservation' => ':id']) }}`.replace(':id', arg.event.extendedProps.id);
+
+                    let actionsHtml = '';
+
+                    if (arg.event.extendedProps.payment_status !== 'paid') {
+                        actionsHtml += `
+                            <form action="${markAsPaidUrl}" method="post" style="display: inline;">
+                                @csrf
+                                @method('patch')
+                                <button type="submit" class="mark-paid-button">
+                                    <i class="fa-solid fa-wallet"></i> Pay
+                                </button>
+                            </form>
+                        `;
+                    } else {
+                        actionsHtml += `
+                            <button type="button" class="mark-paid-button" disabled style="background-color: #aaa; cursor: not-allowed;">
+                                <i class="fa-solid fa-check-circle"></i> Paid
+                            </button>
+                        `;
+                    }
+
+                    actionsHtml += `
+                        <a href="${editUrl}" class="edit-button">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                        </a>
+                        <form action="${cancelUrl}" method="post" style="display: inline;">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="cancel-button">
+                                <i class="fa-solid fa-xmark"></i> Cancel
+                            </button>
+                        </form>
+                    `;
+
                     eventDetails.innerHTML = `
                         <div>
                             <div class="fc-list-event-title">${arg.event.title}</div>
                             <div class="fc-list-event-time">${arg.event.extendedProps.time || ''}</div>
                             <div class="fc-list-event-description">${arg.event.extendedProps.description || ''}</div>
                             <div class="fc-event-actions">
-                                <a href="/reservation/edit/${arg.event.id}" class="edit-button">
-                                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                                </a>
-                                <form action="/admin/reservations/${arg.event.id}/cancel" method="post">
-                                    @csrf
-                                    @method('put')
-                                    <button type="submit" class="cancel-button">
-                                        <i class="fa-solid fa-xmark"></i> Cancel
-                                    </button>
-                                </form>
+                                ${actionsHtml}
                             </div>
                         </div>
                     `;
+
                     return { domNodes: [eventDetails] };
                 }
             });

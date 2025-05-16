@@ -15,8 +15,6 @@ class Tournament extends Model
         'name',
         'type',
         'tournament_date',
-        'semi_finals',
-        'finals',
         'registration_fee',
         'first_prize',
         'second_prize',
@@ -29,7 +27,7 @@ class Tournament extends Model
 
     public function participants()
     {
-        return $this->hasMany(Participant::class);
+    return $this->hasMany(Participant::class, 'tournament_id');
     }
 
     public function results()

@@ -4,6 +4,7 @@
 
 @section('head-access')
     <link rel="stylesheet" href="{{ asset('css/layouts/tables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/attendees.css') }}">
 @endsection
 
 @section('main-content')
@@ -27,7 +28,9 @@
                 </form>
             </div>
             <div class="page-button">
-                <a href="#"><ion-icon name="add-outline"></ion-icon>Add New Attendee</a>
+                <a href="javascript:void(0);" id="openModalBtn">
+                    <ion-icon name="add-outline"></ion-icon>Add New Attendee
+                </a>
             </div>
         </div>
         <div class="page-content">
@@ -84,4 +87,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="addAttendeeModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModalBtn">&times;</button>
+            <h3>Choose Attendee Type</h3>
+            <div class="option-container">
+                <a href="{{ route('attendee.addMemberAttendee') }}" class="option-box">
+                    <i class="fa-solid fa-user"></i>
+                    <p>Member</p>
+                </a>
+                <a href="{{ route('attendee.addGuestAttendee') }}" class="option-box">
+                    <i class="fa-solid fa-user-clock"></i>
+                    <p>Guest</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const openModalBtn = document.getElementById('openModalBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modal = document.getElementById('addAttendeeModal');
+
+            openModalBtn.addEventListener('click', () => {
+                modal.classList.add('active');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    </script>
 @endsection
